@@ -1,0 +1,384 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../engine/config.h
+win32/pch.h
+../engine/win32/pch.h
+stdint.h
+-
+atomic
+-
+xmmintrin.h
+-
+assert.h
+-
+
+../engine/core/app.h
+GL/glew.h
+-
+
+../engine/render/window.h
+functional
+-
+GL/glew.h
+-
+GLFW/glfw3.h
+-
+nanovg.h
+-
+
+../exts/glew/include/GL/glew.h
+stddef.h
+-
+inttypes.h
+-
+stdint.h
+-
+inttypes.h
+-
+Availability.h
+-
+OpenGL/glu.h
+-
+GL/glu.h
+-
+
+../exts/glfw-3.1.1/include/GLFW/glfw3.h
+stddef.h
+-
+OpenGL/gl3.h
+-
+OpenGL/gl3ext.h
+-
+OpenGL/gl.h
+-
+OpenGL/glu.h
+-
+GL/glcorearb.h
+-
+GLES/gl.h
+-
+GLES/glext.h
+-
+GLES2/gl2.h
+-
+GLES2/gl2ext.h
+-
+GLES3/gl3.h
+-
+GLES3/gl2ext.h
+-
+GLES3/gl31.h
+-
+GLES3/gl2ext.h
+-
+GL/gl.h
+-
+GL/glext.h
+-
+GL/glu.h
+-
+
+../exts/nanovg/src/nanovg.h
+
+../exts/nanovg/src/stb_image.h
+stb_image.h
+../exts/nanovg/src/stb_image.h
+stdio.h
+-
+stdarg.h
+-
+stddef.h
+-
+stdlib.h
+-
+string.h
+-
+math.h
+-
+stdio.h
+-
+assert.h
+-
+stdint.h
+-
+emmintrin.h
+-
+intrin.h
+-
+arm_neon.h
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/engine/config.h
+win32/pch.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/engine/win32/pch.h
+stdint.h
+-
+atomic
+-
+xmmintrin.h
+-
+assert.h
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/engine/core/app.h
+GL/glew.h
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/exts/glew/include/GL/glew.h
+stddef.h
+-
+inttypes.h
+-
+stdint.h
+-
+inttypes.h
+-
+Availability.h
+-
+OpenGL/glu.h
+-
+GL/glu.h
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/GraphicsNode.cc
+GraphicsNode.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/GraphicsNode.h
+config.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/config.h
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/GraphicsNode.h
+iostream
+-
+memory
+-
+core/app.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/core/app.h
+ShaderObject.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/ShaderObject.h
+MeshResource.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.h
+TextureResource.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/TextureResource.h
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/LightResource.cc
+LightResource.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/LightResource.h
+config.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/config.h
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/LightResource.h
+core/app.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/core/app.h
+Vector3D.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector3D.h
+Vector2D.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector2D.h
+fstream
+-
+iostream
+-
+string
+-
+vector
+-
+cstdint
+-
+algorithm
+-
+iomanip
+-
+random
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Matrix3D.h
+iostream
+-
+Vector3D.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector3D.h
+math.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/math.h
+cmath
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.cc
+MeshResource.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.h
+config.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/config.h
+string.h
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.h
+core/app.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/core/app.h
+Vector3D.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector3D.h
+Vector2D.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector2D.h
+fstream
+-
+iostream
+-
+string
+-
+map
+-
+vector
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Rasterizer.cc
+Rasterizer.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Rasterizer.h
+iostream
+-
+string
+-
+algorithm
+-
+fstream
+-
+string.h
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Rasterizer.h
+core/app.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/core/app.h
+stb_image.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/stb_image.h
+Matrix3D.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Matrix3D.h
+Vector3D.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector3D.h
+Vector2D.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector2D.h
+MeshResource.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.h
+functional
+-
+vector
+-
+memory
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/ShaderObject.cc
+ShaderObject.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/ShaderObject.h
+config.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/config.h
+string.h
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/ShaderObject.h
+core/app.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/core/app.h
+Vector3D.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector3D.h
+Matrix3D.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Matrix3D.h
+fstream
+-
+iostream
+-
+string
+-
+vector
+-
+map
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/TextureResource.cc
+TextureResource.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/TextureResource.h
+config.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/config.h
+string
+-
+memory
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/TextureResource.h
+core/app.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/core/app.h
+stb_image.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/stb_image.h
+Rasterizer.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Rasterizer.h
+string
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector2D.h
+iostream
+-
+math.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/math.h
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector3D.h
+iostream
+-
+math.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/math.h
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/exampleapp.cc
+../../../engine/config.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/engine/config.h
+../../../exts/glew/include/GL/glew.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/exts/glew/include/GL/glew.h
+exampleapp.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/exampleapp.h
+tinyxml2.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/tinyxml2.h
+stdio.h
+-
+stdlib.h
+-
+cstring
+-
+cstdint
+-
+iostream
+-
+vector
+-
+sstream
+-
+string
+-
+cmath
+-
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/exampleapp.h
+../../../engine/core/app.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/engine/core/app.h
+render/window.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/render/window.h
+memory
+-
+curses.h
+-
+MeshResource.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.h
+TextureResource.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/TextureResource.h
+ShaderObject.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/ShaderObject.h
+GraphicsNode.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/GraphicsNode.h
+Matrix3D.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Matrix3D.h
+LightResource.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/LightResource.h
+Rasterizer.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Rasterizer.h
+
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/main.cc
+config.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/config.h
+exampleapp.h
+/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/exampleapp.h
+

@@ -1,0 +1,44 @@
+# The set of languages for which implicit dependencies are needed:
+set(CMAKE_DEPENDS_LANGUAGES
+  "CXX"
+  )
+# The set of files for implicit dependencies of each language:
+set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/GraphicsNode.cc" "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/GraphicsNode.cc.o"
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/LightResource.cc" "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/LightResource.cc.o"
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.cc" "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/MeshResource.cc.o"
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Rasterizer.cc" "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/Rasterizer.cc.o"
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/ShaderObject.cc" "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/ShaderObject.cc.o"
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/TextureResource.cc" "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/TextureResource.cc.o"
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/exampleapp.cc" "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/exampleapp.cc.o"
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/main.cc" "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/main.cc.o"
+  )
+set(CMAKE_CXX_COMPILER_ID "GNU")
+
+# Preprocessor definitions for this target.
+set(CMAKE_TARGET_DEFINITIONS_CXX
+  "GLEW_STATIC"
+  )
+
+# The include file search paths:
+set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../engine"
+  "../exts/glew/include"
+  "../exts/glfw-3.1.1/include"
+  "../exts/imgui"
+  "../exts/imgui/examples/opengl3_example"
+  "../exts/nanovg/src"
+  )
+
+# Targets to which this target links.
+set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/engine/core/CMakeFiles/core.dir/DependInfo.cmake"
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/engine/render/CMakeFiles/render.dir/DependInfo.cmake"
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/exts/glew/CMakeFiles/glew.dir/DependInfo.cmake"
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/exts/glfw-3.1.1/src/CMakeFiles/glfw.dir/DependInfo.cmake"
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/exts/CMakeFiles/imgui.dir/DependInfo.cmake"
+  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/exts/CMakeFiles/nanovg.dir/DependInfo.cmake"
+  )
+
+# Fortran module output directory.
+set(CMAKE_Fortran_TARGET_MODULE_DIR "")
