@@ -1,4 +1,4 @@
-# Install script for directory: /home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/exts/glfw-3.1.1/src
+# Install script for directory: /home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/exts/glfw-3.1.1/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

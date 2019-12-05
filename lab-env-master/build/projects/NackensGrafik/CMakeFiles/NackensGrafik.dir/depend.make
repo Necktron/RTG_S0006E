@@ -81,6 +81,7 @@ projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/exampleapp.cc.o: ../pro
 projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/exampleapp.cc.o: ../projects/NackensGrafik/code/Vector3D.h
 projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/exampleapp.cc.o: ../projects/NackensGrafik/code/exampleapp.cc
 projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/exampleapp.cc.o: ../projects/NackensGrafik/code/exampleapp.h
+projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/exampleapp.cc.o: ../projects/NackensGrafik/code/tinyxml2.h
 
 projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/main.cc.o: ../engine/config.h
 projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/main.cc.o: ../engine/core/app.h
@@ -101,4 +102,5 @@ projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/main.cc.o: ../projects/
 projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/main.cc.o: ../projects/NackensGrafik/code/Vector3D.h
 projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/main.cc.o: ../projects/NackensGrafik/code/exampleapp.h
 projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/main.cc.o: ../projects/NackensGrafik/code/main.cc
+projects/NackensGrafik/CMakeFiles/NackensGrafik.dir/code/main.cc.o: ../projects/NackensGrafik/code/tinyxml2.h
 

@@ -5,7 +5,6 @@
 #include "../../../engine/config.h"
 #include "../../../exts/glew/include/GL/glew.h"
 #include "exampleapp.h"
-#include "tinyxml2.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstring>
@@ -47,66 +46,66 @@ namespace Example
 		window->SetKeyPressFunction([this](int32 a, int32 b, int32 c, int32 d)
 		{
 			//Keycode for A, position
-			if (a == 65 && rotateEnable == false)
+			if (a == 65)
 			{
 				movmentX -= 0.02f;
 			}
 
-			//Keycode for S, position
-			if (a == 83 && rotateEnable == false)
-			{
-				movmentZ += 0.02f;
-			}
-
 			//Keycode for D, position
-			if (a == 68 && rotateEnable == false)
+			if (a == 68)
 			{
 				movmentX += 0.02f;
 			}
 
+			//Keycode for S, position
+			if (a == 83)
+			{
+				movmentY -= 0.02f;
+			}
+
 			//Keycode for W, position
-			if (a == 87 && rotateEnable == false)
+			if (a == 87)
+			{
+				movmentY += 0.02f;
+			}
+
+			//Keycode for Q, position
+			if (a == 81)
+			{
+				movmentZ += 0.02f;
+			}
+
+			//Keycode for E, position
+			if (a == 69)
 			{
 				movmentZ -= 0.02f;
 			}
 
+
 			/* ****************************** */
 
-			//Keycode for A, rotation
-			if (a == 65 && rotateEnable == true)
+			//Keycode for J, rotation
+			if (a == 74)
 			{
 				rotIntY -= 1.5f;
 			}
 
-			//Keycode for S, rotation
-			if (a == 83 && rotateEnable == true)
+			//Keycode for K, rotation
+			if (a == 75)
 			{
 				rotIntX += 1.5f;
 			}
 
-			//Keycode for D, rotation
-			if (a == 68 && rotateEnable == true)
+			//Keycode for L, rotation
+			if (a == 76)
 			{
 				rotIntY += 1.5f;
 			}
 
-			//Keycode for W, rotation
-			if (a == 87 && rotateEnable == true)
+			//Keycode for I, rotation
+			if (a == 73)
 			{
 				rotIntX -= 1.5f;
-			}
-		});
-
-		window->SetMousePressFunction([this](int32 a, int32 b, int32 c)
-		{
-			if(b == 1)
-			{
-				rotateEnable = true;
-			}
-
-			else
-			{
-				rotateEnable = false;
 			}
 		});
 
@@ -122,29 +121,28 @@ namespace Example
 			lightPTR = std::make_shared<LightResource>();
 			rastPTR = std::make_shared<Rasterizer>();
 
-			shadePTR->LoadVertShader("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/VertexShade.hlsl");
-			shadePTR->LoadFragShader("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/FragmentShade.hlsl");
+			shadePTR->LoadVertShader("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/VertexShade.hlsl");
+			shadePTR->LoadFragShader("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/FragmentShade.hlsl");
 
 			//setup vbo
 			if(renderMode == 0)
 			{
-				meshPTR->loadFromOBJ("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/cube.obj");
-				texPTR->loadFromFile("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/StrawHats.jpg");
+				meshPTR->loadFromOBJ("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/cube.obj");
+				texPTR->loadFromFile("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Ace.jpg");
 				lightPTR->getPointLight();
 				shadePTR->apply();
 			}
 
 			else if (renderMode == 1)
 			{
-				meshPTR->loadFromOBJ("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/cat.obj");
-				meshRastPTR->loadFromOBJ("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/cube.obj");
+				meshPTR->loadFromOBJ("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/cat.obj");
+				meshRastPTR->loadFromOBJ("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/cube.obj");
 
 				lightPTR->getPointLight();
 				shadePTR->apply();
 
 				rastPTR->setMesh(meshPTR);
-				//rastPTR->textureRetriver("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/RedPix.tga");
-				rastPTR->textureRetriver("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/cat.tga");
+				rastPTR->textureRetriver("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/cat_diff.tga");
 			}
 
 			auto vertShader = [](vector3D pos, vector3D norm, matrix3D nMat) -> vector3D
@@ -173,7 +171,7 @@ namespace Example
 				int u = abs((int)(tex.vecOrigin[0] * (w - 1)) % w);
 				int v = abs((int)(tex.vecOrigin[1] * (h - 1)) % h);
 
-				int index = (u * n + v * n *w);
+				int index = (u * n + v * n * w);
 
 				Rasterizer::PixelColor color;
 				color.r = image[index];
@@ -220,17 +218,17 @@ namespace Example
 			glEnable(GL_DEPTH_TEST);
 			glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-			trans.setPosition(vector3D(movmentX, movmentY, 2.0f));
+			trans.setPosition(vector3D(movmentX, movmentY, movmentZ));
 			transRast.setPosition(vector3D(0.0f, 0.0f, 0.0f));
 			Update();
 
 			this->window->Update();
 
-			matrix = matrix3D::scalematrix(scaleSize)* rotA * rotB * trans * matrix3D::LookAt(vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 0.0f, -1.0f), vector3D(0.0f, 1.0f, 0.0f));
-			modelview = matrix3D::LookAt(vector3D(0.0f, 0.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f))*transRast;
-			proj = matrix3D::ProjectionMatrix(90.0f, 0.1f, movmentZ, this->window->GetWidth(), this->window->GetHeight()).transpose();
+			modelview = matrix3D::LookAt(vector3D(0.0f, 0.0f, 1.5f), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
+			matrix = matrix3D::scalematrix(scaleSize)* rotA * rotB * trans * modelview;
+			proj = matrix3D::ProjectionMatrix(90.0f, 0.1f, 100.0f, this->window->GetWidth(), this->window->GetHeight()).transpose();
 
-			shadePTR->setupMatrix3fv("matrix", proj*modelview.transpose());
+			shadePTR->setupMatrix3fv("matrix", matrix * proj);
 
 			if(renderMode == 0)
 			{
@@ -241,7 +239,7 @@ namespace Example
 
 			else if(renderMode == 1)
 			{
-				rastPTR->draw(proj, matrix.transpose());
+				rastPTR->draw(modelview * proj, matrix);
 				texPTR->loadFromRast(rastPTR);
 				
 				// do stuff

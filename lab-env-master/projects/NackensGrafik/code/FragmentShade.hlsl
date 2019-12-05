@@ -1,6 +1,6 @@
 #version 430
 out vec4 Color;
-layout(location=0) in vec2 texCoord;
+in vec2 texCoord;
 
 uniform sampler2D testTex;
 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/example
+# Install script for directory: /home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/example
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

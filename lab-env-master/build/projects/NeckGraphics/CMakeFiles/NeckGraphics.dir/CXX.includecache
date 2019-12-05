@@ -1,0 +1,148 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../engine/config.h
+win32/pch.h
+../engine/win32/pch.h
+stdint.h
+-
+atomic
+-
+xmmintrin.h
+-
+assert.h
+-
+
+../engine/core/app.h
+GL/glew.h
+-
+
+../engine/render/window.h
+functional
+-
+GL/glew.h
+-
+GLFW/glfw3.h
+-
+nanovg.h
+-
+
+../exts/glew/include/GL/glew.h
+stddef.h
+-
+inttypes.h
+-
+stdint.h
+-
+inttypes.h
+-
+Availability.h
+-
+OpenGL/glu.h
+-
+GL/glu.h
+-
+
+../exts/glfw-3.1.1/include/GLFW/glfw3.h
+stddef.h
+-
+OpenGL/gl3.h
+-
+OpenGL/gl3ext.h
+-
+OpenGL/gl.h
+-
+OpenGL/glu.h
+-
+GL/glcorearb.h
+-
+GLES/gl.h
+-
+GLES/glext.h
+-
+GLES2/gl2.h
+-
+GLES2/gl2ext.h
+-
+GLES3/gl3.h
+-
+GLES3/gl2ext.h
+-
+GLES3/gl31.h
+-
+GLES3/gl2ext.h
+-
+GL/gl.h
+-
+GL/glext.h
+-
+GL/glu.h
+-
+
+../exts/nanovg/src/nanovg.h
+
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/Mesh.cc
+Mesh.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/Mesh.h
+config.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/config.h
+string.h
+-
+
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/Mesh.h
+core/app.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/core/app.h
+Vector3D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/Vector3D.h
+Vector2D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/Vector2D.h
+fstream
+-
+iostream
+-
+string
+-
+map
+-
+vector
+-
+
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/Vector2D.h
+iostream
+-
+math.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/math.h
+
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/Vector3D.h
+iostream
+-
+math.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/math.h
+
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/exampleapp.cc
+config.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/config.h
+exampleapp.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/exampleapp.h
+cstring
+-
+
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/exampleapp.h
+core/app.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/core/app.h
+render/window.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/render/window.h
+Mesh.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/Mesh.h
+
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/main.cc
+config.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/config.h
+exampleapp.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NeckGraphics/code/exampleapp.h
+
