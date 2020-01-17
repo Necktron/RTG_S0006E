@@ -48,9 +48,9 @@ namespace Example
 			float rotIntX = 0;
 			float rotIntY = 0;
 			float movmentX = 0.0f;
-			float movmentY = 0.5f;
-			float movmentZ = 1.0f;
-			float scaleSize = 0.2f;
+			float movmentY = 0.0f;
+			float movmentZ = 0.0f;
+			float scaleSize = 0.5f;
 
 			matrix3D trans;
 			matrix3D matrix;

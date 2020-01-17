@@ -134,7 +134,7 @@ void Rasterizer::scanline(const Scanline &scan)
 		vector3D normal = ((normOne * u) * wOne + (normTwo * v) * wTwo + (normThree * w) * wThree) / corrW;
 		vector3D diff = ((diffColorOne * u) * wOne + (diffColorTwo * v) * wTwo + (diffColorThree * w) * wThree) / corrW;*/
 
-		PixelColor col = fragments({ texture.vecOrigin[0], 1 - texture.vecOrigin[0] }, normal, image, this->w, this->h, n);
+		PixelColor col = fragments({ texture.vecOrigin[0], 1 - texture.vecOrigin[1] }, normal, image, this->w, this->h, n);
 
 		//PixelColor col = fragments(texture, normal, image, this->w, this->h, n);
 

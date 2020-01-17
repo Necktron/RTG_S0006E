@@ -72,13 +72,13 @@ namespace Example
 			//Keycode for Q, position
 			if (a == 81)
 			{
-				movmentZ += 0.02f;
+				scaleSize -= 0.02f;
 			}
 
 			//Keycode for E, position
 			if (a == 69)
 			{
-				movmentZ -= 0.02f;
+				scaleSize += 0.02f;
 			}
 
 
@@ -87,25 +87,25 @@ namespace Example
 			//Keycode for J, rotation
 			if (a == 74)
 			{
-				rotIntY -= 1.5f;
+				rotIntY += 1.5f;
 			}
 
 			//Keycode for K, rotation
 			if (a == 75)
 			{
-				rotIntX += 1.5f;
+				rotIntX -= 1.5f;
 			}
 
 			//Keycode for L, rotation
 			if (a == 76)
 			{
-				rotIntY += 1.5f;
+				rotIntY -= 1.5f;
 			}
 
 			//Keycode for I, rotation
 			if (a == 73)
 			{
-				rotIntX -= 1.5f;
+				rotIntX += 1.5f;
 			}
 		});
 
@@ -136,7 +136,7 @@ namespace Example
 			else if (renderMode == 1)
 			{
 				meshPTR->loadFromOBJ("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/cat.obj");
-				meshRastPTR->loadFromOBJ("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/cube.obj");
+				meshRastPTR->loadFromOBJ("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/quad.obj");
 
 				lightPTR->getPointLight();
 				shadePTR->apply();
@@ -147,9 +147,9 @@ namespace Example
 
 			auto vertShader = [](vector3D pos, vector3D norm, matrix3D nMat) -> vector3D
 			{
-				vector3D aColor(1.8f, 1.8f, 1.8f);
-				vector3D ambientColor(0.1f, 0.1f, 0.1f);
-				vector3D lightPos(0, 10, 20);
+				vector3D aColor(1.0f, 1.0f, 1.0f);
+				vector3D ambientColor(0.6f, 0.6f, 0.6f);
+				vector3D lightPos(0, 3, -3);
 				matrix3D mvMat = nMat;
 
 				vector3D modelViewVertex = (mvMat * pos);
@@ -207,6 +207,7 @@ namespace Example
 	void NackensGrafik::Run()
 	{
 		matrix3D matrix;
+		matrix3D matrixRast;
 		matrix3D modelview; //Matrix f�r transformering
 		matrix3D trans; //Translationmatrix
 		matrix3D transRast; //Translationmatrix
@@ -218,14 +219,22 @@ namespace Example
 			glEnable(GL_DEPTH_TEST);
 			glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
-			trans.setPosition(vector3D(movmentX, movmentY, movmentZ));
-			transRast.setPosition(vector3D(0.0f, 0.0f, 0.0f));
 			Update();
 
 			this->window->Update();
 
-			modelview = matrix3D::LookAt(vector3D(0.0f, 0.0f, 1.5f), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
-			matrix = matrix3D::scalematrix(scaleSize)* rotA * rotB * trans * modelview;
+			modelview = matrix3D::LookAt(vector3D(0.0f, 0.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
+
+			if(renderMode == 0)
+			{
+				matrix = matrix3D::scalematrix(scaleSize)* rotA * rotB * trans * modelview;
+			}
+
+			else if(renderMode == 1)
+			{
+				matrixRast = matrix3D::scalematrix(scaleSize)* rotA * rotB * transRast * modelview.transpose();
+			}
+			
 			proj = matrix3D::ProjectionMatrix(90.0f, 0.1f, 100.0f, this->window->GetWidth(), this->window->GetHeight()).transpose();
 
 			shadePTR->setupMatrix3fv("matrix", matrix * proj);
@@ -233,13 +242,15 @@ namespace Example
 			if(renderMode == 0)
 			{
 				// do stuff
+				trans.setPosition(vector3D(movmentX, movmentY, movmentZ));
 				meshPTR->DrawOBJ();
 				this->graphic.Draw();
 			}
 
 			else if(renderMode == 1)
 			{
-				rastPTR->draw(modelview * proj, matrix);
+				transRast.setPosition(vector3D(movmentX, movmentY, movmentZ));
+				rastPTR->draw(modelview * proj, matrixRast);
 				texPTR->loadFromRast(rastPTR);
 				
 				// do stuff
