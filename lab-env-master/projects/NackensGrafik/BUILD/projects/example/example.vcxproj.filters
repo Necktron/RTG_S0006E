@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\example\code\exampleapp.cc">
+      <Filter>example</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\example\code\main.cc">
+      <Filter>example</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\example\code\exampleapp.h">
+      <Filter>example</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\example\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="example">
+      <UniqueIdentifier>{7D907632-CD8C-3019-985E-A40BF71202E5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

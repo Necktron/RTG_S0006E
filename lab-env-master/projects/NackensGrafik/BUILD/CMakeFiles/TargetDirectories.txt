@@ -1,0 +1,16 @@
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/CMakeFiles/ALL_BUILD.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/CMakeFiles/ZERO_CHECK.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/exts/CMakeFiles/nanovg.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/exts/CMakeFiles/imgui.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/exts/glew/CMakeFiles/glew.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/exts/glew/CMakeFiles/ALL_BUILD.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/exts/glfw-3.1.1/CMakeFiles/ALL_BUILD.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/exts/glfw-3.1.1/src/CMakeFiles/glfw.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/engine/core/CMakeFiles/core.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/engine/render/CMakeFiles/render.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/ImGuiExample/CMakeFiles/ImGuiExample.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/ImGuiExample/CMakeFiles/ALL_BUILD.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/CMakeFiles/NackensGrafik.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/CMakeFiles/ALL_BUILD.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/example/CMakeFiles/example.dir
+D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/example/CMakeFiles/ALL_BUILD.dir

@@ -1,0 +1,2 @@
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\engine\core\Debug\core.pdb
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\engine\core\core.dir\Debug\core.pdb

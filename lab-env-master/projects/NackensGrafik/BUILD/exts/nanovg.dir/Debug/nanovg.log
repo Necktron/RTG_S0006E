@@ -1,0 +1,5 @@
+﻿  Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/exts/CMakeLists.txt
+  nanovg.c
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src\fontstash.h(880,7): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src\fontstash.h(910,2): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  nanovg.vcxproj -> D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\exts\Debug\nanovg.lib

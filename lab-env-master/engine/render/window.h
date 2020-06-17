@@ -6,6 +6,7 @@
 	(C) 2015-2016 Individual contributors, see AUTHORS file
 */
 //------------------------------------------------------------------------------
+#include <string>
 #include <functional>
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>

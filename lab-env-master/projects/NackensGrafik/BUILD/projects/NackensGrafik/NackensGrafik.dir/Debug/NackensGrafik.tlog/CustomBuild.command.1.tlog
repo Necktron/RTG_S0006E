@@ -1,0 +1,10 @@
+^D:\GITHUBUNIVERSITY\RTG_S0006E\RTG_S0006E\LAB-ENV-MASTER\PROJECTS\NACKENSGRAFIK\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

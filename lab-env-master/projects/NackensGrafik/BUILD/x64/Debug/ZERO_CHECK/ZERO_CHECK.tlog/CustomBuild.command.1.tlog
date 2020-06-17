@@ -1,0 +1,10 @@
+^D:\GITHUBUNIVERSITY\RTG_S0006E\RTG_S0006E\LAB-ENV-MASTER\PROJECTS\NACKENSGRAFIK\BUILD\CMAKEFILES\7D3FF701AC8D78C9BFB63227E704868E\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/gscept_lab_env.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

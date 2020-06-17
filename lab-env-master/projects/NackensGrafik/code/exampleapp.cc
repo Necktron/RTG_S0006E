@@ -5,7 +5,7 @@
 #include "../../../engine/config.h"
 #include "../../../exts/glew/include/GL/glew.h"
 #include "exampleapp.h"
-#include "tinyxml2.h"
+#include "tinyxml2-master/tinyxml2.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <cstring>
@@ -122,29 +122,35 @@ namespace Example
 			lightPTR = std::make_shared<LightResource>();
 			rastPTR = std::make_shared<Rasterizer>();
 
-			shadePTR->LoadVertShader("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/VertexShade.hlsl");
-			shadePTR->LoadFragShader("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/FragmentShade.hlsl");
+			//Old reference to code place
+			///home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/
+
+			shadePTR->LoadVertShader("../../../code/VertexShade.hlsl");
+			shadePTR->LoadFragShader("../../../code/FragmentShade.hlsl");
 
 			//setup vbo
 			if(renderMode == 0)
 			{
-				meshPTR->loadFromOBJ("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/cube.obj");
-				texPTR->loadFromFile("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/StrawHats.jpg");
+				meshPTR->loadFromOBJ("../../../code/cube.obj");
+				texPTR->loadFromFile("../../../code/RedPix.tga");
 				lightPTR->getPointLight();
 				shadePTR->apply();
+				graphic.setMesh(meshPTR);
+				graphic.setTex(texPTR);
+				graphic.setShade(shadePTR);
 			}
 
 			else if (renderMode == 1)
 			{
-				meshPTR->loadFromOBJ("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/cat.obj");
-				meshRastPTR->loadFromOBJ("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/cube.obj");
+				meshPTR->loadFromOBJ("../../../code/cat.obj");
+				meshRastPTR->loadFromOBJ("../../../code/cube.obj");
 
 				lightPTR->getPointLight();
 				shadePTR->apply();
 
 				rastPTR->setMesh(meshPTR);
 				//rastPTR->textureRetriver("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/RedPix.tga");
-				rastPTR->textureRetriver("/home/nacken/ojaaho-6/S0008E - GPOA/lab-env-master/projects/NackensGrafik/code/cat.tga");
+				rastPTR->textureRetriver("../../../code/cat.tga");
 			}
 
 			auto vertShader = [](vector3D pos, vector3D norm, matrix3D nMat) -> vector3D
@@ -235,7 +241,6 @@ namespace Example
 			if(renderMode == 0)
 			{
 				// do stuff
-				meshPTR->DrawOBJ();
 				this->graphic.Draw();
 			}
 

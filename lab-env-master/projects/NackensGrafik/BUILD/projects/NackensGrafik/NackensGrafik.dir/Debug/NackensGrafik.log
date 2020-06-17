@@ -1,0 +1,16 @@
+﻿  exampleapp.cc
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h(275,29): warning C4244: 'argument': conversion from 'float' to 'char', possible loss of data
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h(513,22): warning C4244: 'argument': conversion from 'float' to 'char', possible loss of data
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h(561,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h(561,17): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h(563,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h(570,61): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  main.cc
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h(275,29): warning C4244: 'argument': conversion from 'float' to 'char', possible loss of data
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h(513,22): warning C4244: 'argument': conversion from 'float' to 'char', possible loss of data
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h(561,25): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h(561,17): warning C4244: 'initializing': conversion from 'int' to 'const float', possible loss of data
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h(563,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h(570,61): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  NackensGrafik.vcxproj -> D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\bin\NackensGrafik.exe

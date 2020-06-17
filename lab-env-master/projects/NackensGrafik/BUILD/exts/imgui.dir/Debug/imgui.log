@@ -1,0 +1,7 @@
+﻿  Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/exts/CMakeLists.txt
+  imgui.cpp
+  imgui_demo.cpp
+  imgui_draw.cpp
+  imgui_impl_glfw_gl3.cpp
+  Generating Code...
+  imgui.vcxproj -> D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\exts\Debug\imgui.lib

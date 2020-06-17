@@ -10,7 +10,7 @@ Application class used for example application.
 #include "../../../engine/core/app.h"
 #include "render/window.h"
 #include <memory>
-#include <curses.h>
+//#include <curses.h>
 #include "MeshResource.h"
 #include "TextureResource.h"
 #include "ShaderObject.h"
@@ -41,7 +41,7 @@ namespace Example
 			bool XMLRetreiver();
 
 			//EASY SWITCH BETWEEN (NORMAL = 0) AND (RAZTERISER = 1)
-			int renderMode = 1;
+			int renderMode = 0;
 
 			float rotInt = 0;
 			float rotIntX = 0;

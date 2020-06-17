@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\GraphicsNode.cc">
+      <Filter>nackensgrafik</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\LightResource.cc">
+      <Filter>nackensgrafik</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\MeshResource.cc">
+      <Filter>nackensgrafik</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Rasterizer.cc">
+      <Filter>nackensgrafik</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\ShaderObject.cc">
+      <Filter>nackensgrafik</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\TextureResource.cc">
+      <Filter>nackensgrafik</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\exampleapp.cc">
+      <Filter>nackensgrafik</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\main.cc">
+      <Filter>nackensgrafik</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\GraphicsNode.h">
+      <Filter>nackensgrafik</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\LightResource.h">
+      <Filter>nackensgrafik</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h">
+      <Filter>nackensgrafik</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\MeshResource.h">
+      <Filter>nackensgrafik</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Rasterizer.h">
+      <Filter>nackensgrafik</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\ShaderObject.h">
+      <Filter>nackensgrafik</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\TextureResource.h">
+      <Filter>nackensgrafik</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Vector2D.h">
+      <Filter>nackensgrafik</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Vector3D.h">
+      <Filter>nackensgrafik</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\exampleapp.h">
+      <Filter>nackensgrafik</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="nackensgrafik">
+      <UniqueIdentifier>{9B5B79B3-A51A-3EAD-A1EB-254247C89338}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

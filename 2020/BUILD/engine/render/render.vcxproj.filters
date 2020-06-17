@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\engine\render\window.cc">
+      <Filter>display</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\engine\config.cc">
+      <Filter>pch</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\engine\render\window.h">
+      <Filter>display</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\engine\config.h">
+      <Filter>pch</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\2020\engine\render\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="display">
+      <UniqueIdentifier>{4F16B14A-311E-36FD-9427-3CB598A6928C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pch">
+      <UniqueIdentifier>{CCAD652F-1488-3B53-8AE4-6B810D0169CE}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

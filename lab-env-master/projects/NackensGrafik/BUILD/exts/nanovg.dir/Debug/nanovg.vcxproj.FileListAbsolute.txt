@@ -1,0 +1,2 @@
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\exts\Debug\nanovg.pdb
+D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\exts\nanovg.dir\Debug\nanovg.pdb

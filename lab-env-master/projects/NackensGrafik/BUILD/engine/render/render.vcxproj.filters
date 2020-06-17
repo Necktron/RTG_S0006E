@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine\render\window.cc">
+      <Filter>display</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine\config.cc">
+      <Filter>pch</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine\render\window.h">
+      <Filter>display</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine\config.h">
+      <Filter>pch</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine\render\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="display">
+      <UniqueIdentifier>{149B4F05-080A-3FF6-B557-0DDF90B3E108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="pch">
+      <UniqueIdentifier>{C81C9938-9704-39C7-A40A-E99DD8176E53}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

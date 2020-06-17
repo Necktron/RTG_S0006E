@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0D52E3F6-36C1-326F-BAA3-430FAFF79952}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>NackensGrafik</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NackensGrafik.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NackensGrafik</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\projects\NackensGrafik\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NackensGrafik.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NackensGrafik</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\projects\NackensGrafik\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">NackensGrafik.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">NackensGrafik</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\projects\NackensGrafik\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">NackensGrafik.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">NackensGrafik</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glfw-3.1.1\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;GLEW_STATIC;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;GLEW_STATIC;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glfw-3.1.1\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glfw-3.1.1\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\engine\core\Debug\core.lib;..\..\engine\render\Debug\render.lib;..\..\exts\glew\Debug\glew.lib;..\..\exts\glfw-3.1.1\src\Debug\glfw3.lib;..\..\exts\Debug\imgui.lib;..\..\exts\Debug\nanovg.lib;..\..\exts\Debug\imgui.lib;..\..\exts\Debug\nanovg.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/Debug/NackensGrafik.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/bin/NackensGrafik.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glfw-3.1.1\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glfw-3.1.1\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glfw-3.1.1\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\engine\core\Release\core.lib;..\..\engine\render\Release\render.lib;..\..\exts\glew\Release\glew.lib;..\..\exts\glfw-3.1.1\src\Release\glfw3.lib;..\..\exts\Release\imgui.lib;..\..\exts\Release\nanovg.lib;..\..\exts\Release\imgui.lib;..\..\exts\Release\nanovg.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/Release/NackensGrafik.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/NackensGrafik.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glfw-3.1.1\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glfw-3.1.1\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glfw-3.1.1\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\engine\core\MinSizeRel\core.lib;..\..\engine\render\MinSizeRel\render.lib;..\..\exts\glew\MinSizeRel\glew.lib;..\..\exts\glfw-3.1.1\src\MinSizeRel\glfw3.lib;..\..\exts\MinSizeRel\imgui.lib;..\..\exts\MinSizeRel\nanovg.lib;..\..\exts\MinSizeRel\imgui.lib;..\..\exts\MinSizeRel\nanovg.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/MinSizeRel/NackensGrafik.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/NackensGrafik.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glfw-3.1.1\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glfw-3.1.1\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\glfw-3.1.1\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\engine\core\RelWithDebInfo\core.lib;..\..\engine\render\RelWithDebInfo\render.lib;..\..\exts\glew\RelWithDebInfo\glew.lib;..\..\exts\glfw-3.1.1\src\RelWithDebInfo\glfw3.lib;..\..\exts\RelWithDebInfo\imgui.lib;..\..\exts\RelWithDebInfo\nanovg.lib;..\..\exts\RelWithDebInfo\imgui.lib;..\..\exts\RelWithDebInfo\nanovg.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/RelWithDebInfo/NackensGrafik.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/NackensGrafik.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\projects\NackensGrafik\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\projects\NackensGrafik\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\projects\NackensGrafik\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/lab-env-master/projects/NackensGrafik/BUILD/projects/NackensGrafik/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\projects\NackensGrafik\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\GraphicsNode.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\LightResource.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Matrix3D.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\MeshResource.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Rasterizer.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\ShaderObject.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\TextureResource.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Vector2D.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Vector3D.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\exampleapp.h" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\GraphicsNode.cc" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\LightResource.cc" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\MeshResource.cc" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\Rasterizer.cc" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\ShaderObject.cc" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\TextureResource.cc" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\exampleapp.cc" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\code\main.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\ZERO_CHECK.vcxproj">
+      <Project>{2FC293E3-E994-3A98-988B-8C071E9671FE}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\engine\core\core.vcxproj">
+      <Project>{80954E81-8AFA-3A93-8F44-1F3BC1DA6EAE}</Project>
+      <Name>core</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\exts\glew\glew.vcxproj">
+      <Project>{70A44C77-2402-33F1-AC32-C616C157DCF3}</Project>
+      <Name>glew</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\exts\glfw-3.1.1\src\glfw.vcxproj">
+      <Project>{576525DF-C8EF-3CE0-ADF8-D1E52B845795}</Project>
+      <Name>glfw</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\exts\nanovg.vcxproj">
+      <Project>{03AD7519-E144-31BF-BF27-B3F5DE6531FE}</Project>
+      <Name>nanovg</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\lab-env-master\projects\NackensGrafik\BUILD\engine\render\render.vcxproj">
+      <Project>{5EBE401D-9D33-36D1-8B5A-22C978E6BC65}</Project>
+      <Name>render</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
