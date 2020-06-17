@@ -10,7 +10,12 @@ Application class used for example application.
 #include "../../../engine/core/app.h"
 #include "render/window.h"
 #include <memory>
+<<<<<<< HEAD
 //#include <curses.h>
+=======
+#include <curses.h>
+#include "tinyxml2.h"
+>>>>>>> master
 #include "MeshResource.h"
 #include "TextureResource.h"
 #include "ShaderObject.h"
@@ -46,12 +51,10 @@ namespace Example
 			float rotInt = 0;
 			float rotIntX = 0;
 			float rotIntY = 0;
-			float movmentX = 0;
-			float movmentY = 0;
-			float movmentZ = 1000.0f;
-			float scaleSize = 1.0f;
-			
-			bool rotateEnable;
+			float movmentX = 0.0f;
+			float movmentY = 0.0f;
+			float movmentZ = 0.0f;
+			float scaleSize = 0.5f;
 
 			matrix3D trans;
 			matrix3D matrix;

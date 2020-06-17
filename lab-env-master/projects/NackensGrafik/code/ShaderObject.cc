@@ -50,7 +50,7 @@ void ShaderObject::LoadVertShader(const char *filename)
 	{
 		GLchar* buf = new GLchar[shaderLogSize];
 		glGetShaderInfoLog(this->soVertexShader, shaderLogSize, NULL, buf);
-		printf("[SHADER COMPILE ERROR]: %s", buf);
+		printf("[VERTEX SHADER COMPILE ERROR]: %s", buf);
 		delete[] buf;
 	}
 }
@@ -73,7 +73,7 @@ void ShaderObject::LoadFragShader(const char *filename)
 	{
 		GLchar* buf = new GLchar[shaderLogSize];
 		glGetShaderInfoLog(this->soPixelShader, shaderLogSize, NULL, buf);
-		printf("[SHADER COMPILE ERROR]: %s", buf);
+		printf("[FRAG SHADER COMPILE ERROR]: %s", buf);
 		delete[] buf;
 	}
 }
@@ -152,9 +152,7 @@ void ShaderObject::setupVector3f(const GLchar* name, vector3D vec)
 
 	this->useProgram();
 	glUniform4f(uMap[temp], x, y, z, w);
-
 }
-
 
 void ShaderObject::setupVector3f(const GLchar* name, GLfloat x, GLfloat y, GLfloat z)
 {

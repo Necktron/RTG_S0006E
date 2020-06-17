@@ -1,4 +1,4 @@
-# Install script for directory: /home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects
+# Install script for directory: /home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,9 +39,10 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/projects/ImGuiExample/cmake_install.cmake")
-  include("/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/projects/NackensGrafik/cmake_install.cmake")
-  include("/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/projects/example/cmake_install.cmake")
+  include("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/build/projects/ImGuiExample/cmake_install.cmake")
+  include("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/build/projects/NackensGrafik/cmake_install.cmake")
+  include("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/build/projects/NeckGraphics/cmake_install.cmake")
+  include("/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/build/projects/example/cmake_install.cmake")
 
 endif()
 

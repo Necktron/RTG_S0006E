@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/engine/config.cc" "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/engine/core/CMakeFiles/core.dir/__/config.cc.o"
-  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/engine/core/app.cc" "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/engine/core/CMakeFiles/core.dir/app.cc.o"
+  "/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/engine/config.cc" "/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/build/engine/core/CMakeFiles/core.dir/__/config.cc.o"
+  "/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/engine/core/app.cc" "/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/build/engine/core/CMakeFiles/core.dir/app.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -26,9 +26,9 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/exts/glew/CMakeFiles/glew.dir/DependInfo.cmake"
-  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/exts/CMakeFiles/imgui.dir/DependInfo.cmake"
-  "/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/build/exts/CMakeFiles/nanovg.dir/DependInfo.cmake"
+  "/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/build/exts/glew/CMakeFiles/glew.dir/DependInfo.cmake"
+  "/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/build/exts/CMakeFiles/imgui.dir/DependInfo.cmake"
+  "/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/build/exts/CMakeFiles/nanovg.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

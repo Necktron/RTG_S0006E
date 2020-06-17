@@ -114,9 +114,9 @@ intrin.h
 arm_neon.h
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/engine/config.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/engine/config.h
 win32/pch.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/engine/win32/pch.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/engine/win32/pch.h
 stdint.h
 -
 atomic
@@ -126,11 +126,11 @@ xmmintrin.h
 assert.h
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/engine/core/app.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/engine/core/app.h
 GL/glew.h
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/exts/glew/include/GL/glew.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/exts/glew/include/GL/glew.h
 stddef.h
 -
 inttypes.h
@@ -146,39 +146,39 @@ OpenGL/glu.h
 GL/glu.h
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/GraphicsNode.cc
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/GraphicsNode.cc
 GraphicsNode.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/GraphicsNode.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/GraphicsNode.h
 config.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/config.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/config.h
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/GraphicsNode.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/GraphicsNode.h
 iostream
 -
 memory
 -
 core/app.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/core/app.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/core/app.h
 ShaderObject.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/ShaderObject.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/ShaderObject.h
 MeshResource.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/MeshResource.h
 TextureResource.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/TextureResource.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/TextureResource.h
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/LightResource.cc
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/LightResource.cc
 LightResource.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/LightResource.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/LightResource.h
 config.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/config.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/config.h
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/LightResource.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/LightResource.h
 core/app.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/core/app.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/core/app.h
 Vector3D.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector3D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Vector3D.h
 Vector2D.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector2D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Vector2D.h
 fstream
 -
 iostream
@@ -196,31 +196,31 @@ iomanip
 random
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Matrix3D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Matrix3D.h
 iostream
 -
 Vector3D.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector3D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Vector3D.h
 math.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/math.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/math.h
 cmath
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.cc
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/MeshResource.cc
 MeshResource.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/MeshResource.h
 config.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/config.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/config.h
 string.h
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/MeshResource.h
 core/app.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/core/app.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/core/app.h
 Vector3D.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector3D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Vector3D.h
 Vector2D.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector2D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Vector2D.h
 fstream
 -
 iostream
@@ -232,9 +232,9 @@ map
 vector
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Rasterizer.cc
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Rasterizer.cc
 Rasterizer.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Rasterizer.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Rasterizer.h
 iostream
 -
 string
@@ -246,19 +246,19 @@ fstream
 string.h
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Rasterizer.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Rasterizer.h
 core/app.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/core/app.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/core/app.h
 stb_image.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/stb_image.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/stb_image.h
 Matrix3D.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Matrix3D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Matrix3D.h
 Vector3D.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector3D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Vector3D.h
 Vector2D.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector2D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Vector2D.h
 MeshResource.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/MeshResource.h
 functional
 -
 vector
@@ -266,21 +266,21 @@ vector
 memory
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/ShaderObject.cc
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/ShaderObject.cc
 ShaderObject.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/ShaderObject.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/ShaderObject.h
 config.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/config.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/config.h
 string.h
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/ShaderObject.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/ShaderObject.h
 core/app.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/core/app.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/core/app.h
 Vector3D.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector3D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Vector3D.h
 Matrix3D.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Matrix3D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Matrix3D.h
 fstream
 -
 iostream
@@ -292,47 +292,45 @@ vector
 map
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/TextureResource.cc
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/TextureResource.cc
 TextureResource.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/TextureResource.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/TextureResource.h
 config.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/config.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/config.h
 string
 -
 memory
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/TextureResource.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/TextureResource.h
 core/app.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/core/app.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/core/app.h
 stb_image.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/stb_image.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/stb_image.h
 Rasterizer.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Rasterizer.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Rasterizer.h
 string
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector2D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Vector2D.h
 iostream
 -
 math.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/math.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/math.h
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Vector3D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Vector3D.h
 iostream
 -
 math.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/math.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/math.h
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/exampleapp.cc
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/exampleapp.cc
 ../../../engine/config.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/engine/config.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/engine/config.h
 ../../../exts/glew/include/GL/glew.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/exts/glew/include/GL/glew.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/exts/glew/include/GL/glew.h
 exampleapp.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/exampleapp.h
-tinyxml2.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/tinyxml2.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/exampleapp.h
 stdio.h
 -
 stdlib.h
@@ -352,33 +350,65 @@ string
 cmath
 -
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/exampleapp.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/exampleapp.h
 ../../../engine/core/app.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/engine/core/app.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/engine/core/app.h
 render/window.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/render/window.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/render/window.h
 memory
 -
 curses.h
 -
+tinyxml2.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/tinyxml2.h
 MeshResource.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/MeshResource.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/MeshResource.h
 TextureResource.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/TextureResource.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/TextureResource.h
 ShaderObject.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/ShaderObject.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/ShaderObject.h
 GraphicsNode.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/GraphicsNode.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/GraphicsNode.h
 Matrix3D.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Matrix3D.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Matrix3D.h
 LightResource.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/LightResource.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/LightResource.h
 Rasterizer.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/Rasterizer.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/Rasterizer.h
 
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/main.cc
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/main.cc
 config.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/config.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/config.h
 exampleapp.h
-/home/nacken/ojaaho-6/S0006E - RTG Prog/lab-env-master/projects/NackensGrafik/code/exampleapp.h
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/exampleapp.h
+
+/home/necktron/Documents/GitLab University/LTU/RTG_S0006E/lab-env-master/projects/NackensGrafik/code/tinyxml2.h
+ctype.h
+-
+limits.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+stddef.h
+-
+cctype
+-
+climits
+-
+cstdio
+-
+cstdlib
+-
+cstring
+-
+stdint.h
+-
+android/log.h
+-
+assert.h
+-
 
