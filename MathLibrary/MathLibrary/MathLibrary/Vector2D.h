@@ -143,7 +143,7 @@ float vector2D::vecGet(int i)
 	if (i > 2)
 	{
 		cout << "Error! Index out of range, max value is 1" << endl;
-		return NULL;
+		return 0;
 	}
 	else
 	{

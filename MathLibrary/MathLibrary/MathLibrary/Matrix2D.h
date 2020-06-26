@@ -113,7 +113,7 @@ float matrix2D::getmxComp(int x, int y)
 	if (x > 2 || y > 2)
 	{
 		cout << "Error! Index out of range, max value is 1" << endl;
-		return NULL;
+		return 0;
 	}
 	else
 	{

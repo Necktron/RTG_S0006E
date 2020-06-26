@@ -8,6 +8,9 @@
 //------------------------------------------------------------------------------
 #include "core/app.h"
 #include "render/window.h"
+#include "Mesh.h"
+#include "Shader.h"
+#include <memory>
 
 namespace Example
 {
@@ -19,16 +22,18 @@ public:
 	/// destructor
 	~ExampleApp();
 
-	/// open app
 	bool Open();
-	/// run app
 	void Run();
-private:
+	void Update();
 
-	GLuint program;
-	GLuint vertexShader;
-	GLuint pixelShader;
-	GLuint triangle;
+	std::shared_ptr<Mesh> meshPTR;
+	std::shared_ptr<Shader> shaderPTR;
+
+private:
+	unsigned int program;
+	unsigned int vertexShader;
+	unsigned int pixelShader;
+	unsigned int triangle;
 	Display::Window* window;
 };
 } // namespace Example

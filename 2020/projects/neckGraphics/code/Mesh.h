@@ -1,34 +1,24 @@
 #pragma once
-//------------------------------------------------------------------------------
-/**
-	Application class used for example application.
-	
-	(C) 2015-2020 Individual contributors, see AUTHORS file
-*/
-//------------------------------------------------------------------------------
+#include <vector>
 #include "core/app.h"
-#include "render/window.h"
 
-namespace Example
+using namespace std;
+
+class Mesh
 {
-class ExampleApp : public Core::App
-{
-public:
-	/// constructor
-	ExampleApp();
-	/// destructor
-	~ExampleApp();
+	public:
+		Mesh();
+		~Mesh();
 
-	/// open app
-	bool Open();
-	/// run app
-	void Run();
-private:
+		void Draw(); //Draw the content assigned to the Mesh PTR
+		void LoadTriangle(); //Get a triangle
+		void LoadQuad(); //Get a quad
+		void LoadCube(); //Get a cube
+		void LoadMeshFile(); //Get mesh from file
 
-	GLuint program;
-	GLuint vertexShader;
-	GLuint pixelShader;
-	GLuint triangle;
-	Display::Window* window;
-};
-} // namespace Example
+	private:
+		//Variables assigned and used to render the mnesh, Vertex Buffer, Vertex Assosiation, Index Buffer, etc
+		unsigned int vertexBuff; //VBO
+		unsigned int vertexAssos; //VAO
+		unsigned int indexBuff; //IBO
+}; // namespace Example
