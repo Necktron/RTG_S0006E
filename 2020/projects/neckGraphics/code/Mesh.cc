@@ -12,8 +12,10 @@ Mesh::~Mesh()
 
 void Mesh::Draw()
 {
+	//Used for objects with a signle triangle
 	//glDrawArrays(GL_TRIANGLES, 0, 3);
 
+	//Used for objects with and Index Buffer attached, (sevral triangles requiered to form the mesh)
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 }
 
