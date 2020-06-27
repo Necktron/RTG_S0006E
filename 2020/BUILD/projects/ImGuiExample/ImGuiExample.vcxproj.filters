@@ -1,24 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\projects\ImGuiExample\code\exampleapp.cc">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\ImGuiExample\code\exampleapp.cc">
       <Filter>example</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\projects\ImGuiExample\code\main.cc">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\ImGuiExample\code\main.cc">
       <Filter>example</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\projects\ImGuiExample\code\exampleapp.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\ImGuiExample\code\exampleapp.h">
       <Filter>example</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\2020\projects\ImGuiExample\CMakeLists.txt" />
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\ImGuiExample\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="example">
-      <UniqueIdentifier>{8E537F52-76B9-3D18-A09F-48B529F89F9B}</UniqueIdentifier>
+      <UniqueIdentifier>{081779AC-7860-3685-8785-31FB2B25DDD1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

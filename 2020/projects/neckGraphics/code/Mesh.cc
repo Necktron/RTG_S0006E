@@ -12,18 +12,38 @@ Mesh::~Mesh()
 
 void Mesh::Draw()
 {
-	//Used for objects with a signle triangle
-	//glDrawArrays(GL_TRIANGLES, 0, 3);
+	//Depending on what mesh we got loaded in we choose different draw setups
+	switch (this->drawSettings)
+	{
+		case DrawMode::TRIANGLE:
+			glDrawArrays(GL_TRIANGLES, 0, 3);
+			break;
 
-	//Used for objects with and Index Buffer attached, (sevral triangles requiered to form the mesh)
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+		case DrawMode::QUAD:
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+			break;
+
+		case DrawMode::CUBE:
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+			break;
+
+		case DrawMode::COMPLEX:
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+			break;
+
+		case DrawMode::MULTIPLE:
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+			break;
+	}
 }
 
 
 //BIND A QUAD TO THE BUFFER
 void Mesh::LoadTriangle()
 {
-	float triPos[6] =
+	drawSettings = DrawMode::TRIANGLE;
+
+	float triPos[] =
 	{
 		//( x, y )
 		-0.5f, -0.5f,
@@ -31,22 +51,26 @@ void Mesh::LoadTriangle()
 		0.5f, -0.5f,
 	};
 
+	//Vertex Array
+	glGenVertexArrays(1, &this->vertexArr);
+	glBindVertexArray(this->vertexArr);
+
 	//Vertex Buffer Object, VBO
 	glGenBuffers(1, &this->vertexBuff);
 	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuff);
-	glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), triPos, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 3 * 2 * sizeof(float), triPos, GL_STATIC_DRAW);
 
 	//Vertex Assosiation Object, VAO
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 //BIND A QUAD TO THE BUFFER
 void Mesh::LoadQuad()
 {
-	float quadPos[8] =
+	drawSettings = DrawMode::QUAD;
+
+	float quadPos[] =
 	{
 		//( x, y, )
 		-0.5f, -0.5f,
@@ -61,10 +85,14 @@ void Mesh::LoadQuad()
 		2, 3, 0
 	};
 
+	//Vertex Array
+	glGenVertexArrays(1, &this->vertexArr);
+	glBindVertexArray(this->vertexArr);
+
 	//Vertex Buffer Object, VBO
 	glGenBuffers(1, &this->vertexBuff);
 	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuff);
-	glBufferData(GL_ARRAY_BUFFER, 8 * sizeof(float), quadPos, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), quadPos, GL_STATIC_DRAW);
 
 	//Vertex Assosiation Object, VAO
 	glEnableVertexAttribArray(0);
@@ -79,20 +107,22 @@ void Mesh::LoadQuad()
 //BIND A CUBE TO THE BUFFER
 void Mesh::LoadCube()
 {
-	float cubePos[24] =
+	drawSettings = DrawMode::CUBE;
+
+	float cubePos[] =
 	{
 		//(x, y, z, textureA, textureB)
 		//BACK SIDE
-		-0.5f, -0.5f, -0.5f, //0
-		-0.5f, 0.5f, -0.5f, //1
-		0.5f, 0.5f, -0.5f, //2
-		0.5f, -0.5f, -0.5f, //3
+		-0.2f, -0.2f, -0.2f, //0
+		-0.2f, 0.2f, -0.2f, //1
+		0.2f, 0.2f, -0.2f, //2
+		0.2f, -0.2f, -0.2f, //3
 
 		//FRONT SIDE
-		-0.5f, -0.5f, 0.5f, //4
-		-0.5f, 0.5f, 0.5f, //5
-		0.5f, 0.5f, 0.5f, //6
-		0.5f, -0.5f, 0.5f //7
+		-0.2f, -0.2f, 0.2f, //4
+		-0.2f, 0.2f, 0.2f, //5
+		0.2f, 0.2f, 0.2f, //6
+		0.2f, -0.2f, 0.2f //7
 	};
 
 	unsigned int cubeIndex[] =
@@ -122,12 +152,16 @@ void Mesh::LoadCube()
 		2, 3, 7
 	};
 
-	//Vertex buffer
+	//Vertex Array
+	glGenVertexArrays(1, &this->vertexArr);
+	glBindVertexArray(this->vertexArr);
+
+	//Vertex Buffer
 	glGenBuffers(1, &this->vertexBuff);
 	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuff);
-	glBufferData(GL_ARRAY_BUFFER, 24 * sizeof(float), cubePos, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 8 * 3 * sizeof(float), cubePos, GL_STATIC_DRAW);
 
-	//Vertex Assosiation Object, VAO
+	//Vertex Array Object, VAO
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
 
@@ -137,7 +171,42 @@ void Mesh::LoadCube()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), cubeIndex, GL_STATIC_DRAW);
 }
 
+//BIND A MESH TO THE BUFFER
 void Mesh::LoadMeshFile()
 {
-	
+	drawSettings = DrawMode::COMPLEX;
+
+	//TODO: READ FILE FOR VERTEX POS, TEXTURE, UV, INDEX, ETC
+	float pos[] =
+	{
+		0.0f, 0.0f, 0.0f,
+		1.0f, 1.0f, 0.0f,
+		-1.0f, 1.0f, 0.0f,
+		1.0f, -1.0f, 0.0f,
+		-1.0f, -1.0f, 0.0f
+	};
+
+	unsigned int index[] =
+	{
+		0, 1, 2,
+		3, 4, 0
+	};
+
+	//Vertex Array
+	glGenVertexArrays(1, &this->vertexArr);
+	glBindVertexArray(this->vertexArr);
+
+	//Vertex Buffer
+	glGenBuffers(1, &this->vertexBuff);
+	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuff);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(pos) * sizeof(float), pos, GL_STATIC_DRAW);
+
+	//Vertex Array Object, VAO
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+
+	//Index Buffer Object, IBO
+	glGenBuffers(1, &this->indexBuff);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuff);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index) * sizeof(unsigned int), index, GL_STATIC_DRAW);
 }

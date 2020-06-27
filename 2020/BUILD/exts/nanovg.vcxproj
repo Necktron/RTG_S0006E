@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{75562DD9-48ED-32AC-8AE4-3F2EFE75D252}</ProjectGuid>
+    <ProjectGuid>{9D0BDDCF-2CDB-3155-8A87-8454EB7E359E}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
@@ -59,26 +59,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">nanovg.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">nanovg</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">nanovg.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">nanovg</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">nanovg.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">nanovg</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">nanovg.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">nanovg</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -96,10 +96,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;GLEW_STATIC;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -112,7 +112,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -130,10 +130,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -146,7 +146,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -164,10 +164,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -180,7 +180,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -197,10 +197,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -212,10 +212,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/2020/exts/CMakeLists.txt</Message>
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/exts/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/2020/BUILD/exts/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/exts/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -224,11 +224,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/2020/exts/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/exts/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/2020/BUILD/exts/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/exts/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -237,11 +237,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/2020/exts/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/exts/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/2020/BUILD/exts/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/exts/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -250,11 +250,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/2020/exts/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/exts/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/2020/BUILD/exts/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/exts/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -263,24 +263,24 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src\nanovg.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src\nanovg.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
     </ClCompile>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src\nanovg.h" />
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src\nanovg_gl.h" />
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src\nanovg_gl_utils.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src\nanovg.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src\nanovg_gl.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src\nanovg_gl_utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\imgui.vcxproj">
-      <Project>{7A80CF60-06EE-36C9-B665-8E0546010E3E}</Project>
+    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\imgui.vcxproj">
+      <Project>{B0658E2F-1726-3681-A781-C64180956773}</Project>
       <Name>imgui</Name>
     </ProjectReference>
   </ItemGroup>

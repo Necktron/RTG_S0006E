@@ -1,48 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\imgui.cpp">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\imgui.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\imgui_demo.cpp">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\imgui_demo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\imgui_draw.cpp">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\imgui_draw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example\imgui_impl_glfw_gl3.cpp">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example\imgui_impl_glfw_gl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\imgui.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\imgui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\imgui_internal.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\imgui_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\stb_rect_pack.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\stb_rect_pack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\stb_textedit.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\stb_textedit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\stb_truetype.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\stb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example\imgui_impl_glfw_gl3.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example\imgui_impl_glfw_gl3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\CMakeLists.txt" />
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{0C63B3F9-9AEB-37F6-B3C3-16B547C25A77}</UniqueIdentifier>
+      <UniqueIdentifier>{C1F2CD9F-5C2E-3CF7-B547-E4DB264B0613}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{2ABA6FE5-76C0-3C6F-8BC4-46163D47C87F}</UniqueIdentifier>
+      <UniqueIdentifier>{0E0AC606-5AC9-3266-8845-938EFC847A3F}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

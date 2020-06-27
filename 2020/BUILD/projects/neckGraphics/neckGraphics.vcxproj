@@ -22,7 +22,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{395AE984-A74E-3683-B092-50576851D15A}</ProjectGuid>
+    <ProjectGuid>{2218FF81-4477-3E12-869B-5311A23B5B94}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
@@ -59,25 +59,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHubUniversity\RTG_S0006E\2020\bin\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\bin\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">neckGraphics.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">neckGraphics</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\projects\neckGraphics\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\projects\neckGraphics\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">neckGraphics.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">neckGraphics</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\projects\neckGraphics\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\projects\neckGraphics\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">neckGraphics.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">neckGraphics</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\projects\neckGraphics\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\projects\neckGraphics\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">neckGraphics.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">neckGraphics</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\projects\MathLibrary;D:\GitHubUniversity\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -104,10 +104,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;GLEW_STATIC;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -120,8 +120,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/neckGraphics/Debug/neckGraphics.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/GitHubUniversity/RTG_S0006E/2020/bin/neckGraphics.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/neckGraphics/Debug/neckGraphics.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/bin/neckGraphics.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -130,7 +130,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -148,10 +148,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -164,8 +164,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/neckGraphics/Release/neckGraphics.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/neckGraphics/neckGraphics.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/neckGraphics/Release/neckGraphics.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/neckGraphics/neckGraphics.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -174,7 +174,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -192,10 +192,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -208,8 +208,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/neckGraphics/MinSizeRel/neckGraphics.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/neckGraphics/neckGraphics.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/neckGraphics/MinSizeRel/neckGraphics.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/neckGraphics/neckGraphics.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -218,7 +218,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -235,10 +235,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;GLEW_STATIC;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glew\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\imgui\examples\opengl3_example;D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\nanovg\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -251,8 +251,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/neckGraphics/RelWithDebInfo/neckGraphics.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/neckGraphics/neckGraphics.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/neckGraphics/RelWithDebInfo/neckGraphics.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/neckGraphics/neckGraphics.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -260,10 +260,10 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\2020\projects\neckGraphics\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/2020/projects/neckGraphics/CMakeLists.txt</Message>
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/projects/neckGraphics/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/neckGraphics/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/neckGraphics/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -272,11 +272,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\projects\neckGraphics\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\projects\neckGraphics\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/2020/projects/neckGraphics/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/projects/neckGraphics/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/neckGraphics/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/neckGraphics/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -285,11 +285,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\projects\neckGraphics\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\projects\neckGraphics\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/2020/projects/neckGraphics/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/projects/neckGraphics/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/neckGraphics/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/neckGraphics/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -298,11 +298,11 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\projects\neckGraphics\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\projects\neckGraphics\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/2020/projects/neckGraphics/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/projects/neckGraphics/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/neckGraphics/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020 -BD:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD --check-stamp-file D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/neckGraphics/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -311,38 +311,45 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHubUniversity\RTG_S0006E\2020\BUILD\projects\neckGraphics\CMakeFiles\generate.stamp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\projects\neckGraphics\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\projects\neckGraphics\code\exampleapp.h" />
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\projects\neckGraphics\code\exampleapp.cc" />
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\projects\neckGraphics\code\main.cc" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Mesh.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Shader.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\exampleapp.h" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Mesh.cc" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Shader.cc" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\exampleapp.cc" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\main.cc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\2020\BUILD\ZERO_CHECK.vcxproj">
-      <Project>{32CFBACE-F8B2-3E37-9848-2C8C820F8747}</Project>
+    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\ZERO_CHECK.vcxproj">
+      <Project>{EE4FA1F4-7740-3E66-8540-631D7BE763B1}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\2020\BUILD\engine\core\core.vcxproj">
-      <Project>{1A319389-6BB0-3986-ACF5-5B50857789DB}</Project>
+    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\engine\core\core.vcxproj">
+      <Project>{6636E343-8532-360A-A775-1F313A5C81ED}</Project>
       <Name>core</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\glew\glew.vcxproj">
-      <Project>{E58B3E72-2308-34AA-A59E-F65F25683FD3}</Project>
+    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\glew\glew.vcxproj">
+      <Project>{A15EDE70-BF24-3823-85C8-CA4DA61D953F}</Project>
       <Name>glew</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\glfw\src\glfw.vcxproj">
-      <Project>{61DA8A00-5D20-36C7-B01B-5021A21B7A1F}</Project>
+    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\glfw\src\glfw.vcxproj">
+      <Project>{27994755-0028-39E9-8EB8-CB5E899E0EBE}</Project>
       <Name>glfw</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\nanovg.vcxproj">
-      <Project>{75562DD9-48ED-32AC-8AE4-3F2EFE75D252}</Project>
+    <ProjectReference Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\nanovg.vcxproj">
+      <Project>{9D0BDDCF-2CDB-3155-8A87-8454EB7E359E}</Project>
       <Name>nanovg</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\projects\neckGraphics\code\Basic.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\2020\BUILD\CMakeFiles\016532b9e48f2ff9e6458fad63902695\generate.stamp.rule">
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\CMakeFiles\66f1f27269b2c7724df4ddf06bf1d1f3\generate.stamp.rule">
       <Filter>CMake Rules</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="CMake Rules">
-      <UniqueIdentifier>{9143A15F-0F48-361F-B5F6-76B7A6C3B0C0}</UniqueIdentifier>
+      <UniqueIdentifier>{3E5B9E29-D563-3FD8-85C0-BEB6D35C0D45}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-# Install script for directory: D:/GitHubUniversity/RTG_S0006E/2020
+# Install script for directory: D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,9 +34,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("D:/GitHubUniversity/RTG_S0006E/2020/BUILD/exts/cmake_install.cmake")
-  include("D:/GitHubUniversity/RTG_S0006E/2020/BUILD/engine/cmake_install.cmake")
-  include("D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/cmake_install.cmake")
+  include("D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/exts/cmake_install.cmake")
+  include("D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/engine/cmake_install.cmake")
+  include("D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/cmake_install.cmake")
 
 endif()
 
@@ -48,5 +48,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/GitHubUniversity/RTG_S0006E/2020/BUILD/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

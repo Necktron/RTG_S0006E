@@ -30,10 +30,7 @@ public:
 	std::shared_ptr<Shader> shaderPTR;
 
 private:
-	unsigned int program;
-	unsigned int vertexShader;
-	unsigned int pixelShader;
-	unsigned int triangle;
+	unsigned int shader;
 	Display::Window* window;
 };
 } // namespace Example

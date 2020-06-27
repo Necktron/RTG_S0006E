@@ -1,4 +1,4 @@
-# Install script for directory: D:/GitHubUniversity/RTG_S0006E/2020/projects
+# Install script for directory: D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/projects
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,9 +34,9 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/ImGuiExample/cmake_install.cmake")
-  include("D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/example/cmake_install.cmake")
-  include("D:/GitHubUniversity/RTG_S0006E/2020/BUILD/projects/neckGraphics/cmake_install.cmake")
+  include("D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/ImGuiExample/cmake_install.cmake")
+  include("D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/example/cmake_install.cmake")
+  include("D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/projects/neckGraphics/cmake_install.cmake")
 
 endif()
 

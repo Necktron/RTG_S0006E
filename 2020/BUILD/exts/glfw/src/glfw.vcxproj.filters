@@ -1,84 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\context.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\context.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\init.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\init.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\input.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\input.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\monitor.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\monitor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\vulkan.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\vulkan.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\window.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\window.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\win32_init.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\win32_init.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\win32_joystick.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\win32_joystick.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\win32_monitor.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\win32_monitor.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\win32_time.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\win32_time.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\win32_tls.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\win32_tls.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\win32_window.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\win32_window.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\wgl_context.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\wgl_context.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\egl_context.c">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\egl_context.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\internal.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\BUILD\exts\glfw\src\glfw_config.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\BUILD\exts\glfw\src\glfw_config.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include\GLFW\glfw3.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include\GLFW\glfw3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\include\GLFW\glfw3native.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\include\GLFW\glfw3native.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\win32_platform.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\win32_platform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\win32_joystick.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\win32_joystick.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\wgl_context.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\wgl_context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\egl_context.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\egl_context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\2020\exts\glfw\src\CMakeLists.txt" />
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\exts\glfw\src\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{0C63B3F9-9AEB-37F6-B3C3-16B547C25A77}</UniqueIdentifier>
+      <UniqueIdentifier>{C1F2CD9F-5C2E-3CF7-B547-E4DB264B0613}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{2ABA6FE5-76C0-3C6F-8BC4-46163D47C87F}</UniqueIdentifier>
+      <UniqueIdentifier>{0E0AC606-5AC9-3266-8845-938EFC847A3F}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-# Install script for directory: D:/GitHubUniversity/RTG_S0006E/2020/exts
+# Install script for directory: D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/exts
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,8 +34,8 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("D:/GitHubUniversity/RTG_S0006E/2020/BUILD/exts/glew/cmake_install.cmake")
-  include("D:/GitHubUniversity/RTG_S0006E/2020/BUILD/exts/glfw/cmake_install.cmake")
+  include("D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/exts/glew/cmake_install.cmake")
+  include("D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/BUILD/exts/glfw/cmake_install.cmake")
 
 endif()
 

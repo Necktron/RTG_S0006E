@@ -1,4 +1,4 @@
-# Install script for directory: D:/GitHubUniversity/RTG_S0006E/2020/exts/glfw/src
+# Install script for directory: D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/exts/glfw/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

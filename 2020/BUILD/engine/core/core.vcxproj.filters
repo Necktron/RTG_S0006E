@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\engine\core\app.cc">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine\core\app.cc">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\engine\config.cc">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine\config.cc">
       <Filter>pch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\engine\core\app.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine\core\app.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\engine\config.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine\config.h">
       <Filter>pch</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\2020\engine\core\CMakeLists.txt" />
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\engine\core\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="core">
-      <UniqueIdentifier>{29D0010C-1365-3A50-A538-D7EDA7B065D1}</UniqueIdentifier>
+      <UniqueIdentifier>{FE8D2BA1-13EC-3E39-93CF-42D342F5E68A}</UniqueIdentifier>
     </Filter>
     <Filter Include="pch">
-      <UniqueIdentifier>{CCAD652F-1488-3B53-8AE4-6B810D0169CE}</UniqueIdentifier>
+      <UniqueIdentifier>{9DD86C8E-93E1-392E-B1A5-BD85AE314A64}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

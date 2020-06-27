@@ -1,4 +1,4 @@
-# Install script for directory: D:/GitHubUniversity/RTG_S0006E/2020/engine/render
+# Install script for directory: D:/GitHubUniversity/RTG_S0006E/RTG_S0006E/2020/engine/render
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

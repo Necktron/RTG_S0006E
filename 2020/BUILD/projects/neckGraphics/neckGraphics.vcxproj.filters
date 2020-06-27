@@ -1,24 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\projects\neckGraphics\code\exampleapp.cc">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Mesh.cc">
       <Filter>neckGraphics</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\2020\projects\neckGraphics\code\main.cc">
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Shader.cc">
+      <Filter>neckGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\exampleapp.cc">
+      <Filter>neckGraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\main.cc">
       <Filter>neckGraphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\2020\projects\neckGraphics\code\exampleapp.h">
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Mesh.h">
+      <Filter>neckGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Shader.h">
+      <Filter>neckGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\exampleapp.h">
       <Filter>neckGraphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\2020\projects\neckGraphics\CMakeLists.txt" />
+    <CustomBuild Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="neckGraphics">
-      <UniqueIdentifier>{542AFCA4-43AB-3910-A9F5-B68ED3B8B73D}</UniqueIdentifier>
+      <UniqueIdentifier>{8C222489-6FEB-3038-9785-B5B9EDCB4CF8}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\projects\neckGraphics\code\Basic.shader">
+      <Filter>neckGraphics</Filter>
+    </None>
   </ItemGroup>
 </Project>
