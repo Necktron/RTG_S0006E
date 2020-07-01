@@ -9,7 +9,10 @@
 #include "core/app.h"
 #include "render/window.h"
 #include "Mesh.h"
+#include "Texture.h"
 #include "Shader.h"
+#include "Renderer.h"
+#include "resources/mathLibrary/Matrix3D.h"
 #include <memory>
 
 namespace Example
@@ -28,6 +31,8 @@ public:
 
 	std::shared_ptr<Mesh> meshPTR;
 	std::shared_ptr<Shader> shaderPTR;
+	std::shared_ptr<Texture> texturePTR;
+	std::shared_ptr<Renderer> graphicsPTR;
 
 private:
 	unsigned int shader;

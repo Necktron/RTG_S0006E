@@ -317,10 +317,14 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Mesh.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Renderer.h" />
     <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Shader.h" />
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Texture.h" />
     <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\exampleapp.h" />
     <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Mesh.cc" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Renderer.cc" />
     <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Shader.cc" />
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Texture.cc" />
     <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\exampleapp.cc" />
     <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\main.cc" />
   </ItemGroup>
@@ -347,9 +351,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{9D0BDDCF-2CDB-3155-8A87-8454EB7E359E}</Project>
       <Name>nanovg</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\projects\neckGraphics\code\Basic.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

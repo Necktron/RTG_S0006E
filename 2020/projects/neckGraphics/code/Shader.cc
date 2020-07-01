@@ -1,5 +1,60 @@
 #include "Shader.h"
 
+void Shader::SetupShader(const std::string& filepath)
+{
+	ShaderProgramSource source = ParseShader(filepath);
+	m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
+
+	//Print's the Vertex and Fragment shader source code for inspection in CMD
+	if (m_DEBUG)
+	{
+		std::cout << "VERTEX" << std::endl;
+		std::cout << source.VertexSource << std::endl;
+		std::cout << "FRAGMENT" << std::endl;
+		std::cout << source.FragmentSource << std::endl;
+	}
+}
+
+void Shader::Bind()
+{
+	glUseProgram(m_RendererID);
+}
+
+void Shader::Unbind()
+{
+	glUseProgram(0);
+}
+
+void Shader::SetUniform1i(const std::string name, int value)
+{
+	glUniform1i(GetUniformLocation(name), value);
+}
+
+void Shader::SetUniform1f(const std::string name, float value)
+{
+	glUniform1f(GetUniformLocation(name), value);
+}
+
+void Shader::SetUniform4f(const std::string name, float v0, float v1, float v2, float v3)
+{
+	glUniform4f(GetUniformLocation(name), v0, v1, v2, v3);
+}
+
+int Shader::GetUniformLocation(const std::string& name)
+{
+	if (m_UniformLocationCache.find(name) != m_UniformLocationCache.end())
+		return m_UniformLocationCache[name];
+
+	unsigned int location = glGetUniformLocation(m_RendererID, name.c_str());
+
+	if (location == -1)
+		std::cout << "Warning: Uniform '" << name << "' dosen't exsist!" << std::endl;
+
+	m_UniformLocationCache[name] = location;
+
+	return location;
+}
+
 Shader::ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 {
 	std::ifstream stream(filepath);

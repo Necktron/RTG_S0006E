@@ -10,45 +10,20 @@ Mesh::~Mesh()
 
 }
 
-void Mesh::Draw()
-{
-	//Depending on what mesh we got loaded in we choose different draw setups
-	switch (this->drawSettings)
-	{
-		case DrawMode::TRIANGLE:
-			glDrawArrays(GL_TRIANGLES, 0, 3);
-			break;
-
-		case DrawMode::QUAD:
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-			break;
-
-		case DrawMode::CUBE:
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-			break;
-
-		case DrawMode::COMPLEX:
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-			break;
-
-		case DrawMode::MULTIPLE:
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
-			break;
-	}
-}
-
-
 //BIND A QUAD TO THE BUFFER
 void Mesh::LoadTriangle()
 {
-	drawSettings = DrawMode::TRIANGLE;
-
-	float triPos[] =
+	float pos[] =
 	{
 		//( x, y )
-		-0.5f, -0.5f,
-		0.0f, 0.5f,
-		0.5f, -0.5f,
+		-0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0,
+		0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f,
+		0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f
+	};
+
+	unsigned int index[] =
+	{
+		0, 1, 2
 	};
 
 	//Vertex Array
@@ -58,28 +33,33 @@ void Mesh::LoadTriangle()
 	//Vertex Buffer Object, VBO
 	glGenBuffers(1, &this->vertexBuff);
 	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuff);
-	glBufferData(GL_ARRAY_BUFFER, 3 * 2 * sizeof(float), triPos, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 3 * 2 * sizeof(pos), pos, GL_STATIC_DRAW);
 
 	//Vertex Assosiation Object, VAO
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 6, 0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (GLvoid*)(sizeof(float) * 2));
+
+	//Index Buffer Object, IBO
+	glGenBuffers(1, &this->indexBuff);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuff);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
 }
 
 //BIND A QUAD TO THE BUFFER
 void Mesh::LoadQuad()
 {
-	drawSettings = DrawMode::QUAD;
-
-	float quadPos[] =
+	float pos[] =
 	{
-		//( x, y, )
-		-0.5f, -0.5f,
-		-0.5f, 0.5f,
-		0.5f, 0.5f,
-		0.5f, -0.5f
+		//( x, y, textureA, textureB)
+		-0.5f, -0.5f, 0.0f, 0.0f,
+		0.5f, -0.5f, 1.0f, 0.0f,
+		0.5f, 0.5f, 1.0f, 1.0f,
+		-0.5f, 0.5f, 0.0f, 1.0f
 	};
 
-	unsigned int quadIndex[6] =
+	unsigned int index[] =
 	{
 		0, 1, 2,
 		2, 3, 0
@@ -92,40 +72,40 @@ void Mesh::LoadQuad()
 	//Vertex Buffer Object, VBO
 	glGenBuffers(1, &this->vertexBuff);
 	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuff);
-	glBufferData(GL_ARRAY_BUFFER, 4 * 2 * sizeof(float), quadPos, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 4 * 4 * sizeof(pos), pos, GL_STATIC_DRAW);
 
 	//Vertex Assosiation Object, VAO
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (GLvoid*)(sizeof(float) * 2));
 
 	//Index Buffer Object, IBO
 	glGenBuffers(1, &this->indexBuff);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuff);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), quadIndex, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
 }
 
 //BIND A CUBE TO THE BUFFER
 void Mesh::LoadCube()
 {
-	drawSettings = DrawMode::CUBE;
-
-	float cubePos[] =
+	float pos[] =
 	{
 		//(x, y, z, textureA, textureB)
 		//BACK SIDE
-		-0.2f, -0.2f, -0.2f, //0
-		-0.2f, 0.2f, -0.2f, //1
-		0.2f, 0.2f, -0.2f, //2
-		0.2f, -0.2f, -0.2f, //3
+		-0.2f, -0.2f, -0.2f, 1.0f, 0.0f, 0.0f, 1.0, //0
+		-0.2f, 0.2f, -0.2f, 0.0f, 1.0f, 0.0f, 1.0f, //1
+		0.2f, 0.2f, -0.2f, 0.0f, 0.0f, 1.0f, 1.0f,  //2
+		0.2f, -0.2f, -0.2f, 0.0f, 0.5f, 0.5f, 1.0f  //3
 
 		//FRONT SIDE
-		-0.2f, -0.2f, 0.2f, //4
-		-0.2f, 0.2f, 0.2f, //5
-		0.2f, 0.2f, 0.2f, //6
-		0.2f, -0.2f, 0.2f //7
+		-0.2f, -0.2f, 0.2f, 0.0f, 0.5f, 0.5f, 1.0f, //4
+		-0.2f, 0.2f, 0.2f, 0.0f, 0.0f, 1.0f, 1.0f,  //5
+		0.2f, 0.2f, 0.2f, 0.0f, 1.0f, 0.0f, 1.0f,   //6
+		0.2f, -0.2f, 0.2f, 1.0f, 0.0f, 0.0f, 1.0    //7
 	};
 
-	unsigned int cubeIndex[] =
+	unsigned int index[] =
 	{
 		//Back
 		0, 1, 2,
@@ -159,31 +139,34 @@ void Mesh::LoadCube()
 	//Vertex Buffer
 	glGenBuffers(1, &this->vertexBuff);
 	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuff);
-	glBufferData(GL_ARRAY_BUFFER, 8 * 3 * sizeof(float), cubePos, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
 
 	//Vertex Array Object, VAO
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, 0);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (GLvoid*)(sizeof(float) * 3));
 
 	//Index Buffer Object, IBO
 	glGenBuffers(1, &this->indexBuff);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuff);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), cubeIndex, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
 }
 
 //BIND A MESH TO THE BUFFER
 void Mesh::LoadMeshFile()
 {
-	drawSettings = DrawMode::COMPLEX;
-
 	//TODO: READ FILE FOR VERTEX POS, TEXTURE, UV, INDEX, ETC
+
+	//COLORFUL SHADER
 	float pos[] =
 	{
-		0.0f, 0.0f, 0.0f,
-		1.0f, 1.0f, 0.0f,
-		-1.0f, 1.0f, 0.0f,
-		1.0f, -1.0f, 0.0f,
-		-1.0f, -1.0f, 0.0f
+		//( x, y, z, R, G, B, A)
+		0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+		1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+		-1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+		1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+		-1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f
 	};
 
 	unsigned int index[] =
@@ -199,14 +182,16 @@ void Mesh::LoadMeshFile()
 	//Vertex Buffer
 	glGenBuffers(1, &this->vertexBuff);
 	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuff);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(pos) * sizeof(float), pos, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
 
 	//Vertex Array Object, VAO
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, 0);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (GLvoid*)(sizeof(float) * 3));
 
 	//Index Buffer Object, IBO
 	glGenBuffers(1, &this->indexBuff);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuff);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index) * sizeof(unsigned int), index, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
 }
