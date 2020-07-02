@@ -11,7 +11,7 @@ Mesh::~Mesh()
 }
 
 //BIND A QUAD TO THE BUFFER
-void Mesh::LoadTriangle()
+void Mesh::Triangle()
 {
 	float pos[] =
 	{
@@ -27,12 +27,12 @@ void Mesh::LoadTriangle()
 	};
 
 	//Vertex Array
-	glGenVertexArrays(1, &this->vertexArr);
-	glBindVertexArray(this->vertexArr);
+	glGenVertexArrays(1, &this->vao);
+	glBindVertexArray(this->vao);
 
 	//Vertex Buffer Object, VBO
-	glGenBuffers(1, &this->vertexBuff);
-	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuff);
+	glGenBuffers(1, &this->vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
 	glBufferData(GL_ARRAY_BUFFER, 3 * 2 * sizeof(pos), pos, GL_STATIC_DRAW);
 
 	//Vertex Assosiation Object, VAO
@@ -42,13 +42,13 @@ void Mesh::LoadTriangle()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (GLvoid*)(sizeof(float) * 2));
 
 	//Index Buffer Object, IBO
-	glGenBuffers(1, &this->indexBuff);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuff);
+	glGenBuffers(1, &this->ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ibo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
 }
 
 //BIND A QUAD TO THE BUFFER
-void Mesh::LoadQuad()
+void Mesh::Quad()
 {
 	float pos[] =
 	{
@@ -66,12 +66,12 @@ void Mesh::LoadQuad()
 	};
 
 	//Vertex Array
-	glGenVertexArrays(1, &this->vertexArr);
-	glBindVertexArray(this->vertexArr);
+	glGenVertexArrays(1, &this->vao);
+	glBindVertexArray(this->vao);
 
 	//Vertex Buffer Object, VBO
-	glGenBuffers(1, &this->vertexBuff);
-	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuff);
+	glGenBuffers(1, &this->vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
 	glBufferData(GL_ARRAY_BUFFER, 4 * 4 * sizeof(pos), pos, GL_STATIC_DRAW);
 
 	//Vertex Assosiation Object, VAO
@@ -81,13 +81,13 @@ void Mesh::LoadQuad()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (GLvoid*)(sizeof(float) * 2));
 
 	//Index Buffer Object, IBO
-	glGenBuffers(1, &this->indexBuff);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuff);
+	glGenBuffers(1, &this->ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ibo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
 }
 
 //BIND A CUBE TO THE BUFFER
-void Mesh::LoadCube()
+void Mesh::Cube()
 {
 	float pos[] =
 	{
@@ -133,12 +133,12 @@ void Mesh::LoadCube()
 	};
 
 	//Vertex Array
-	glGenVertexArrays(1, &this->vertexArr);
-	glBindVertexArray(this->vertexArr);
+	glGenVertexArrays(1, &this->vao);
+	glBindVertexArray(this->vao);
 
 	//Vertex Buffer
-	glGenBuffers(1, &this->vertexBuff);
-	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuff);
+	glGenBuffers(1, &this->vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
 
 	//Vertex Array Object, VAO
@@ -148,13 +148,13 @@ void Mesh::LoadCube()
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (GLvoid*)(sizeof(float) * 3));
 
 	//Index Buffer Object, IBO
-	glGenBuffers(1, &this->indexBuff);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuff);
+	glGenBuffers(1, &this->ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ibo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
 }
 
 //BIND A MESH TO THE BUFFER
-void Mesh::LoadMeshFile()
+void Mesh::MeshFile()
 {
 	//TODO: READ FILE FOR VERTEX POS, TEXTURE, UV, INDEX, ETC
 
@@ -169,19 +169,19 @@ void Mesh::LoadMeshFile()
 		-1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f
 	};
 
-	unsigned int index[] =
+	unsigned int indices[] =
 	{
 		0, 1, 2,
 		3, 4, 0
 	};
 
 	//Vertex Array
-	glGenVertexArrays(1, &this->vertexArr);
-	glBindVertexArray(this->vertexArr);
+	glGenVertexArrays(1, &this->vao);
+	glBindVertexArray(this->vao);
 
 	//Vertex Buffer
-	glGenBuffers(1, &this->vertexBuff);
-	glBindBuffer(GL_ARRAY_BUFFER, this->vertexBuff);
+	glGenBuffers(1, &this->vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
 
 	//Vertex Array Object, VAO
@@ -191,7 +191,7 @@ void Mesh::LoadMeshFile()
 	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (GLvoid*)(sizeof(float) * 3));
 
 	//Index Buffer Object, IBO
-	glGenBuffers(1, &this->indexBuff);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->indexBuff);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
+	glGenBuffers(1, &this->ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ibo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 }
