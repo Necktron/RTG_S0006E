@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\IndexBuffer.cc">
-      <Filter>neckGraphics</Filter>
-    </ClCompile>
     <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Mesh.cc">
       <Filter>neckGraphics</Filter>
     </ClCompile>
@@ -16,9 +13,6 @@
     <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Texture.cc">
       <Filter>neckGraphics</Filter>
     </ClCompile>
-    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\VertexBuffer.cc">
-      <Filter>neckGraphics</Filter>
-    </ClCompile>
     <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\exampleapp.cc">
       <Filter>neckGraphics</Filter>
     </ClCompile>
@@ -27,9 +21,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\IndexBuffer.h">
-      <Filter>neckGraphics</Filter>
-    </ClInclude>
     <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Mesh.h">
       <Filter>neckGraphics</Filter>
     </ClInclude>
@@ -40,9 +31,6 @@
       <Filter>neckGraphics</Filter>
     </ClInclude>
     <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Texture.h">
-      <Filter>neckGraphics</Filter>
-    </ClInclude>
-    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\VertexBuffer.h">
       <Filter>neckGraphics</Filter>
     </ClInclude>
     <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\exampleapp.h">

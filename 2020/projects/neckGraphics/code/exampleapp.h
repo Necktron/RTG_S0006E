@@ -12,6 +12,7 @@
 #include "Texture.h"
 #include "Shader.h"
 #include "Renderer.h"
+#include "resources/mathLibrary/Matrix2D.h"
 #include "resources/mathLibrary/Matrix3D.h"
 #include <memory>
 

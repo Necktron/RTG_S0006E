@@ -93,16 +93,16 @@ void Mesh::Cube()
 	{
 		//(x, y, z, textureA, textureB)
 		//BACK SIDE
-		-0.2f, -0.2f, -0.2f, 1.0f, 0.0f, 0.0f, 1.0, //0
-		-0.2f, 0.2f, -0.2f, 0.0f, 1.0f, 0.0f, 1.0f, //1
-		0.2f, 0.2f, -0.2f, 0.0f, 0.0f, 1.0f, 1.0f,  //2
-		0.2f, -0.2f, -0.2f, 0.0f, 0.5f, 0.5f, 1.0f  //3
+		-0.5f, -0.5f, -0.5f, 0.0f, 0.0f, //0
+		-0.5f, 0.5f, -0.5f, 0.0f, 1.0f,  //1
+		0.5f, 0.5f, -0.5f, 1.0f, 1.0f,   //2
+		0.5f, -0.5f, -0.5f, 1.0f, 0.0f   //3
 
 		//FRONT SIDE
-		-0.2f, -0.2f, 0.2f, 0.0f, 0.5f, 0.5f, 1.0f, //4
-		-0.2f, 0.2f, 0.2f, 0.0f, 0.0f, 1.0f, 1.0f,  //5
-		0.2f, 0.2f, 0.2f, 0.0f, 1.0f, 0.0f, 1.0f,   //6
-		0.2f, -0.2f, 0.2f, 1.0f, 0.0f, 0.0f, 1.0    //7
+		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,  //4
+		-0.5f, 0.5f, 0.5f, 0.0f, 1.0f,   //5
+		0.5f, 0.5f, 0.5f, 1.0f, 1.0f,    //6
+		0.5f, -0.5f, 0.5f, 1.0f, 0.0f    //7
 	};
 
 	unsigned int index[] =
@@ -144,8 +144,8 @@ void Mesh::Cube()
 	//Vertex Array Object, VAO
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, 0);
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (GLvoid*)(sizeof(float) * 3));
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (GLvoid*)(sizeof(float) * 3));
 
 	//Index Buffer Object, IBO
 	glGenBuffers(1, &this->ibo);

@@ -14,7 +14,8 @@ public:
 		TURQUOISE_WOOD = 1,
 		KOREAN_FLAG = 2,
 		BLUEBERRIES = 3,
-		OPENGL_LOGO = 4
+		OPENGL_LOGO = 4,
+		INSTAGRAM = 5
 	};
 
 	TextureImage textureImage = TextureImage::NONE;
