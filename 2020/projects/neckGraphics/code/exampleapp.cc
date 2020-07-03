@@ -36,7 +36,10 @@ ExampleApp::Open()
 	App::Open();
 	this->window = new Display::Window;
 	this->window->SetTitle("Necktronian Graphics Inc.");
-	this->window->SetSize(850, 850);
+
+	this->resolution[0] = 800.0f;
+	this->resolution[1] = 600.0f;
+	this->window->SetSize(resolution[0], resolution[1]);
 	window->SetKeyPressFunction([this](int32, int32, int32, int32)
 	{
 		this->window->Close();
@@ -48,15 +51,20 @@ ExampleApp::Open()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		Shader::ShaderProgramSource source;
 
-		//glEnable(GL_BLEND);
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		meshPTR = std::make_shared<Mesh>();
 		shaderPTR = std::make_shared<Shader>();
 		texturePTR = std::make_shared<Texture>();
 
-		matrix3D projection('I');
-		vector3D move(1.0f, 1.0f, 1.0f);
+		//Model View Projection matrix setup
+		matrix3D modelToWorld = matrix3D::LookAt(vector3D(0.0f, 0.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
+		matrix3D worldToView = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f));
+		matrix3D viewToProjection = matrix3D::ProjectionMatrix(45.0f, 0.1f, 10.0f, this->resolution[0], this->resolution[1]);
+		matrix3D MVP = worldToView * modelToWorld;
+
+		vector3D move(0.0f, 0.0f, 0.0f);
 
 		//Do you want the shader to be printed out for closer inspection?
 		shaderPTR->m_DEBUG = true;
@@ -65,7 +73,7 @@ ExampleApp::Open()
 		meshPTR->Cube();
 
 		//Select a shader effect, ( You must know what shader makes what effects )
-		shaderPTR->shaderEFK = Shader::ShaderEffect::STATIC_RAINBOW;
+		shaderPTR->shaderEFK = Shader::ShaderEffect::IMAGE_TEXTURE;
 
 		//If the shader allows a texture, we may choose a texture below
 		texturePTR->textureImage = Texture::TextureImage::KOREAN_FLAG;
@@ -81,8 +89,8 @@ ExampleApp::Open()
 		
 		//Bind the shader
 		shaderPTR->Bind();
-		shaderPTR->SetUniformMat4f("u_MVP", projection);
-		shaderPTR->SetUniform4f("u_Move", move.vecOrigin[0], move.vecOrigin[1], move.vecOrigin[2], move.vecOrigin[3]);
+		shaderPTR->SetUniformMat4fv("u_MVP", MVP);
+		shaderPTR->SetUniform4f("u_Move", move.vecOrigin[0], move.vecOrigin[1], move.vecOrigin[2], 1.0f);
 
 		if (int(shaderPTR->shaderEFK) == 1)
 		{
@@ -133,7 +141,17 @@ ExampleApp::Run()
 	float r = 0.0f;
 	float g = 0.0f;
 	float b = 0.0f;
-	float increment = 0.05f;
+	float moveX = 0.0f;
+	float moveZ = 1.0f;
+	float incrementRGB = 0.02f;
+	float incrementPOSX = 0.01f;
+	float incrementPOSZ = 0.01f;
+	vector3D move(0.0f, 0.0f, 0.0f);
+
+	matrix3D modelToWorld = matrix3D::LookAt(vector3D(0.0f, 0.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
+	matrix3D worldToView = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f));
+	matrix3D viewToProjection = matrix3D::ProjectionMatrix(45.0f, 0.1f, 10.0f, this->resolution[0], this->resolution[1]);
+	matrix3D MVP = worldToView * modelToWorld;
 
 	while (this->window->IsOpen())
 	{
@@ -145,7 +163,8 @@ ExampleApp::Run()
 		if (int(shaderPTR->shaderEFK) == 1)
 			shaderPTR->SetUniform4f("u_Color", r, 0.4f, 0.5f, 1.0f);
 		
-		shaderPTR->SetUniform4f("u_Move", r, 0.0f, 0.0f, 1.0f);
+		shaderPTR->SetUniformMat4fv("u_MVP", MVP);
+		shaderPTR->SetUniform4f("u_Move", moveX, 0.0f, 0.0f, 1.0f);
 
 		glBindVertexArray(meshPTR->vao);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, meshPTR->ibo);
@@ -153,36 +172,35 @@ ExampleApp::Run()
 		//ACTUAL RENDER
 		graphicsPTR->Draw(meshPTR, shaderPTR);
 
-		//Update();
-
 		//COLOR ANIM
-		if (int(shaderPTR->shaderEFK) == 1)
-		{
-			if (r > 1.0f)
-				increment = -0.05f;
-			else if (r < 0.0f)
-				increment = 0.05f;
+		if (r > 1.5f)
+			incrementRGB = -0.02f;
+		else if (r < -1.5f)
+			incrementRGB = 0.02f;
 
-			r += increment;
-		}
+		r += incrementRGB;
 
 		//POS MOVE
-		if (int(shaderPTR->shaderEFK) == 0)
-		{
-			if (r > 1.5f)
-				increment = -0.01f;
-			else if (r < -1.5f)
-				increment = 0.01f;
+		if (moveX > 1.0f)
+			incrementPOSX = -0.01f;
+		else if (moveX < -1.0f)
+			incrementPOSX = 0.01f;
 
-			r += increment;
-		}
+		moveX += incrementPOSX;
+
+		//POS MOVE
+		if (moveZ > 1.0f)
+			incrementPOSZ = -0.01f;
+		else if (moveZ < -1.0f)
+			incrementPOSZ = 0.01f;
+
+		moveZ += incrementPOSZ;
+
+		modelToWorld = matrix3D::LookAt(vector3D(moveX, 0.4f, moveZ), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
+		worldToView = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f));
+		MVP = worldToView * modelToWorld;
 
 		this->window->SwapBuffers();
 	}
-}
-
-void ExampleApp::Update()
-{
-
 }
 } // namespace Example

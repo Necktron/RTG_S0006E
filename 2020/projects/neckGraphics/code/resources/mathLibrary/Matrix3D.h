@@ -8,6 +8,7 @@ class matrix3D
 public:
 	//Basic constructors
 	matrix3D();
+	matrix3D(float);
 	matrix3D(float, float, float, float, float, float, float, float, float);
 	matrix3D(float, float, float, float, float, float, float, float, float, float, float, float, float, float, float, float);
 
@@ -38,9 +39,26 @@ public:
 	matrix3D mxRotY(float angle);
 	matrix3D mxRotZ(float angle);
 	matrix3D mxRotAroundVec(vector3D arbit, float angle);
-	matrix3D translationMatrix(vector3D pos);
+	matrix3D static translate(vector3D pos);
 	void setPosition(vector3D);
 	vector3D getPosition();
+
+	struct Frustum
+	{
+		float near;
+		float far;
+		float fov;
+		float top;
+		float bottom;
+		float right;
+		float left;
+	};
+
+	matrix3D static LookAt(vector3D eye, vector3D target, vector3D upDir);
+	matrix3D static ProjectionMatrix(float angleOfView, float zNear, float zFar, int width, int height);
+
+		//Turns the degrees into radians
+		//float degToRad = (angle * 3.14159265f / 180.0f);
 };
 
 //Empty constructor
@@ -50,6 +68,24 @@ inline matrix3D::matrix3D()
 }
 
 //Constructor with components
+inline matrix3D::matrix3D(float value)
+{
+	mxOrigin[0][0] = value;
+	mxOrigin[0][1] = value;
+	mxOrigin[0][2] = value;
+
+	mxOrigin[1][0] = value;
+	mxOrigin[1][1] = value;
+	mxOrigin[1][2] = value;
+
+	mxOrigin[2][0] = value;
+	mxOrigin[2][1] = value;
+	mxOrigin[2][2] = value;
+
+	mxOrigin[3][3] = 1.0f;
+}
+
+//Constructor with components, excludes the W values
 inline matrix3D::matrix3D(float a, float b, float c, float d, float e, float f, float g, float h, float i)
 {
 	mxOrigin[0][0] = a;
@@ -63,9 +99,11 @@ inline matrix3D::matrix3D(float a, float b, float c, float d, float e, float f, 
 	mxOrigin[2][0] = g;
 	mxOrigin[2][1] = h;
 	mxOrigin[2][2] = i;
+
+	mxOrigin[3][3] = 1.0f;
 }
 
-//Constructor with components
+//Constructor with components, including the W values
 inline matrix3D::matrix3D(float a, float b, float c, float d, float e, float f, float g, float h, float i, float j, float k, float l, float m, float n, float o, float p)
 {
 	mxOrigin[0][0] = a;
@@ -448,7 +486,7 @@ inline matrix3D matrix3D::operator=(const matrix3D &other)
 }
 
 //Translation Matrix
-inline matrix3D matrix3D::translationMatrix(vector3D pos)
+inline matrix3D matrix3D::translate(vector3D pos)
 {
 	matrix3D translation;
 
@@ -487,4 +525,51 @@ inline void matrix3D::setPosition(vector3D pos)
 inline vector3D matrix3D::getPosition()
 {
 	return vector3D(mxOrigin[2][0], mxOrigin[2][1], mxOrigin[2][2]);
+}
+
+inline matrix3D matrix3D::ProjectionMatrix(float angleOfView, float zNear, float zFar, int width, int height)
+{
+	matrix3D m;
+	const float ar = width / height;
+	const float zRange = zNear - zFar;
+	const float tanHalfFOV = tanf(((angleOfView * 3.14159265f / 180.0f) / 2.0));
+
+	matrix3D::Frustum frustum;
+
+	frustum.near = zNear;
+	frustum.far = zFar;
+	frustum.fov = angleOfView;
+	frustum.top = tan(angleOfView * 0.5 * 3.14f * 0.00555555f) * zNear;
+	frustum.bottom = -frustum.top;
+	frustum.right = frustum.top * 1;
+	frustum.left = frustum.bottom * 1;
+
+	float invWidth = 1 / (frustum.right - frustum.left);
+	float invHeight = 1 / (frustum.top - frustum.bottom);
+	float invLength = 1 / (zFar - zNear);
+
+	m.mxOrigin[0][0] = 2 * zNear * invWidth;
+	m.mxOrigin[0][2] = (frustum.right + frustum.left) * invWidth;
+	m.mxOrigin[1][1] = 2 * zNear * invHeight;
+	m.mxOrigin[1][2] = (frustum.top + frustum.bottom) * invHeight;
+	m.mxOrigin[2][2] = -(zFar + zNear) * invLength;
+	m.mxOrigin[2][3] = -2 * zFar * zNear * invLength;
+	m.mxOrigin[3][2] = -1.0f;
+	m.mxOrigin[3][3] = 0.0f;
+
+	return m;
+}
+
+inline matrix3D matrix3D::LookAt(vector3D eye, vector3D target, vector3D upDir)
+{
+	vector3D zaxis = (eye - target).vecNormilisation();
+	vector3D xaxis = (upDir.crossProd(zaxis)).vecNormilisation();
+	vector3D yaxis = zaxis.crossProd(xaxis);
+
+	matrix3D matrix(xaxis.vecOrigin[0], yaxis.vecOrigin[0], zaxis.vecOrigin[0], 0.0f,
+		xaxis.vecOrigin[1], yaxis.vecOrigin[1], zaxis.vecOrigin[1], 0.0f,
+		xaxis.vecOrigin[2], yaxis.vecOrigin[2], zaxis.vecOrigin[2], 0.0f,
+		-xaxis.dotProd(eye), -yaxis.dotProd(eye), -zaxis.dotProd(eye), 1.0f);
+
+	return matrix;
 }

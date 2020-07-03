@@ -38,5 +38,6 @@ public:
 private:
 	unsigned int shader;
 	Display::Window* window;
+	float resolution[2];
 };
 } // namespace Example
