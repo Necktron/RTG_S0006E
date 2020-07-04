@@ -6,8 +6,8 @@ layout(location = 1) in vec2 texCoord;
 
 out vec2 v_TexCoord;
 
-uniform vec4 u_Move;
 uniform mat4 u_MVP;
+uniform vec4 u_Move;
 
 void main()
 {

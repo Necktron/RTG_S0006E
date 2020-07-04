@@ -35,11 +35,12 @@ public:
 	vector3D vectorToMatrix(vector3D other);
 	matrix3D transpose();
 	matrix3D inverse();
-	matrix3D mxRotX(float angle);
-	matrix3D mxRotY(float angle);
-	matrix3D mxRotZ(float angle);
-	matrix3D mxRotAroundVec(vector3D arbit, float angle);
+	matrix3D static mxRotX(float angle);
+	matrix3D static mxRotY(float angle);
+	matrix3D static mxRotZ(float angle);
+	matrix3D static mxRotAroundVec(vector3D arbit, float angle);
 	matrix3D static translate(vector3D pos);
+	matrix3D static scale(vector3D pos);
 	void setPosition(vector3D);
 	vector3D getPosition();
 
@@ -307,25 +308,25 @@ inline matrix3D matrix3D::mxRotX(float angle)
 	//Turns the degrees into radians
 	float degToRad = (angle * 3.14159265f / 180.0f);
 
-	mxRotated.mxOrigin[0][0] = (mxOrigin[0][0] * 1);
-	mxRotated.mxOrigin[0][1] = (mxOrigin[0][1] * 0);
-	mxRotated.mxOrigin[0][2] = (mxOrigin[0][2] * 0);
-	mxRotated.mxOrigin[0][3] = (mxOrigin[0][3] * 0);
+	mxRotated.mxOrigin[0][0] = 1;
+	mxRotated.mxOrigin[0][1] = 0;
+	mxRotated.mxOrigin[0][2] = 0;
+	mxRotated.mxOrigin[0][3] = 0;
 
-	mxRotated.mxOrigin[1][0] = (mxOrigin[1][0] * 0);
-	mxRotated.mxOrigin[1][1] = (mxOrigin[1][1] * cos(degToRad));
-	mxRotated.mxOrigin[1][2] = (mxOrigin[1][2] * -sin(degToRad));
-	mxRotated.mxOrigin[1][3] = (mxOrigin[1][3] * 0);
+	mxRotated.mxOrigin[1][0] = 0;
+	mxRotated.mxOrigin[1][1] = cos(degToRad);
+	mxRotated.mxOrigin[1][2] = -sin(degToRad);
+	mxRotated.mxOrigin[1][3] = 0;
 
-	mxRotated.mxOrigin[2][0] = (mxOrigin[2][0] * 0);
-	mxRotated.mxOrigin[2][1] = (mxOrigin[2][1] * sin(degToRad));
-	mxRotated.mxOrigin[2][2] = (mxOrigin[2][2] * cos(degToRad));
-	mxRotated.mxOrigin[2][3] = (mxOrigin[2][3] * 0);
+	mxRotated.mxOrigin[2][0] = 0;
+	mxRotated.mxOrigin[2][1] = sin(degToRad);
+	mxRotated.mxOrigin[2][2] = cos(degToRad);
+	mxRotated.mxOrigin[2][3] = 0;
 
-	mxRotated.mxOrigin[3][0] = (mxOrigin[3][0] * 0);
-	mxRotated.mxOrigin[3][1] = (mxOrigin[3][1] * 0);
-	mxRotated.mxOrigin[3][2] = (mxOrigin[3][2] * 0);
-	mxRotated.mxOrigin[3][3] = (mxOrigin[3][3] * 1);
+	mxRotated.mxOrigin[3][0] = 0;
+	mxRotated.mxOrigin[3][1] = 0;
+	mxRotated.mxOrigin[3][2] = 0;
+	mxRotated.mxOrigin[3][3] = 1;
 
 	return mxRotated;
 }
@@ -338,25 +339,25 @@ inline matrix3D matrix3D::mxRotY(float angle)
 	//Turns the degrees into radians
 	float degToRad = (angle * 3.14159265f / 180.0f);
 
-	mxRotated.mxOrigin[0][0] = (mxOrigin[0][0] * cos(degToRad));
-	mxRotated.mxOrigin[0][1] = (mxOrigin[0][1] * 0);
-	mxRotated.mxOrigin[0][2] = (mxOrigin[0][2] * sin(degToRad));
-	mxRotated.mxOrigin[0][3] = (mxOrigin[0][3] * 0);
+	mxRotated.mxOrigin[0][0] = cos(degToRad);
+	mxRotated.mxOrigin[0][1] = 0;
+	mxRotated.mxOrigin[0][2] = sin(degToRad);
+	mxRotated.mxOrigin[0][3] = 0;
 
-	mxRotated.mxOrigin[1][0] = (mxOrigin[1][0] * 0);
-	mxRotated.mxOrigin[1][1] = (mxOrigin[1][1] * 1);
-	mxRotated.mxOrigin[1][2] = (mxOrigin[1][2] * 0);
-	mxRotated.mxOrigin[1][3] = (mxOrigin[1][3] * 0);
+	mxRotated.mxOrigin[1][0] = 0;
+	mxRotated.mxOrigin[1][1] = 1;
+	mxRotated.mxOrigin[1][2] = 0;
+	mxRotated.mxOrigin[1][3] = 0;
 
-	mxRotated.mxOrigin[2][0] = (mxOrigin[2][0] * -sin(degToRad));
-	mxRotated.mxOrigin[2][1] = (mxOrigin[2][1] * 0);
-	mxRotated.mxOrigin[2][2] = (mxOrigin[2][2] * cos(degToRad));
-	mxRotated.mxOrigin[2][3] = (mxOrigin[2][3] * 0);
+	mxRotated.mxOrigin[2][0] = -sin(degToRad);
+	mxRotated.mxOrigin[2][1] = 0;
+	mxRotated.mxOrigin[2][2] = cos(degToRad);
+	mxRotated.mxOrigin[2][3] = 0;
 
-	mxRotated.mxOrigin[3][0] = (mxOrigin[3][0] * 0);
-	mxRotated.mxOrigin[3][1] = (mxOrigin[3][1] * 0);
-	mxRotated.mxOrigin[3][2] = (mxOrigin[3][2] * 0);
-	mxRotated.mxOrigin[3][3] = (mxOrigin[3][3] * 1);
+	mxRotated.mxOrigin[3][0] = 0;
+	mxRotated.mxOrigin[3][1] = 0;
+	mxRotated.mxOrigin[3][2] = 0;
+	mxRotated.mxOrigin[3][3] = 1;
 
 	return mxRotated;
 }
@@ -369,25 +370,25 @@ inline matrix3D matrix3D::mxRotZ(float angle)
 	//Turns the degrees into radians
 	float degToRad = (angle * 3.14159265f / 180.0f);
 
-	mxRotated.mxOrigin[0][0] = (mxOrigin[0][0] * cos(degToRad));
-	mxRotated.mxOrigin[0][1] = (mxOrigin[0][1] * -sin(degToRad));
-	mxRotated.mxOrigin[0][2] = (mxOrigin[0][2] * 0);
-	mxRotated.mxOrigin[0][3] = (mxOrigin[0][3] * 0);
+	mxRotated.mxOrigin[0][0] = cos(degToRad);
+	mxRotated.mxOrigin[0][1] = -sin(degToRad);
+	mxRotated.mxOrigin[0][2] = 0;
+	mxRotated.mxOrigin[0][3] = 0;
 
-	mxRotated.mxOrigin[1][0] = (mxOrigin[1][0] * sin(degToRad));
-	mxRotated.mxOrigin[1][1] = (mxOrigin[1][1] * cos(degToRad));
-	mxRotated.mxOrigin[1][2] = (mxOrigin[1][2] * 0);
-	mxRotated.mxOrigin[1][3] = (mxOrigin[1][3] * 0);
+	mxRotated.mxOrigin[1][0] = sin(degToRad);
+	mxRotated.mxOrigin[1][1] = cos(degToRad);
+	mxRotated.mxOrigin[1][2] = 0;
+	mxRotated.mxOrigin[1][3] = 0;
 
-	mxRotated.mxOrigin[2][0] = (mxOrigin[2][0] * 0);
-	mxRotated.mxOrigin[2][1] = (mxOrigin[2][1] * 0);
-	mxRotated.mxOrigin[2][2] = (mxOrigin[2][2] * 1);
-	mxRotated.mxOrigin[2][3] = (mxOrigin[2][3] * 0);
+	mxRotated.mxOrigin[2][0] = 0;
+	mxRotated.mxOrigin[2][1] = 0;
+	mxRotated.mxOrigin[2][2] = 1;
+	mxRotated.mxOrigin[2][3] = 0;
 
-	mxRotated.mxOrigin[3][0] = (mxOrigin[3][0] * 0);
-	mxRotated.mxOrigin[3][1] = (mxOrigin[3][1] * 0);
-	mxRotated.mxOrigin[3][2] = (mxOrigin[3][2] * 0);
-	mxRotated.mxOrigin[3][3] = (mxOrigin[3][3] * 1);
+	mxRotated.mxOrigin[3][0] = 0;
+	mxRotated.mxOrigin[3][1] = 0;
+	mxRotated.mxOrigin[3][2] = 0;
+	mxRotated.mxOrigin[3][3] = 1;
 
 	return mxRotated;
 }
@@ -511,6 +512,34 @@ inline matrix3D matrix3D::translate(vector3D pos)
 	translation.mxOrigin[3][3] = 1;
 
 	return translation;
+}
+
+//Scale Matrix
+inline matrix3D matrix3D::scale(vector3D pos)
+{
+	matrix3D scale;
+
+	scale.mxOrigin[0][0] = 1 * pos.vecGet(0);
+	scale.mxOrigin[0][1] = 0;
+	scale.mxOrigin[0][2] = 0;
+	scale.mxOrigin[0][3] = 0;
+
+	scale.mxOrigin[1][0] = 0;
+	scale.mxOrigin[1][1] = 1 * pos.vecGet(1);
+	scale.mxOrigin[1][2] = 0;
+	scale.mxOrigin[1][3] = 0;
+
+	scale.mxOrigin[2][0] = 0;
+	scale.mxOrigin[2][1] = 0;
+	scale.mxOrigin[2][2] = 1 * pos.vecGet(2);
+	scale.mxOrigin[2][3] = 0;
+
+	scale.mxOrigin[3][0] = 0;
+	scale.mxOrigin[3][1] = 0;
+	scale.mxOrigin[3][2] = 0;
+	scale.mxOrigin[3][3] = 1;
+
+	return scale;
 }
 
 //Set position
