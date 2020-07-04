@@ -8,4 +8,5 @@ void Renderer::Draw(const std::shared_ptr<Mesh> meshRef, const std::shared_ptr<S
 void Renderer::Clear()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_DEPTH_BUFFER_BIT);
 }

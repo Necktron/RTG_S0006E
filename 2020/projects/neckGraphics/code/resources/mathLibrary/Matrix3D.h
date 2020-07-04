@@ -558,8 +558,10 @@ inline vector3D matrix3D::getPosition()
 
 inline matrix3D matrix3D::ProjectionMatrix(float angleOfView, float zNear, float zFar, int width, int height)
 {
-	matrix3D m;
-	const float ar = width / height;
+	matrix3D m(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+
+	//OLD STUFF, might be useful for FOV and Aspect Ratios
+	/*const float ar = width / height;
 	const float zRange = zNear - zFar;
 	const float tanHalfFOV = tanf(((angleOfView * 3.14159265f / 180.0f) / 2.0));
 
@@ -583,6 +585,15 @@ inline matrix3D matrix3D::ProjectionMatrix(float angleOfView, float zNear, float
 	m.mxOrigin[1][2] = (frustum.top + frustum.bottom) * invHeight;
 	m.mxOrigin[2][2] = -(zFar + zNear) * invLength;
 	m.mxOrigin[2][3] = -2 * zFar * zNear * invLength;
+	m.mxOrigin[3][2] = -1.0f;
+	m.mxOrigin[3][3] = 0.0f;*/
+
+
+
+	m.mxOrigin[0][0] = 1;
+	m.mxOrigin[1][1] = 1;
+	m.mxOrigin[2][2] = -zFar / (zFar - zNear);
+	m.mxOrigin[2][3] = -zFar * zNear / (zFar - zNear);
 	m.mxOrigin[3][2] = -1.0f;
 	m.mxOrigin[3][3] = 0.0f;
 

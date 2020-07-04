@@ -87,20 +87,20 @@ void Mesh::Quad()
 }
 
 //BIND A CUBE TO THE BUFFER
-void Mesh::Cube()
+void Mesh::Cube(float scale)
 {
 	float pos[] =
 	{
 		//(x, y, z, textureA, textureB)
-		-0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-		-0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-		0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-		0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
+		-1.0f * scale, -1.0f * scale, 1.0f * scale, 0.0f, 0.0f,   //0
+		-1.0f * scale, 1.0f * scale, 1.0f * scale, 0.0f, 1.0f,    //1
+		1.0f * scale, 1.0f * scale, 1.0f * scale, 1.0f, 1.0f,     //2
+		1.0f * scale, -1.0f * scale, 1.0f * scale, 1.0f, 0.0f,    //3
 
-		0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-		0.5f, 0.5f, -0.5f, 0.0, 1.0f,
-		-0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f, 1.0f, 0.0f
+		1.0f * scale, -1.0f * scale, -1.0f * scale, 1.0f, 0.0f,   //4
+		1.0f * scale, 1.0f * scale, -1.0f * scale, 1.0, 1.0f,     //5
+		-1.0f * scale, 1.0f * scale, -1.0f * scale, 0.0f, 1.0f,   //6
+		-1.0f * scale, -1.0f * scale, -1.0f * scale, 0.0f, 0.0f   //7
 	};
 
 	unsigned int index[] =
@@ -148,7 +148,7 @@ void Mesh::Cube()
 	//Index Buffer Object, IBO
 	glGenBuffers(1, &this->ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ibo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 24 * sizeof(unsigned int), index, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 36 * sizeof(unsigned int), index, GL_STATIC_DRAW);
 }
 
 //BIND A MESH TO THE BUFFER

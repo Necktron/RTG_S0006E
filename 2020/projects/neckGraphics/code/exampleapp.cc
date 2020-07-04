@@ -56,6 +56,8 @@ ExampleApp::Open()
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+		glEnable(GL_DEPTH_TEST);
+
 		meshPTR = std::make_shared<Mesh>();
 		shaderPTR = std::make_shared<Shader>();
 		texturePTR = std::make_shared<Texture>();
@@ -72,10 +74,10 @@ ExampleApp::Open()
 		shaderPTR->m_DEBUG = true;
 
 		//Setup mesh with VBO, VAO and IBO
-		meshPTR->Quad();
+		meshPTR->Cube(0.6f);
 
 		//Select a shader effect, ( You must know what shader makes what effects )
-		shaderPTR->shaderEFK = Shader::ShaderEffect::PULSE_COLOR;
+		shaderPTR->shaderEFK = Shader::ShaderEffect::STATIC_RAINBOW;
 
 		//If the shader allows a texture, we may choose a texture below
 		texturePTR->textureImage = Texture::TextureImage::KOREAN_FLAG;
@@ -146,15 +148,18 @@ ExampleApp::Run()
 	float b = 0.0f;
 	float moveX = 0.0f;
 	float moveZ = 1.0f;
-	float rotX = 0.0f;
+	float rot = 0.0f;
+	float angleOfRot = 0.0f;
+	float rotSpeed = 1.0f;
+	float zoomOut = 0.0f;
 	float incrementRGB = 0.02f;
 	float incrementPOSX = 0.01f;
 	float incrementPOSZ = 0.01f;
 
-	matrix3D view = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f));
-	matrix3D model = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f));
-	matrix3D projection = matrix3D::ProjectionMatrix(90.0f, 0.1f, 10.0f, this->resolution[0], this->resolution[1]);
-	matrix3D MVP = model;
+	matrix3D view = matrix3D::LookAt(vector3D(0.0f, 0.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
+	matrix3D model = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f)) * matrix3D::scale(vector3D(1.0f, 1.0f, 1.0f)) * matrix3D::mxRotZ(0);
+	matrix3D projection = matrix3D::ProjectionMatrix(90.0f, 0.1f, 100.0f, this->resolution[0], this->resolution[1]);
+	matrix3D MVP = view * model;
 
 	while (this->window->IsOpen())
 	{
@@ -184,9 +189,9 @@ ExampleApp::Run()
 		r += incrementRGB;
 
 		//POS MOVE
-		if (moveX > 1.5f)
+		if (moveX > 1.0f)
 			incrementPOSX = -0.01f;
-		else if (moveX < -1.5f)
+		else if (moveX < -1.0f)
 			incrementPOSX = 0.01f;
 
 		moveX += incrementPOSX;
@@ -197,11 +202,32 @@ ExampleApp::Run()
 		else if (moveZ < -1.0f)
 			incrementPOSZ = 0.01f;
 
-		//ROT MOVE
-		rotX += 1.0f;
+		moveZ += incrementPOSZ;
 
-		model = matrix3D::translate(vector3D(moveX, 0.0f, 0.0f)) * matrix3D::scale(vector3D(1.0f, 1.0f, 1.0f)) * matrix3D::mxRotZ(rotX);
-		MVP = model;
+		//ROT MOVE
+		if(angleOfRot > 360.0f)
+			angleOfRot = 0.0f;
+
+		angleOfRot += 1.0f;
+
+		rot = angleOfRot * rotSpeed;
+		zoomOut += 0.01f;
+
+		/*std::cout << "MATRIX VALUES" <<std::endl;
+		std::cout << MVP.mxOrigin[0][0] << " " << MVP.mxOrigin[0][1] << " " << MVP.mxOrigin[0][2] << " " << MVP.mxOrigin[0][3] << std::endl;
+		std::cout << "----------------" << std::endl;
+		std::cout << MVP.mxOrigin[1][0] << " " << MVP.mxOrigin[1][1] << " " << MVP.mxOrigin[1][2] << " " << MVP.mxOrigin[1][3] << std::endl;
+		std::cout << "----------------" << std::endl;
+		std::cout << MVP.mxOrigin[2][0] << " " << MVP.mxOrigin[2][1] << " " << MVP.mxOrigin[2][2] << " " << MVP.mxOrigin[2][3] << std::endl;
+		std::cout << "----------------" << std::endl;
+		std::cout << MVP.mxOrigin[3][0] << " " << MVP.mxOrigin[3][1] << " " << MVP.mxOrigin[3][2] << " " << MVP.mxOrigin[3][3] << std::endl;
+		std::cout << "                " << std::endl;*/
+
+		view = matrix3D::LookAt(vector3D(moveX, 0.4f, moveZ), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
+		model = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f)) * matrix3D::scale(vector3D(1.0f, 1.0f, 1.0f)) * matrix3D::mxRotZ(0);
+		projection = matrix3D::ProjectionMatrix(90.0f, 0.1f, 100.0f, this->resolution[0], this->resolution[1]);
+
+		MVP = view * model;
 
 		this->window->SwapBuffers();
 	}
