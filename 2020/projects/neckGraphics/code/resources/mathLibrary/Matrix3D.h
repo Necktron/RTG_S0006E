@@ -50,13 +50,14 @@ public:
 		float far;
 		float fov;
 		float top;
-		float bottom;
+		float bot;
 		float right;
 		float left;
 	};
 
 	matrix3D static LookAt(vector3D eye, vector3D target, vector3D upDir);
-	matrix3D static ProjectionMatrix(float angleOfView, float zNear, float zFar, int width, int height);
+	matrix3D static orthogonalProj(float L, float T, float R, float B, float zNear, float zFar); // "2D"
+	matrix3D static perspectiveProj(float FOV, float width, float height, float zNear, float zFar); // "3D"
 
 		//Turns the degrees into radians
 		//float degToRad = (angle * 3.14159265f / 180.0f);
@@ -556,48 +557,73 @@ inline vector3D matrix3D::getPosition()
 	return vector3D(mxOrigin[2][0], mxOrigin[2][1], mxOrigin[2][2]);
 }
 
-inline matrix3D matrix3D::ProjectionMatrix(float angleOfView, float zNear, float zFar, int width, int height)
+inline matrix3D matrix3D::orthogonalProj(float L, float R, float B, float T, float zNear, float zFar)
 {
-	matrix3D m(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+	matrix3D orth(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+
+	orth.mxOrigin[0][0] = 2 / (R - 1);
+	orth.mxOrigin[0][1] = 0;
+	orth.mxOrigin[0][2] = 0;
+	orth.mxOrigin[0][3] = 0;
+
+	orth.mxOrigin[1][0] = 0;
+	orth.mxOrigin[1][1] = 2 / (T - B);
+	orth.mxOrigin[1][2] = 0;
+	orth.mxOrigin[1][3] = 0;
+
+	orth.mxOrigin[2][0] = 0;
+	orth.mxOrigin[2][1] = 0;
+	orth.mxOrigin[2][2] = -2 / (zFar - zNear);
+	orth.mxOrigin[2][3] = 0;
+
+	orth.mxOrigin[3][0] = -(R + 1) / (R - 1);
+	orth.mxOrigin[3][1] = -(T + B) / (T - B);
+	orth.mxOrigin[3][2] = -(zFar + zNear) / (zFar - zNear);
+	orth.mxOrigin[3][3] = 1;
+
+	return orth;
+}
+
+inline matrix3D matrix3D::perspectiveProj(float FOV, float width, float height, float zNear, float zFar)
+{
+	matrix3D per(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
 
 	//OLD STUFF, might be useful for FOV and Aspect Ratios
-	/*const float ar = width / height;
+	const float scale = tanf(FOV * 0.5f * 3.14159265f / 180.0f) * zNear;
+	const float aspectRatio = width / height;
 	const float zRange = zNear - zFar;
-	const float tanHalfFOV = tanf(((angleOfView * 3.14159265f / 180.0f) / 2.0));
 
-	matrix3D::Frustum frustum;
+	matrix3D::Frustum FR;
 
-	frustum.near = zNear;
-	frustum.far = zFar;
-	frustum.fov = angleOfView;
-	frustum.top = tan(angleOfView * 0.5 * 3.14f * 0.00555555f) * zNear;
-	frustum.bottom = -frustum.top;
-	frustum.right = frustum.top * 1;
-	frustum.left = frustum.bottom * 1;
+	FR.near = zNear;
+	FR.far = zFar;
+	FR.fov = FOV;
+	FR.top = scale;
+	FR.bot = -FR.top;
+	FR.right = aspectRatio * FR.top;
+	FR.left = -FR.right;
 
-	float invWidth = 1 / (frustum.right - frustum.left);
-	float invHeight = 1 / (frustum.top - frustum.bottom);
-	float invLength = 1 / (zFar - zNear);
+	per.mxOrigin[0][0] = 2 * zNear / (FR.right - 1);
+	per.mxOrigin[0][1] = 0;
+	per.mxOrigin[0][2] = 0;
+	per.mxOrigin[0][3] = 0;
 
-	m.mxOrigin[0][0] = 2 * zNear * invWidth;
-	m.mxOrigin[0][2] = (frustum.right + frustum.left) * invWidth;
-	m.mxOrigin[1][1] = 2 * zNear * invHeight;
-	m.mxOrigin[1][2] = (frustum.top + frustum.bottom) * invHeight;
-	m.mxOrigin[2][2] = -(zFar + zNear) * invLength;
-	m.mxOrigin[2][3] = -2 * zFar * zNear * invLength;
-	m.mxOrigin[3][2] = -1.0f;
-	m.mxOrigin[3][3] = 0.0f;*/
+	per.mxOrigin[1][0] = 0;
+	per.mxOrigin[1][1] = 2 * zNear / (FR.top - FR.bot);
+	per.mxOrigin[1][2] = 0;
+	per.mxOrigin[1][3] = 0;
 
+	per.mxOrigin[2][0] = (FR.right + 1) / (FR.right - 1);
+	per.mxOrigin[2][1] = (FR.top + FR.bot) / (FR.top - FR.bot);
+	per.mxOrigin[2][2] = -(FR.far + FR.near) / (FR.far - FR.near);
+	per.mxOrigin[2][3] = -1;
 
+	per.mxOrigin[3][0] = 0;
+	per.mxOrigin[3][1] = 0;
+	per.mxOrigin[3][2] = -2 * zFar * zNear / (zFar - zNear);
+	per.mxOrigin[3][3] = 0;
 
-	m.mxOrigin[0][0] = 1;
-	m.mxOrigin[1][1] = 1;
-	m.mxOrigin[2][2] = -zFar / (zFar - zNear);
-	m.mxOrigin[2][3] = -zFar * zNear / (zFar - zNear);
-	m.mxOrigin[3][2] = -1.0f;
-	m.mxOrigin[3][3] = 0.0f;
-
-	return m;
+	return per;
 }
 
 inline matrix3D matrix3D::LookAt(vector3D eye, vector3D target, vector3D upDir)

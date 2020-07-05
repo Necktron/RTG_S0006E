@@ -15,7 +15,8 @@ public:
 		KOREAN_FLAG = 2,
 		BLUEBERRIES = 3,
 		OPENGL_LOGO = 4,
-		INSTAGRAM = 5
+		INSTAGRAM = 5,
+		CAT = 6
 	};
 
 	TextureImage textureImage = TextureImage::NONE;
