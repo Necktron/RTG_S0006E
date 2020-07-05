@@ -66,7 +66,25 @@ public:
 //Empty constructor
 inline matrix3D::matrix3D()
 {
-
+	mxOrigin[0][0] = 0;
+	mxOrigin[0][1] = 0;
+	mxOrigin[0][2] = 0;
+	mxOrigin[0][3] = 0;
+					 
+	mxOrigin[1][0] = 0;
+	mxOrigin[1][1] = 0;
+	mxOrigin[1][2] = 0;
+	mxOrigin[1][3] = 0;
+					 
+	mxOrigin[2][0] = 0;
+	mxOrigin[2][1] = 0;
+	mxOrigin[2][2] = 0;
+	mxOrigin[2][3] = 0;
+					 
+	mxOrigin[3][0] = 0;
+	mxOrigin[3][1] = 0;
+	mxOrigin[3][2] = 0;
+	mxOrigin[3][3] = 1;
 }
 
 //Constructor with components
@@ -236,7 +254,7 @@ inline matrix3D matrix3D::transpose()
 //Inverse
 inline matrix3D matrix3D::inverse()
 {
-	matrix3D mxInverse(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	matrix3D mxInverse;
 
 	//All coordinates are set to A11 - A44, easier to debug with examples from internet; where all indexes are A[row][colum] and begins at 1 instead of 0
 	float* A11 = &this->mxOrigin[0][0];
@@ -304,7 +322,7 @@ inline matrix3D matrix3D::inverse()
 //Rotation for matrix around X-axis
 inline matrix3D matrix3D::mxRotX(float angle)
 {
-	matrix3D mxRotated(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	matrix3D mxRotated;
 
 	//Turns the degrees into radians
 	float degToRad = (angle * 3.14159265f / 180.0f);
@@ -335,7 +353,7 @@ inline matrix3D matrix3D::mxRotX(float angle)
 //Rotation for matrix around Y-axis
 inline matrix3D matrix3D::mxRotY(float angle)
 {
-	matrix3D mxRotated(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	matrix3D mxRotated;
 
 	//Turns the degrees into radians
 	float degToRad = (angle * 3.14159265f / 180.0f);
@@ -366,7 +384,7 @@ inline matrix3D matrix3D::mxRotY(float angle)
 //Rotation for matrix around Z-axis
 inline matrix3D matrix3D::mxRotZ(float angle)
 {
-	matrix3D mxRotated(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	matrix3D mxRotated;
 
 	//Turns the degrees into radians
 	float degToRad = (angle * 3.14159265f / 180.0f);
@@ -397,7 +415,7 @@ inline matrix3D matrix3D::mxRotZ(float angle)
 //Rotation for matrix around arbitrary vector
 inline matrix3D matrix3D::mxRotAroundVec(vector3D arbit, float angle)
 {
-	matrix3D arbitRot(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	matrix3D arbitRot;
 
 	float u = arbit.vecGet(0);
 	float v = arbit.vecGet(1);
@@ -451,7 +469,7 @@ inline vector3D matrix3D::operator*(const vector3D &other)
 //Operator *, matrix and matrix
 inline matrix3D matrix3D::operator*(matrix3D other)
 {
-	matrix3D mxMult(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	matrix3D mxMult;
 
 	mxMult.mxOrigin[0][0] = other.mxOrigin[0][0] * mxOrigin[0][0] + other.mxOrigin[0][1] * mxOrigin[1][0] + other.mxOrigin[0][2] * mxOrigin[2][0] + other.mxOrigin[0][3] * mxOrigin[3][0];
 	mxMult.mxOrigin[0][1] = other.mxOrigin[0][0] * mxOrigin[0][1] + other.mxOrigin[0][1] * mxOrigin[1][1] + other.mxOrigin[0][2] * mxOrigin[2][1] + other.mxOrigin[0][3] * mxOrigin[3][1];
@@ -557,9 +575,10 @@ inline vector3D matrix3D::getPosition()
 	return vector3D(mxOrigin[2][0], mxOrigin[2][1], mxOrigin[2][2]);
 }
 
+//WIP
 inline matrix3D matrix3D::orthogonalProj(float L, float R, float B, float T, float zNear, float zFar)
 {
-	matrix3D orth(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+	matrix3D orth;
 
 	orth.mxOrigin[0][0] = 2 / (R - 1);
 	orth.mxOrigin[0][1] = 0;
@@ -584,43 +603,27 @@ inline matrix3D matrix3D::orthogonalProj(float L, float R, float B, float T, flo
 	return orth;
 }
 
+// Perspective WIP
 inline matrix3D matrix3D::perspectiveProj(float FOV, float width, float height, float zNear, float zFar)
 {
-	matrix3D per(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+	matrix3D per;
 
-	//OLD STUFF, might be useful for FOV and Aspect Ratios
-	const float scale = tanf(FOV * 0.5f * 3.14159265f / 180.0f) * zNear;
 	const float aspectRatio = width / height;
-	const float zRange = zNear - zFar;
+	const float properFOV = tanf(FOV * 3.14159265f / 180.0f);
+	const float halfFOV = properFOV * 0.5;
+	const float sinFOV = sinf(halfFOV);
+	const float cosFOV = cosf(halfFOV);
 
-	matrix3D::Frustum FR;
+	const float properHeight = cosFOV / sinFOV;
+	const float properWidth = properHeight / aspectRatio;
 
-	FR.near = zNear;
-	FR.far = zFar;
-	FR.fov = FOV;
-	FR.top = scale;
-	FR.bot = -FR.top;
-	FR.right = aspectRatio * FR.top;
-	FR.left = -FR.right;
+	const float dist = zFar / (zNear - zFar);
 
-	per.mxOrigin[0][0] = 2 * zNear / (FR.right - 1);
-	per.mxOrigin[0][1] = 0;
-	per.mxOrigin[0][2] = 0;
-	per.mxOrigin[0][3] = 0;
-
-	per.mxOrigin[1][0] = 0;
-	per.mxOrigin[1][1] = 2 * zNear / (FR.top - FR.bot);
-	per.mxOrigin[1][2] = 0;
-	per.mxOrigin[1][3] = 0;
-
-	per.mxOrigin[2][0] = (FR.right + 1) / (FR.right - 1);
-	per.mxOrigin[2][1] = (FR.top + FR.bot) / (FR.top - FR.bot);
-	per.mxOrigin[2][2] = -(FR.far + FR.near) / (FR.far - FR.near);
-	per.mxOrigin[2][3] = -1;
-
-	per.mxOrigin[3][0] = 0;
-	per.mxOrigin[3][1] = 0;
-	per.mxOrigin[3][2] = -2 * zFar * zNear / (zFar - zNear);
+	per.mxOrigin[0][0] = properWidth;
+	per.mxOrigin[1][0] = properHeight;
+	per.mxOrigin[2][1] = dist;
+	per.mxOrigin[2][2] = dist * zNear;
+	per.mxOrigin[3][2] = -1;
 	per.mxOrigin[3][3] = 0;
 
 	return per;

@@ -53,8 +53,8 @@ ExampleApp::Open()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		Shader::ShaderProgramSource source;
 
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		//glEnable(GL_BLEND);
+		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glEnable(GL_DEPTH_TEST);
 
@@ -74,14 +74,14 @@ ExampleApp::Open()
 		shaderPTR->m_DEBUG = true;
 
 		//Setup mesh with VBO, VAO and IBO
-		//meshPTR->Cube(0.5f);
-		meshPTR->MeshFile("../../../projects/neckGraphics/code/resources/meshes/cat.obj");
+		meshPTR->Cube(0.5f);
+		//meshPTR->MeshFile("../../../projects/neckGraphics/code/resources/meshes/cat.obj");
 
 		//Select a shader effect, ( You must know what shader makes what effects )
-		shaderPTR->shaderEFK = Shader::ShaderEffect::STATIC_RAINBOW;
+		shaderPTR->shaderEFK = Shader::ShaderEffect::IMAGE_TEXTURE;
 
 		//If the shader allows a texture, we may choose a texture below
-		texturePTR->textureImage = Texture::TextureImage::CAT;
+		texturePTR->textureImage = Texture::TextureImage::KOREAN_FLAG;
 
 		if (int(shaderPTR->shaderEFK) == 0)
 			shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/StaticRainbow.shader");
@@ -162,7 +162,7 @@ ExampleApp::Run()
 
 	matrix3D view = matrix3D::LookAt(vector3D(0.0f, 0.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
 	matrix3D model = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f)) * matrix3D::scale(vector3D(1.0f, 1.0f, 1.0f)) * matrix3D::mxRotZ(0);
-	matrix3D projection = matrix3D::perspectiveProj(90.0f, this->resolution[0], this->resolution[1], -0.1f, 100.0f);
+	matrix3D projection = matrix3D::perspectiveProj(-90.0f, this->resolution[0], this->resolution[1], 0.1f, 100.0f);
 	matrix3D MVP = projection * view * model;
 
 	while (this->window->IsOpen())
@@ -228,10 +228,10 @@ ExampleApp::Run()
 		std::cout << "                " << std::endl;
 
 		view = matrix3D::LookAt(vector3D(0.0f, 0.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
-		model = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f)) * matrix3D::scale(vector3D(1.0f, 1.0f, 1.0f)) * matrix3D::mxRotZ(0);
+		model = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f)) * matrix3D::scale(vector3D(1.0f, 1.0f, 1.0f)) * matrix3D::mxRotAroundVec(vector3D(1.0f, 1.0f, 1.0f), 0);
 		projection = matrix3D::perspectiveProj(90.0f, this->resolution[0], this->resolution[1], 0.1f, 100.0f);
 
-		MVP = view * model;
+		MVP = projection * view.transpose() * model;
 
 		this->window->SwapBuffers();
 	}
