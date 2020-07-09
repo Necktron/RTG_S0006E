@@ -59,10 +59,7 @@ public:
 
 	matrix3D static LookAt(vector3D eye, vector3D target, vector3D upDir);
 	matrix3D static orthogonalProj(float L, float T, float R, float B, float zNear, float zFar); // "2D"
-	matrix3D static perspectiveProj(float FOV, float width, float height, float zNear, float zFar); // "3D"
-
-		//Turns the degrees into radians
-		//float degToRad = (angle * 3.14159265f / 180.0f);
+	matrix3D static perspectiveProj(float FOV, int width, int height, float zNear, float zFar); // "3D"
 };
 
 //Empty constructor
@@ -606,7 +603,7 @@ inline matrix3D matrix3D::orthogonalProj(float L, float R, float B, float T, flo
 }
 
 // Perspective WIP
-inline matrix3D matrix3D::perspectiveProj(float FOV, float width, float height, float zNear, float zFar)
+inline matrix3D matrix3D::perspectiveProj(float FOV, int width, int height, float zNear, float zFar)
 {
 	matrix3D per;
 	Frustum frustum;
@@ -631,25 +628,6 @@ inline matrix3D matrix3D::perspectiveProj(float FOV, float width, float height, 
 	per.mxOrigin[2][3] = -2 * zFar * zNear * invLength;
 	per.mxOrigin[3][2] = -1.0f;
 	per.mxOrigin[3][3] = 0.0f;
-
-	/*
-	const float aspectRatio = width / height;
-	const float properFOV = tanf(FOV * 3.14159265f / 180.0f);
-	const float halfFOV = properFOV * 0.5;
-	const float sinFOV = sinf(halfFOV);
-	const float cosFOV = cosf(halfFOV);
-
-	const float properHeight = cosFOV / sinFOV;
-	const float properWidth = properHeight / aspectRatio;
-
-	const float dist = zFar / (zNear - zFar);
-
-	per.mxOrigin[0][0] = properWidth;
-	per.mxOrigin[1][0] = properHeight;
-	per.mxOrigin[2][1] = dist;
-	per.mxOrigin[2][2] = dist * zNear;
-	per.mxOrigin[3][2] = -1;
-	per.mxOrigin[3][3] = 0;*/
 
 	return per;
 }

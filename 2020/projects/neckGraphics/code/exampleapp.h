@@ -28,12 +28,9 @@ public:
 
 	bool Open();
 	void Run();
-	void Update();
 
-	std::shared_ptr<Mesh> meshPTR;
-	std::shared_ptr<Shader> shaderPTR;
-	std::shared_ptr<Texture> texturePTR;
-	std::shared_ptr<Renderer> graphicsPTR;
+	Renderer renderInstanceA;
+	Renderer renderInstanceB;
 
 private:
 	unsigned int shader;
