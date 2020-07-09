@@ -1,6 +1,8 @@
 #pragma once
 #include "Vector3D.h"
 
+#define DEGREES_TO_RADIANS(degrees)((3.14159265359f * degrees)/180.0f)
+
 using namespace std;
 
 class matrix3D
@@ -534,23 +536,23 @@ inline matrix3D matrix3D::translate(vector3D pos)
 }
 
 //Scale Matrix
-inline matrix3D matrix3D::scale(vector3D pos)
+inline matrix3D matrix3D::scale(vector3D size)
 {
 	matrix3D scale;
 
-	scale.mxOrigin[0][0] = 1 * pos.vecGet(0);
+	scale.mxOrigin[0][0] = 1 * size.vecGet(0);
 	scale.mxOrigin[0][1] = 0;
 	scale.mxOrigin[0][2] = 0;
 	scale.mxOrigin[0][3] = 0;
 
 	scale.mxOrigin[1][0] = 0;
-	scale.mxOrigin[1][1] = 1 * pos.vecGet(1);
+	scale.mxOrigin[1][1] = 1 * size.vecGet(1);
 	scale.mxOrigin[1][2] = 0;
 	scale.mxOrigin[1][3] = 0;
 
 	scale.mxOrigin[2][0] = 0;
 	scale.mxOrigin[2][1] = 0;
-	scale.mxOrigin[2][2] = 1 * pos.vecGet(2);
+	scale.mxOrigin[2][2] = 1 * size.vecGet(2);
 	scale.mxOrigin[2][3] = 0;
 
 	scale.mxOrigin[3][0] = 0;
@@ -607,7 +609,30 @@ inline matrix3D matrix3D::orthogonalProj(float L, float R, float B, float T, flo
 inline matrix3D matrix3D::perspectiveProj(float FOV, float width, float height, float zNear, float zFar)
 {
 	matrix3D per;
+	Frustum frustum;
 
+	frustum.near = zNear;
+	frustum.far = zFar;
+	frustum.fov = FOV;
+	frustum.top = tan(DEGREES_TO_RADIANS(FOV * 0.5)) * zNear;
+	frustum.bot = -frustum.top;
+	frustum.right = frustum.top * 1;
+	frustum.left = frustum.bot * 1;
+
+	float invWidth = 1 / (frustum.right - frustum.left);
+	float invHeight = 1 / (frustum.top - frustum.bot);
+	float invLength = 1 / (zFar - zNear);
+
+	per.mxOrigin[0][0] = 2 * zNear * invWidth;
+	per.mxOrigin[0][2] = (frustum.right + frustum.left) * invWidth;
+	per.mxOrigin[1][1] = 2 * zNear * invHeight;
+	per.mxOrigin[1][2] = (frustum.top + frustum.bot) * invHeight;
+	per.mxOrigin[2][2] = -(zFar + zNear) * invLength;
+	per.mxOrigin[2][3] = -2 * zFar * zNear * invLength;
+	per.mxOrigin[3][2] = -1.0f;
+	per.mxOrigin[3][3] = 0.0f;
+
+	/*
 	const float aspectRatio = width / height;
 	const float properFOV = tanf(FOV * 3.14159265f / 180.0f);
 	const float halfFOV = properFOV * 0.5;
@@ -624,7 +649,7 @@ inline matrix3D matrix3D::perspectiveProj(float FOV, float width, float height, 
 	per.mxOrigin[2][1] = dist;
 	per.mxOrigin[2][2] = dist * zNear;
 	per.mxOrigin[3][2] = -1;
-	per.mxOrigin[3][3] = 0;
+	per.mxOrigin[3][3] = 0;*/
 
 	return per;
 }
@@ -636,9 +661,9 @@ inline matrix3D matrix3D::LookAt(vector3D eye, vector3D target, vector3D upDir)
 	vector3D yaxis = zaxis.crossProd(xaxis);
 
 	matrix3D matrix(xaxis.vecOrigin[0], yaxis.vecOrigin[0], zaxis.vecOrigin[0], 0.0f,
-		xaxis.vecOrigin[1], yaxis.vecOrigin[1], zaxis.vecOrigin[1], 0.0f,
-		xaxis.vecOrigin[2], yaxis.vecOrigin[2], zaxis.vecOrigin[2], 0.0f,
-		-xaxis.dotProd(eye), -yaxis.dotProd(eye), -zaxis.dotProd(eye), 1.0f);
+					xaxis.vecOrigin[1], yaxis.vecOrigin[1], zaxis.vecOrigin[1], 0.0f,
+					xaxis.vecOrigin[2], yaxis.vecOrigin[2], zaxis.vecOrigin[2], 0.0f,
+					-xaxis.dotProd(eye), -yaxis.dotProd(eye), -zaxis.dotProd(eye), 1.0f);
 
 	return matrix;
 }

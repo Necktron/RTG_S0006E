@@ -68,20 +68,18 @@ ExampleApp::Open()
 		matrix3D projection = matrix3D::perspectiveProj(90.0f, this->resolution[0], this->resolution[1], 0.1f, 100.0f);
 		matrix3D MVP = projection * view * model;
 
-		vector3D move(0.0f, 0.0f, 0.0f);
-
 		//Do you want the shader to be printed out for closer inspection?
-		shaderPTR->m_DEBUG = true;
+		meshPTR->m_DEBUG = false;
+		shaderPTR->m_DEBUG = false;
 
 		//Setup mesh with VBO, VAO and IBO
-		meshPTR->Cube(0.5f);
-		//meshPTR->MeshFile("../../../projects/neckGraphics/code/resources/meshes/cat.obj");
+		meshPTR->Cube(0.4f);
 
 		//Select a shader effect, ( You must know what shader makes what effects )
 		shaderPTR->shaderEFK = Shader::ShaderEffect::IMAGE_TEXTURE;
 
-		//If the shader allows a texture, we may choose a texture below
-		texturePTR->textureImage = Texture::TextureImage::KOREAN_FLAG;
+		//If the shader allows a texture, we may choose a texture below, ( *# )
+		texturePTR->textureImage = Texture::TextureImage::IKEA;
 
 		if (int(shaderPTR->shaderEFK) == 0)
 			shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/StaticRainbow.shader");
@@ -96,38 +94,15 @@ ExampleApp::Open()
 		shaderPTR->Bind();
 
 		shaderPTR->SetUniformMat4fv("u_MVP", MVP);
-		shaderPTR->SetUniform4f("u_Move", move.vecOrigin[0], move.vecOrigin[1], move.vecOrigin[2], 1.0f);
-
-		if (int(shaderPTR->shaderEFK) == 1)
-		{
-			shaderPTR->SetUniform4f("u_Color", 1.0f, 0.0f, 0.0f, 1.0f);
-		}
+		shaderPTR->SetUniform4f("u_Move", 0.0f, 0.0f, 0.0f, 1.0f);
 		//SHADER SETUP DONE
-
 
 		//Select a texture file if the shader allows for textures
 		if (int(shaderPTR->shaderEFK) == 2)
 		{
-			if (int(texturePTR->textureImage) == 0)
-				texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/YellowBrickWall.jpg");
-
-			else if (int(texturePTR->textureImage) == 1)
-				texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/TurquoiseWoodWall.jpg");
-
-			else if (int(texturePTR->textureImage) == 2)
-				texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/KoreanFlag.png");
-
-			else if (int(texturePTR->textureImage) == 3)
-				texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/Blueberries.jpg");
-
-			else if (int(texturePTR->textureImage) == 4)
-				texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/OpenGLLogo.png");
-
-			else if (int(texturePTR->textureImage) == 5)
-				texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/InstaTransparent.png");
-
-			else if (int(texturePTR->textureImage) == 6)
-				texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/cat_diff.tga");
+			//Get the file path to right texture based upon value set att textureImage at *#
+			texturePTR->TextureFilepath(texturePTR);
+			texturePTR->SetupTexture(texturePTR->m_FilePath);
 
 			//Bind the texture aswell to the shader
 			texturePTR->Bind();
@@ -155,14 +130,13 @@ ExampleApp::Run()
 	float rot = 0.0f;
 	float angleOfRot = 0.0f;
 	float rotSpeed = 1.0f;
-	float zoomOut = 0.0f;
 	float incrementRGB = 0.02f;
 	float incrementPOSX = 0.01f;
 	float incrementPOSZ = 0.01f;
 
 	matrix3D view = matrix3D::LookAt(vector3D(0.0f, 0.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
-	matrix3D model = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f)) * matrix3D::scale(vector3D(1.0f, 1.0f, 1.0f)) * matrix3D::mxRotZ(0);
-	matrix3D projection = matrix3D::perspectiveProj(-90.0f, this->resolution[0], this->resolution[1], 0.1f, 100.0f);
+	matrix3D model = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f)) * matrix3D::scale(vector3D(1.0f, 1.0f, 1.0f)) * matrix3D::mxRotAroundVec(vector3D(1.0f, 1.0f, 1.0f), 0);
+	matrix3D projection = matrix3D::perspectiveProj(90.0f, this->resolution[0], this->resolution[1], 0.1f, 100.0f).transpose();
 	matrix3D MVP = projection * view * model;
 
 	while (this->window->IsOpen())
@@ -192,7 +166,7 @@ ExampleApp::Run()
 
 		r += incrementRGB;
 
-		//POS MOVE
+		//POS MOVE X
 		if (moveX > 1.0f)
 			incrementPOSX = -0.01f;
 		else if (moveX < -1.0f)
@@ -200,7 +174,7 @@ ExampleApp::Run()
 
 		moveX += incrementPOSX;
 
-		//POS MOVE
+		//POS MOVE Z
 		if (moveZ > 1.0f)
 			incrementPOSZ = -0.01f;
 		else if (moveZ < -1.0f)
@@ -215,23 +189,28 @@ ExampleApp::Run()
 		angleOfRot += 1.0f;
 
 		rot = angleOfRot * rotSpeed;
-		zoomOut += 0.01f;
 
-		std::cout << "MATRIX VALUES" <<std::endl;
-		std::cout << MVP.mxOrigin[0][0] << " " << MVP.mxOrigin[0][1] << " " << MVP.mxOrigin[0][2] << " " << MVP.mxOrigin[0][3] << std::endl;
-		std::cout << "----------------" << std::endl;
-		std::cout << MVP.mxOrigin[1][0] << " " << MVP.mxOrigin[1][1] << " " << MVP.mxOrigin[1][2] << " " << MVP.mxOrigin[1][3] << std::endl;
-		std::cout << "----------------" << std::endl;
-		std::cout << MVP.mxOrigin[2][0] << " " << MVP.mxOrigin[2][1] << " " << MVP.mxOrigin[2][2] << " " << MVP.mxOrigin[2][3] << std::endl;
-		std::cout << "----------------" << std::endl;
-		std::cout << MVP.mxOrigin[3][0] << " " << MVP.mxOrigin[3][1] << " " << MVP.mxOrigin[3][2] << " " << MVP.mxOrigin[3][3] << std::endl;
-		std::cout << "                " << std::endl;
+		//Print out matrix values per frame
+		if(meshPTR->m_DEBUG)
+		{
+			std::cout << "MATRIX VALUES" << std::endl;
+			std::cout << MVP.mxOrigin[0][0] << " " << MVP.mxOrigin[0][1] << " " << MVP.mxOrigin[0][2] << " " << MVP.mxOrigin[0][3] << std::endl;
+			std::cout << "----------------" << std::endl;
+			std::cout << MVP.mxOrigin[1][0] << " " << MVP.mxOrigin[1][1] << " " << MVP.mxOrigin[1][2] << " " << MVP.mxOrigin[1][3] << std::endl;
+			std::cout << "----------------" << std::endl;
+			std::cout << MVP.mxOrigin[2][0] << " " << MVP.mxOrigin[2][1] << " " << MVP.mxOrigin[2][2] << " " << MVP.mxOrigin[2][3] << std::endl;
+			std::cout << "----------------" << std::endl;
+			std::cout << MVP.mxOrigin[3][0] << " " << MVP.mxOrigin[3][1] << " " << MVP.mxOrigin[3][2] << " " << MVP.mxOrigin[3][3] << std::endl;
+			std::cout << "                " << std::endl;
+		}
 
-		view = matrix3D::LookAt(vector3D(0.0f, 0.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
+		//Setup the vital parts for MVP, Model + View + Projection
+		view = matrix3D::LookAt(vector3D(moveX, 0.4f, moveZ), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
 		model = matrix3D::translate(vector3D(0.0f, 0.0f, 0.0f)) * matrix3D::scale(vector3D(1.0f, 1.0f, 1.0f)) * matrix3D::mxRotAroundVec(vector3D(1.0f, 1.0f, 1.0f), 0);
-		projection = matrix3D::perspectiveProj(90.0f, this->resolution[0], this->resolution[1], 0.1f, 100.0f);
+		projection = matrix3D::perspectiveProj(90.0f, this->resolution[0], this->resolution[1], 0.1f, 100.0f).transpose();
 
-		MVP = projection * view.transpose() * model;
+		//Merge the matrixes to create MVP. It's now ready to be sent in to the shader
+		MVP = projection * view * model;
 
 		this->window->SwapBuffers();
 	}

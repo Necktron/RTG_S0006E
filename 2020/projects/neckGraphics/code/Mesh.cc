@@ -93,15 +93,41 @@ void Mesh::Cube(float scale)
 	float pos[] =
 	{
 		//(x, y, z, textureA, textureB)
-		-1.0f * scale, -1.0f * scale, 1.0f * scale, 0.0f, 0.0f,   //0
-		-1.0f * scale, 1.0f * scale, 1.0f * scale, 0.0f, 1.0f,    //1
-		1.0f * scale, 1.0f * scale, 1.0f * scale, 1.0f, 1.0f,     //2
-		1.0f * scale, -1.0f * scale, 1.0f * scale, 1.0f, 0.0f,    //3
+		//FRONT
+		-1.0f * scale, -1.0f * scale, 1.0f * scale, 0.0f, 0.0f,     //0
+		-1.0f * scale, 1.0f * scale, 1.0f * scale, 0.0f, 1.0f,      //1
+		1.0f * scale, 1.0f * scale, 1.0f * scale, 1.0f, 1.0f,       //2
+		1.0f * scale, -1.0f * scale, 1.0f * scale, 1.0f, 0.0f,      //3
 
-		1.0f * scale, -1.0f * scale, -1.0f * scale, 1.0f, 0.0f,   //4
-		1.0f * scale, 1.0f * scale, -1.0f * scale, 1.0, 1.0f,     //5
-		-1.0f * scale, 1.0f * scale, -1.0f * scale, 0.0f, 1.0f,   //6
-		-1.0f * scale, -1.0f * scale, -1.0f * scale, 0.0f, 0.0f   //7
+		//BACK
+		1.0f * scale, -1.0f * scale, -1.0f * scale, 0.0f, 0.0f,     //4
+		1.0f * scale, 1.0f * scale, -1.0f * scale, 0.0f, 1.0f,      //5
+		-1.0f * scale, 1.0f * scale, -1.0f * scale,  1.0f, 1.0f,    //6
+		-1.0f * scale, -1.0f * scale, -1.0f * scale, 1.0f, 0.0f,    //7
+
+		//RIGHT
+		1.0f * scale, -1.0f * scale, 1.0f * scale, 0.0f, 0.0f,      //8
+		1.0f * scale, 1.0f * scale, 1.0f * scale, 0.0f, 1.0f,       //9
+		1.0f * scale, 1.0f * scale, -1.0f * scale,  1.0f, 1.0f,     //10
+		1.0f * scale, -1.0f * scale, -1.0f * scale, 1.0f, 0.0f,     //11
+
+		//LEFT
+		-1.0f * scale, -1.0f * scale, -1.0f * scale, 0.0f, 0.0f,    //12
+		-1.0f * scale, 1.0f * scale, -1.0f * scale, 0.0f, 1.0f,     //13
+		-1.0f * scale, 1.0f * scale, 1.0f * scale,  1.0f, 1.0f,     //14
+		-1.0f * scale, -1.0f * scale, 1.0f * scale, 1.0f, 0.0f,     //15
+
+		//TOP
+		-1.0f * scale, 1.0f * scale, 1.0f * scale, 0.0f, 0.0f,      //16
+		-1.0f * scale, 1.0f * scale, -1.0f * scale, 0.0f, 1.0f,     //17
+		1.0f * scale, 1.0f * scale, -1.0f * scale,  1.0f, 1.0f,     //18
+		1.0f * scale, 1.0f * scale, 1.0f * scale, 1.0f, 0.0f,       //19
+
+		//BOT
+		-1.0f * scale, -1.0f * scale, -1.0f * scale, 0.0f, 0.0f,    //20
+		-1.0f * scale, -1.0f * scale, 1.0f * scale, 0.0f, 1.0f,     //21
+		1.0f * scale, -1.0f * scale, 1.0f * scale,  1.0f, 1.0f,     //22
+		1.0f * scale, -1.0f * scale, -1.0f * scale, 1.0f, 0.0f      //23
 	};
 
 	unsigned int index[] =
@@ -110,25 +136,25 @@ void Mesh::Cube(float scale)
 		0, 1, 2,
 		2, 3, 0,
 
-		//TOP
-		1, 6, 5,
-		5, 2, 1,
+		//BACK
+		4, 5, 6,
+		6, 7, 4,
 
 		//RIGHT
-		3, 2, 5,
-		5, 4, 3,
+		8, 9, 10,
+		10, 11, 8,
 
 		//LEFT
-		7, 6, 1,
-		1, 0, 7,
+		12, 13, 14,
+		14, 15, 12,
+
+		//TOP
+		16, 17, 18,
+		18, 19, 16,
 
 		//BOT
-		7, 0, 3,
-		3, 4, 7,
-
-		//BACK
-		6, 7, 4,
-		4, 5, 6
+		20, 21, 22,
+		22, 23, 20
 	};
 
 	//Vertex Array

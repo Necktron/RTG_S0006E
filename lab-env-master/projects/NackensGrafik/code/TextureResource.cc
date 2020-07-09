@@ -10,7 +10,7 @@ TextureResource::TextureResource()
 
 TextureResource::~TextureResource()
 {
-
+	glDelete
 }
 
 void TextureResource::loadFromRast(std::shared_ptr<Rasterizer> rastPTR)

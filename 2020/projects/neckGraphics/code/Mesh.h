@@ -40,6 +40,8 @@ class Mesh
 		void Cube(float scale); //Get a cube
 		void MeshFile(const char* filepath); //Get mesh from file
 		
+		bool m_DEBUG; //Debug bool for matrix values of the mesh
+
 		string FaceKey(int pos, int uv, int norm); //Search for duplicates among faces
 		vector<unsigned int> indices;
 		vector<Vertex> mesh;

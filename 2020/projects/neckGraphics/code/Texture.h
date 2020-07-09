@@ -1,11 +1,16 @@
 #pragma once
 #include "stb_image.h"
 #include "core/app.h"
+#include <iostream>
+#include <memory>
 #include <string>
 
 class Texture
 {
 public:
+
+	Texture();
+	~Texture();
 
 	enum class TextureImage
 	{
@@ -16,11 +21,13 @@ public:
 		BLUEBERRIES = 3,
 		OPENGL_LOGO = 4,
 		INSTAGRAM = 5,
-		CAT = 6
+		CAT = 6,
+		IKEA = 7
 	};
 
 	TextureImage textureImage = TextureImage::NONE;
 
+	void TextureFilepath(std::shared_ptr<Texture> ref);
 	void SetupTexture(const std::string& filepath); //Scan and setup texture
 	void Bind(unsigned int slot = 0) const;
 	void Unbind();
@@ -28,9 +35,10 @@ public:
 	inline int GetWitdh() const { return m_Width; }
 	inline int GetHeight() const { return m_Height; }
 
+	std::string m_FilePath;
+
 private:
 	unsigned int m_RendererID;
-	std::string m_FilePath;
 	unsigned char* m_TextureData;
 	int m_Width, m_Height, m_BPP;
 };
