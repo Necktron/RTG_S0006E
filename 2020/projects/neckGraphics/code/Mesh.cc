@@ -46,9 +46,6 @@ void Mesh::Triangle()
 	glGenBuffers(1, &this->ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ibo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
-
-
-	Unbind();
 }
 
 //BIND A QUAD TO THE BUFFER
@@ -88,9 +85,6 @@ void Mesh::Quad()
 	glGenBuffers(1, &this->ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ibo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
-
-
-	Unbind();
 }
 
 //BIND A CUBE TO THE BUFFER
@@ -182,8 +176,6 @@ void Mesh::Cube()
 	glGenBuffers(1, &this->ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ibo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 36 * sizeof(unsigned int), index, GL_STATIC_DRAW);
-
-	Unbind();
 }
 
 void Mesh::Bind()

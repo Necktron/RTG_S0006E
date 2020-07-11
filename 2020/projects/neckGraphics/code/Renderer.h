@@ -18,6 +18,7 @@ public:
 	void Init();
 	void ConfigUniforms();
 	void InputScan();
+	void Update();
 
 	//Set functions
 	void SetMesh(const char* filepath); //Set a mesh from file path
@@ -30,7 +31,7 @@ public:
 	void GetMesh(); //Get current mesh
 	void GetTexture(); //Get current texture
 	void GetShader(); //Get current shader
-	void GetTransform(); //Get everything from the transform
+	matrix3D GetTransform(); //Get everything from the transform
 	void GetTransform(int option); //Get a specific part of the transform
 
 	//Rendering
@@ -40,8 +41,10 @@ public:
 	void Bind();
 	void Unbind();
 
+	float moveX;
+	float moveY;
+
 private:
-	vector3D color;
 	matrix3D transform;
 	matrix3D view;
 	matrix3D projection;
@@ -50,6 +53,11 @@ private:
 	float rotSpeed;
 	float angleOfRot;
 	float incrementRGB;
-	float incrementPOSX;
-	float incrementPOSZ;
+	float incrementPosX;
+	float incrementPosY;
+	float incrementPosZ;
+	float moveZ;
+	float r;
+	float g;
+	float b;
 };

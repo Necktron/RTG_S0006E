@@ -19,7 +19,9 @@ public:
 		NONE = -1,
 		STATIC_RAINBOW = 0,
 		PULSE_COLOR = 1,
-		IMAGE_TEXTURE = 2
+		IMAGE_TEXTURE = 2,
+		BLINN_PHONG = 3,
+		BLINN_PHONG_W_TEXTURE = 4
 	};
 
 	struct ShaderProgramSource

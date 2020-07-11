@@ -40,11 +40,11 @@ ExampleApp::Open()
 	this->resolution[0] = 800.0f;
 	this->resolution[1] = 600.0f;
 
-	renderInstanceA.window_Width = 800.0f;
-	renderInstanceA.window_Height = 600.0f;
+	renderInstanceA.window_Width = resolution[0];
+	renderInstanceA.window_Height = resolution[1];
 
-	renderInstanceB.window_Width = 800.0f;
-	renderInstanceB.window_Height = 600.0f;
+	renderInstanceB.window_Width = resolution[0];
+	renderInstanceB.window_Height = resolution[1];
 
 	this->window->SetSize(resolution[0], resolution[1]);
 
@@ -75,7 +75,7 @@ ExampleApp::Open()
 
 		//Do you want the shader to be printed out for closer inspection?
 		renderInstanceA.meshPTR->m_DEBUG = false;
-		renderInstanceA.shaderPTR->m_DEBUG = false;
+		renderInstanceA.shaderPTR->m_DEBUG = true;
 
 		renderInstanceB.meshPTR->m_DEBUG = false;
 		renderInstanceB.shaderPTR->m_DEBUG = false;
@@ -83,20 +83,16 @@ ExampleApp::Open()
 		//Setup mesh with VBO, VAO and IBO
 		renderInstanceA.meshPTR->Cube();
 
-		renderInstanceB.meshPTR->Cube();
-
 		//Select a shader effect, ( You must know what shader makes what effects )
 		renderInstanceA.shaderPTR->shaderEFK = Shader::ShaderEffect::IMAGE_TEXTURE;
-		renderInstanceB.shaderPTR->shaderEFK = Shader::ShaderEffect::STATIC_RAINBOW;
 
 		//If the shader allows a texture, we may choose a texture below, ( *# )
 		renderInstanceA.texturePTR->textureImage = Texture::TextureImage::IKEA;
-		//renderInstanceB.texturePTR->textureImage = Texture::TextureImage::KOREAN_FLAG;
 
-		renderInstanceA.shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/ImageTexture.shader");
-		renderInstanceB.shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/StaticRainbow.shader");
-
-		/*
+		renderInstanceB.meshPTR->Cube();
+		renderInstanceB.shaderPTR->shaderEFK = Shader::ShaderEffect::IMAGE_TEXTURE;
+		renderInstanceB.texturePTR->textureImage = Texture::TextureImage::KOREAN_FLAG;
+		
 		if (int(renderInstanceA.shaderPTR->shaderEFK) == 0)
 			renderInstanceA.shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/StaticRainbow.shader");
 
@@ -105,18 +101,17 @@ ExampleApp::Open()
 
 		else if (int(renderInstanceA.shaderPTR->shaderEFK) == 2)
 			renderInstanceA.shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/ImageTexture.shader");
-			*/
 		
+		renderInstanceB.shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/ImageTexture.shader");
+
 		//Bind the shader
 		renderInstanceA.shaderPTR->Bind();
-
 		renderInstanceA.shaderPTR->SetUniformMat4fv("u_MVP", MVP);
-		renderInstanceA.shaderPTR->SetUniform4f("u_Move", 0.0f, 0.0f, 0.0f, 1.0f);
+		renderInstanceA.shaderPTR->SetUniform4f("u_Move", 0.0f, 0.5f, 0.0f, 1.0f);
 
 		renderInstanceB.shaderPTR->Bind();
 		renderInstanceB.shaderPTR->SetUniformMat4fv("u_MVP", MVP);
-		renderInstanceB.shaderPTR->SetUniform4f("u_Move", 0.0f, 0.0f, 0.0f, 1.0f);
-
+		renderInstanceB.shaderPTR->SetUniform4f("u_Move", 0.0f, -0.5f, 0.0f, 1.0f);
 		//SHADER SETUP DONE
 
 		//Select a texture file if the shader allows for textures
@@ -129,22 +124,16 @@ ExampleApp::Open()
 			//Bind the texture aswell to the shader
 			renderInstanceA.texturePTR->Bind();
 			renderInstanceA.shaderPTR->SetUniform1i("u_Texture", 0);
+
+			renderInstanceB.texturePTR->TextureFilepath(renderInstanceB.texturePTR);
+			renderInstanceB.texturePTR->SetupTexture(renderInstanceB.texturePTR->m_FilePath);
+			renderInstanceB.texturePTR->Bind();
+			renderInstanceB.shaderPTR->SetUniform1i("u_Texture", 0);
 		}
-
-		//Get the file path to right texture based upon value set att textureImage at *#
-		//renderInstanceB.texturePTR->TextureFilepath(renderInstanceB.texturePTR);
-		//renderInstanceB.texturePTR->SetupTexture(renderInstanceB.texturePTR->m_FilePath);
-
-		//Bind the texture aswell to the shader
-		//renderInstanceB.texturePTR->Bind();
-		//renderInstanceB.shaderPTR->SetUniform1i("u_Texture", 0);
 		//TEXTURE SETUP DONE
 
 		renderInstanceA.ConfigUniforms();
 		renderInstanceB.ConfigUniforms();
-
-		renderInstanceA.SetTransform(vector3D(-0.6f, 0.4f, 0.0f), vector3D(0.5f, 0.5f, 0.5f), vector3D(1.0f, 1.0f, 1.0f));
-		renderInstanceB.SetTransform(vector3D(0.6f, -0.4f, 0.0f), vector3D(0.5f, 0.5f, 0.5f), vector3D(1.0f, 1.0f, 1.0f));
 
 		return true;
 
@@ -158,13 +147,27 @@ ExampleApp::Open()
 void
 ExampleApp::Run()
 {
+	renderInstanceA.moveX = 1.6f;
+	renderInstanceB.moveX = 1.6f;
+
+	renderInstanceA.moveY = 0.9f;
+	renderInstanceB.moveY = -0.9f;
+
 	while (this->window->IsOpen())
 	{
+
 		renderInstanceA.Clear();
 		renderInstanceB.Clear();
 
+		renderInstanceA.Bind();
+		renderInstanceA.Update();
 		renderInstanceA.Draw();
+		renderInstanceA.Unbind();
+
+		renderInstanceB.Bind();
+		renderInstanceB.Update();
 		renderInstanceB.Draw();
+		renderInstanceB.Unbind();
 
 		this->window->Update();
 

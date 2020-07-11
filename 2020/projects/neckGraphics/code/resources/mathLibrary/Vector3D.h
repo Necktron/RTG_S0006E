@@ -37,6 +37,7 @@ public:
 	float vecLength();
 	vector3D vecNormilisation();
 	float vecGet(int i);
+	void vecSet(int pos, float value);
 	void vecSet(float x, float y, float z);
 
 	//3D exclusive
@@ -46,7 +47,10 @@ public:
 //Empty Constructor
 inline vector3D::vector3D()
 {
-
+	vecOrigin[0] = 0;
+	vecOrigin[1] = 0;
+	vecOrigin[2] = 0;
+	vecOrigin[3] = 1;
 }
 
 //Constructor with components
@@ -170,7 +174,17 @@ inline float vector3D::vecGet(int i)
 	}
 }
 
-//Set
+//Set a single element
+inline void vector3D::vecSet(int pos, float value)
+{
+	if (pos > 2)
+		std::cout << "ERROR: Invalid index, max value is 2" << std::endl;
+
+	else
+		this->vecOrigin[pos] = value;
+}
+
+//Set all elements
 inline void vector3D::vecSet(float x, float y, float z)
 {
 	this->vecOrigin[0] = x;
