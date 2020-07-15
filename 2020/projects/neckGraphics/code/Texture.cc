@@ -10,48 +10,6 @@ Texture::~Texture()
 	glDeleteTextures(1, &m_RendererID);
 }
 
-void Texture::TextureFilepath(std::shared_ptr<Texture> ref)
-{
-	switch (int(ref->textureImage))
-	{
-		case -1:
-			std::cout << "No texture chosen!" << std::endl;
-			break;
-
-		case 0:
-			ref->m_FilePath = "../../../projects/neckGraphics/code/resources/textures/YellowBrickWall.jpg";
-			break;
-
-		case 1:
-			ref->m_FilePath = "../../../projects/neckGraphics/code/resources/textures/TurquoiseWoodWall.jpg";
-			break;
-
-		case 2:
-			ref->m_FilePath = "../../../projects/neckGraphics/code/resources/textures/KoreanFlag.png";
-			break;
-
-		case 3:
-			ref->m_FilePath = "../../../projects/neckGraphics/code/resources/textures/Blueberries.jpg";
-			break;
-
-		case 4:
-			ref->m_FilePath = "../../../projects/neckGraphics/code/resources/textures/OpenGLLogo.png";
-			break;
-
-		case 5:
-			ref->m_FilePath = "../../../projects/neckGraphics/code/resources/textures/InstaTransparent.png";
-			break;
-
-		case 6:
-			ref->m_FilePath = "../../../projects/neckGraphics/code/resources/textures/cat_diff.tga";
-			break;
-
-		case 7:
-			ref->m_FilePath = "../../../projects/neckGraphics/code/resources/textures/IKEA.jpg";
-			break;
-	}
-}
-
 void Texture::SetupTexture(const std::string& filepath)
 {
 	stbi_set_flip_vertically_on_load(1);

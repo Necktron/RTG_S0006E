@@ -27,15 +27,12 @@ public:
 
 	TextureImage textureImage = TextureImage::NONE;
 
-	void TextureFilepath(std::shared_ptr<Texture> ref);
 	void SetupTexture(const std::string& filepath); //Scan and setup texture
 	void Bind(unsigned int slot = 0) const;
 	void Unbind();
 
 	inline int GetWitdh() const { return m_Width; }
 	inline int GetHeight() const { return m_Height; }
-
-	std::string m_FilePath;
 
 private:
 	unsigned int m_RendererID;

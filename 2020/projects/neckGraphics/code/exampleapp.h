@@ -30,11 +30,35 @@ public:
 
 	Renderer renderInstanceA;
 	Renderer renderInstanceB;
+	Renderer renderInstanceC;
+	Renderer renderInstanceD;
+	Renderer renderInstanceE;
+	Renderer renderInstanceF;
+
+	Renderer renderInstanceG;
+	Renderer renderInstanceH;
+	Renderer renderInstanceI;
+	Renderer renderInstanceJ;
+	Renderer renderInstanceK;
+	Renderer renderInstanceL;
+
+	Renderer renderInstanceM;
+	Renderer renderInstanceN;
+	Renderer renderInstanceO;
+	Renderer renderInstanceP;
+	Renderer renderInstanceQ;
+	Renderer renderInstanceR;
+
+	Renderer renderInstanceS;
+	Renderer renderInstanceT;
+	Renderer renderInstanceU;
+	Renderer renderInstanceV;
+	Renderer renderInstanceX;
+	Renderer renderInstanceY;
 
 private:
 	unsigned int shader;
 	Display::Window* window;
-	GLFWwindow* windowGUI;
 	float resolution[2];
 };
 } // namespace Example
