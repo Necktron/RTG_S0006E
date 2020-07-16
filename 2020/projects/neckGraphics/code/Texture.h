@@ -22,7 +22,9 @@ public:
 		OPENGL_LOGO = 4,
 		INSTAGRAM = 5,
 		CAT = 6,
-		IKEA = 7
+		IKEA = 7,
+		LAGER = 8,
+		MICKE = 9
 	};
 
 	TextureImage textureImage = TextureImage::NONE;

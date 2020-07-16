@@ -1,5 +1,7 @@
 #define LMB 0x0001
 #define RMB 0x0002
+#define M4 0x0006
+#define M5 0x0005
 
 #include "Renderer.h"
 
@@ -32,7 +34,12 @@ void Renderer::Init(float resX, float resY)
 	initRotX = 0.0f;
 	initRotY = 0.0f;
 	initRotZ = 0.0f;
-	zoomCam = 4.0f;
+	camX = 0.0f;
+	camY = 0.0f;
+	camZ = 4.0f;
+
+	oldRotX = 0.0f;
+	oldRotY = 0.0f;
 
 	window_Width = resX;
 	window_Height = resY;
@@ -46,6 +53,7 @@ void Renderer::Init(float resX, float resY)
 
 	meshPTR->m_DEBUG = false;
 	shaderPTR->m_DEBUG = false;
+	isDown = false;
 }
 
 //Update values for color anim, rot, etc
@@ -82,7 +90,7 @@ void Renderer::Update()
 	}
 
 	//Setup the vital parts for MVP, Model + View + Projection
-	SetView(vector3D(0.0f, 0.0f, zoomCam), vector3D(0.0f, 0.0f, 0.0f));
+	SetView(vector3D(camX, camY, camZ), vector3D(camX, camY, camZ - 10.0f));
 	SetTransform(vector3D(initPosX + moveX, initPosY + moveY, initPosZ + moveZ), vector3D(initScaleX, initScaleY, initScaleZ), vector3D(initRotX + rotX, initRotY + rotY, initRotZ + rotZ));
 	SetProjection(90.0f);
 
@@ -90,11 +98,18 @@ void Renderer::Update()
 	this->MVP = this->projection * this->view * this->transform;
 }
 
-//Check for keyboard / mouse input
+//Check for keyboard / mouse input overall
 void Renderer::InputScan()
 {
-	KeyboardScan();
 	MouseScan();
+	KeyboardScan();
+}
+
+//Check for keyboard / mouse input, specifically for camera commands
+void Renderer::InputScanOnlyCamera()
+{
+	MouseScanCam();
+	KeyboardScanCam();
 }
 
 //Set a mesh from the pre-defined types, triangle / quad / cube
@@ -165,6 +180,14 @@ void Renderer::SetTexture(Texture::TextureImage texture)
 
 		case 7:
 			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/IKEA.jpg");
+			break;
+
+		case 8:
+			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/Richard.jpg");
+			break;
+
+		case 9:
+			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/Micke.jpg");
 			break;
 	}
 
@@ -259,31 +282,6 @@ void Renderer::Clear() const
 	glClear(GL_DEPTH_BUFFER_BIT);
 }
 
-//Bind buffers for render
-void Renderer::Bind()
-{
-	shaderPTR->Bind();
-	meshPTR->Bind();
-
-	if (int(texturePTR->textureImage) != -1)
-	{
-		texturePTR->Bind();
-	}
-}
-
-//Unbind data so other Renderers can Bind their data and spare memory
-void Renderer::Unbind()
-{
-	if (int(texturePTR->textureImage) != -1)
-	{
-		texturePTR->Bind();
-	}
-
-	meshPTR->Unbind();
-	shaderPTR->Unbind();
-}
-
-//WIP -->
 //Return current Mesh data
 Mesh Renderer::GetMesh()
 {
@@ -308,30 +306,120 @@ matrix3D Renderer::GetTransform()
 	return transform;
 }
 
-//Handle input for mouse
-void Renderer::MouseScan()
-{
-	if (GetAsyncKeyState(LMB) & 0x8000)
-	{
-		//CHECK FOR CHANGES IN POSITION
+// * * * PRIVATE FUNCTIONS * * *
 
-		// MOVE X AXIS = ROT X AXIS
-		// MOVE Y AXIS = ROT Y AXIS
+//Bind buffers for render
+void Renderer::Bind()
+{
+	shaderPTR->Bind();
+	meshPTR->Bind();
+
+	if (int(texturePTR->textureImage) != -1)
+	{
+		texturePTR->Bind();
 	}
 }
 
-//Handle input for keyboard
+//Unbind data so other Renderers can Bind their data and spare memory
+void Renderer::Unbind()
+{
+	if (int(texturePTR->textureImage) != -1)
+	{
+		texturePTR->Bind();
+	}
+
+	meshPTR->Unbind();
+	shaderPTR->Unbind();
+}
+
+//Handle input form mouse, Everything
+void Renderer::MouseScan()
+{
+	//CAM Z MOVEMENT
+	if (GetAsyncKeyState(M5) & 0x8000)
+		camZ += 0.06f;
+
+	if (GetAsyncKeyState(M4) & 0x8000)
+		camZ -= 0.06f;
+
+	//ROTATION FOR MODEL
+	if (GetAsyncKeyState(LMB) & 0x8000 && !isDown)
+	{
+		GetCursorPos(&mousePosOrigin);
+		oldRotX = rotX;
+		oldRotY = rotY;
+		isDown = true;
+	}
+
+	else if (GetAsyncKeyState(LMB) & 0x8000 && isDown)
+	{
+		GetCursorPos(&mousePosCurrent);
+
+		float currX = mousePosCurrent.x - mousePosOrigin.x;
+		float currY = mousePosCurrent.y - mousePosOrigin.y;
+
+		rotX = -currY + oldRotX;
+		rotY = -currX + oldRotY;
+	}
+
+	else
+		isDown = false;
+}
+
+//Handle input form keyboard, Everything
 void Renderer::KeyboardScan()
 {
-	if (GetAsyncKeyState('W') & 0x8000)
+	//MOVE MODEL IF RMB IS NOT DOWN
+	if (GetAsyncKeyState('W') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
 		moveY += 0.15f;
 
-	if (GetAsyncKeyState('A') & 0x8000)
+	if (GetAsyncKeyState('A') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
 		moveX -= 0.1f;
 
-	if (GetAsyncKeyState('S') & 0x8000)
+	if (GetAsyncKeyState('S') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
 		moveY -= 0.15f;
 
-	if (GetAsyncKeyState('D') & 0x8000)
+	if (GetAsyncKeyState('D') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
 		moveX += 0.1f;
+
+	//MOVE CAMERA IF RMB IS DOWN
+	if (GetAsyncKeyState('W') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+		camY += 0.15f;
+
+	if (GetAsyncKeyState('A') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+		camX -= 0.1f;
+
+	if (GetAsyncKeyState('S') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+		camY -= 0.15f;
+
+	if (GetAsyncKeyState('D') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+		camX += 0.1f;
+}
+
+//Handle input form mouse to the camera
+void Renderer::MouseScanCam()
+{
+	//CAM Z MOVEMENT
+	if (GetAsyncKeyState(M5) & 0x8000)
+		camZ += 0.06f;
+
+	if (GetAsyncKeyState(M4) & 0x8000)
+		camZ -= 0.06f;
+}
+
+//Handle input form keyboard to the camera
+void Renderer::KeyboardScanCam()
+{
+	//MOVE CAMERA IF RMB IS DOWN
+	if (GetAsyncKeyState('W') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+		camY += 0.15f;
+
+	if (GetAsyncKeyState('A') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+		camX -= 0.1f;
+
+	if (GetAsyncKeyState('S') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+		camY -= 0.15f;
+
+	if (GetAsyncKeyState('D') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+		camX += 0.1f;
 }

@@ -37,8 +37,8 @@ ExampleApp::Open()
 	this->window = new Display::Window;
 	this->window->SetTitle("Necktronian Graphics Inc.");
 
-	resolution[0] = 1920.0f;
-	resolution[1] = 1080.0f;
+	resolution[0] = 800.0f;
+	resolution[1] = 600.0f;
 
 	this->window->SetSize(resolution[0], resolution[1]);
 
@@ -70,7 +70,14 @@ ExampleApp::Open()
 		renderInstanceA.SetShader(Shader::ShaderEffect::IMAGE_TEXTURE);
 
 		//Select a texture, we must make sure we got a shader that support textures above
-		renderInstanceA.SetTexture(Texture::TextureImage::IKEA);
+		renderInstanceA.SetTexture(Texture::TextureImage::LAGER);
+
+		//RENDER B
+		renderInstanceB.Init(resolution[0], resolution[1]);
+		renderInstanceB.shaderPTR->m_DEBUG = true;
+		renderInstanceB.SetMesh(2);
+		renderInstanceB.SetShader(Shader::ShaderEffect::IMAGE_TEXTURE);
+		renderInstanceB.SetTexture(Texture::TextureImage::MICKE);
 
 		return true;
 
@@ -84,18 +91,22 @@ ExampleApp::Open()
 void
 ExampleApp::Run()
 {
-	renderInstanceA.SetStartTransform(vector3D(0.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
+	renderInstanceA.SetStartTransform(vector3D(-1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
+	renderInstanceB.SetStartTransform(vector3D(1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(40.0f, 0.0f, 0.0f));
 
 	while (this->window->IsOpen())
 	{
 		//CLEAR
 		renderInstanceA.Clear();
+		renderInstanceB.Clear();
 
 		//INPUT
 		renderInstanceA.InputScan();
+		renderInstanceB.InputScanOnlyCamera();
 
 		//DRAW
 		renderInstanceA.Draw();
+		renderInstanceB.Draw();
 
 		this->window->Update();
 

@@ -19,6 +19,7 @@ public:
 	void Init(float resX, float resY); //Init all components
 	void Update(); //Update values for color anim, rot, etc
 	void InputScan();
+	void InputScanOnlyCamera();
 
 	//Set functions
 	void SetMesh(int meshType); //Set a mesh from the pre-defined types, triangle / quad / cube
@@ -47,8 +48,10 @@ private:
 	void MouseScan();
 	void KeyboardScan();
 
-	vector3D rotation;
+	void MouseScanCam();
+	void KeyboardScanCam();
 
+	vector3D rotation;
 	matrix3D transform;
 	matrix3D view;
 	matrix3D projection;
@@ -79,5 +82,13 @@ private:
 	float initRotY;
 	float initRotZ;
 
-	float zoomCam;
+	float camX;
+	float camY;
+	float camZ;
+
+	bool isDown;
+	float oldRotX;
+	float oldRotY;
+	POINT mousePosOrigin;
+	POINT mousePosCurrent;
 };

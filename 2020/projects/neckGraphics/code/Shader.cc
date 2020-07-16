@@ -1,3 +1,4 @@
+#define ERROR_TRIGGER __debugbreak();
 #include "Shader.h"
 
 void Shader::SetupShader(const std::string& filepath)
@@ -75,6 +76,12 @@ Shader::ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 
 	ShaderType mode = ShaderType::NONE;
 
+	if (stream.fail())
+	{
+		std::cout << "[Necktron OpenGL Error System] : Shader could not be parsed, validate file path!" << std::endl;
+		ERROR_TRIGGER;
+	}
+
 	while(getline(stream, line))
 	{
 		if (line.find("#shader") != std::string::npos)
@@ -133,9 +140,10 @@ unsigned int Shader::CompileShader(unsigned int type, const string& source)
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
 		char* message = (char*)alloca(length * sizeof(char));
 		glGetShaderInfoLog(id, length, &length, message);
-		std::cout << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << std::endl;
+		std::cout << "[Necktron OpenGL Error System] : Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << std::endl;
 		std::cout << message << std::endl;
 		glDeleteShader(id);
+		ERROR_TRIGGER;
 		return 0;
 	}
 
