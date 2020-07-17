@@ -92,42 +92,42 @@ void Mesh::Cube()
 {
 	float pos[] =
 	{
-		//(x, y, z, textureA, textureB)
+		//(x, y, z, textureA, textureB, normalX, normalY, normalZ)
 		//FRONT
-		-1.0f, -1.0f, 1.0f, 0.0f, 0.0f,     //0
-		-1.0f, 1.0f, 1.0f, 0.0f, 1.0f,      //1
-		1.0f, 1.0f, 1.0f, 1.0f, 1.0f,       //2
-		1.0f, -1.0f, 1.0f, 1.0f, 0.0f,      //3
+		-1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,    //0
+		-1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,     //1
+		1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,      //2
+		1.0f, -1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,     //3
 
 		//BACK
-		1.0f, -1.0f, -1.0f, 0.0f, 0.0f,     //4
-		1.0f, 1.0f, -1.0f, 0.0f, 1.0f,      //5
-		-1.0f, 1.0f, -1.0f,  1.0f, 1.0f,    //6
-		-1.0f, -1.0f, -1.0f, 1.0f, 0.0f,    //7
+		1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f,   //4
+		1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, -1.0f,    //5
+		-1.0f, 1.0f, -1.0f,  1.0f, 1.0f, 0.0f, 0.0f, -1.0f,  //6
+		-1.0f, -1.0f, -1.0f, 1.0f, 0.0f,  0.0f, 0.0f, -1.0f, //7
 
 		//RIGHT
-		1.0f, -1.0f, 1.0f, 0.0f, 0.0f,      //8
-		1.0f, 1.0f, 1.0f, 0.0f, 1.0f,       //9
-		1.0f, 1.0f, -1.0f,  1.0f, 1.0f,     //10
-		1.0f, -1.0f, -1.0f, 1.0f, 0.0f,     //11
+		1.0f, -1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,     //8
+		1.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f,      //9
+		1.0f, 1.0f, -1.0f,  1.0f, 1.0f, 1.0f, 0.0f, 0.0f,    //10
+		1.0f, -1.0f, -1.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f,    //11
 
 		//LEFT
-		-1.0f, -1.0f, -1.0f, 0.0f, 0.0f,    //12
-		-1.0f, 1.0f, -1.0f, 0.0f, 1.0f,     //13
-		-1.0f, 1.0f, 1.0f,  1.0f, 1.0f,     //14
-		-1.0f, -1.0f, 1.0f, 1.0f, 0.0f,     //15
+		-1.0f, -1.0f, -1.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f,  //12
+		-1.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f,   //13
+		-1.0f, 1.0f, 1.0f,  1.0f, 1.0f, -1.0f, 0.0f, 0.0f,   //14
+		-1.0f, -1.0f, 1.0f, 1.0f, 0.0f, -1.0f, 0.0f, 0.0f,   //15
 
 		//TOP
-		-1.0f, 1.0f, 1.0f, 0.0f, 0.0f,      //16
-		-1.0f, 1.0f, -1.0f, 0.0f, 1.0f,     //17
-		1.0f, 1.0f, -1.0f,  1.0f, 1.0f,     //18
-		1.0f, 1.0f, 1.0f, 1.0f, 0.0f,       //19
+		-1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f,     //16
+		-1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,    //17
+		1.0f, 1.0f, -1.0f,  1.0f, 1.0f, 0.0f, 1.0f, 0.0f,    //18
+		1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,      //19
 
 		//BOT
-		-1.0f, -1.0f, -1.0f, 0.0f, 0.0f,    //20
-		-1.0f, -1.0f, 1.0f, 0.0f, 1.0f,     //21
-		1.0f, -1.0f, 1.0f,  1.0f, 1.0f,     //22
-		1.0f, -1.0f, -1.0f, 1.0f, 0.0f      //23
+		-1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f,  //20
+		-1.0f, -1.0f, 1.0f, 0.0f, 1.0f, 0.0f, -1.0f, 0.0f,   //21
+		1.0f, -1.0f, 1.0f,  1.0f, 1.0f,  0.0f, -1.0f, 0.0f,  //22
+		1.0f, -1.0f, -1.0f, 1.0f, 0.0f, 0.0f, -1.0f, 0.0f    //23
 	};
 
 	unsigned int index[] =
@@ -167,10 +167,12 @@ void Mesh::Cube()
 	glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
 
 	//Vertex Array Object, VAO
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 5, 0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 5, (GLvoid*)(sizeof(float) * 3));
+	glEnableVertexAttribArray(0); //Pos
+	glEnableVertexAttribArray(1); //Texture
+	glEnableVertexAttribArray(2); //Normal
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, 0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (GLvoid*)(sizeof(float) * 3));
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (GLvoid*)(sizeof(float) * 5));
 
 	//Index Buffer Object, IBO
 	glGenBuffers(1, &this->ibo);

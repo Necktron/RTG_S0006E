@@ -58,7 +58,7 @@ ExampleApp::Open()
 
 		glEnable(GL_DEPTH_TEST);
 
-		renderInstanceA.Init(resolution[0], resolution[1]);
+		renderInstanceA.Init(resolution[0], resolution[1], "Instance A");
 
 		//Do you want the shader to be printed out for closer inspection? Simply comment out this line if you don't want to. It's disabled by default
 		renderInstanceA.shaderPTR->m_DEBUG = true;
@@ -72,8 +72,11 @@ ExampleApp::Open()
 		//Select a texture, we must make sure we got a shader that support textures above
 		renderInstanceA.SetTexture(Texture::TextureImage::LAGER);
 
+		//Select a light source
+		//renderInstanceA.SetLight(Light::LightSource::POINT_LIGHT);
+
 		//RENDER B
-		renderInstanceB.Init(resolution[0], resolution[1]);
+		renderInstanceB.Init(resolution[0], resolution[1], "Instance B");
 		renderInstanceB.shaderPTR->m_DEBUG = true;
 		renderInstanceB.SetMesh(2);
 		renderInstanceB.SetShader(Shader::ShaderEffect::IMAGE_TEXTURE);
@@ -92,7 +95,7 @@ void
 ExampleApp::Run()
 {
 	renderInstanceA.SetStartTransform(vector3D(-1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
-	renderInstanceB.SetStartTransform(vector3D(1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(40.0f, 0.0f, 0.0f));
+	renderInstanceB.SetStartTransform(vector3D(1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
 
 	while (this->window->IsOpen())
 	{

@@ -2,6 +2,7 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include "Shader.h"
+#include "Light.h"
 #include <memory>
 #include <Windows.h>
 
@@ -14,9 +15,10 @@ public:
 	std::shared_ptr<Mesh> meshPTR;
 	std::shared_ptr<Texture> texturePTR;
 	std::shared_ptr<Shader> shaderPTR;
+	std::shared_ptr<Light> lightPTR;
 
 	//Setup and handle
-	void Init(float resX, float resY); //Init all components
+	void Init(float resX, float resY, string name); //Init all components
 	void Update(); //Update values for color anim, rot, etc
 	void InputScan();
 	void InputScanOnlyCamera();
@@ -26,15 +28,16 @@ public:
 	void SetMesh(const char* filepath); //Set a mesh from file path, load OBJ, next assignment
 	void SetTexture(Texture::TextureImage); //Set texture from a specific path
 	void SetShader(Shader::ShaderEffect); //Set shader from a specific path
+	void SetLight(Light::LightSource); //Set shader from a specific path
 	void SetStartTransform(vector3D pos, vector3D scale, vector3D rot); //Set everything for the transform
 	void SetTransform(vector3D pos, vector3D scale, vector3D rot); //Set everything for the transform
 	void SetView(vector3D origin, vector3D target);
 	void SetProjection(float FOV);
 
 	//Get functions
-	Mesh GetMesh(); //Get current mesh
-	Texture GetTexture(); //Get current texture
-	Shader GetShader(); //Get current shader
+	std::shared_ptr<Mesh> GetMesh(); //Get current mesh
+	std::shared_ptr<Texture> GetTexture(); //Get current texture
+	std::shared_ptr<Shader> GetShader(); //Get current shader
 	matrix3D GetTransform(); //Get everything from the transform
 
 	//Rendering
@@ -50,6 +53,8 @@ private:
 
 	void MouseScanCam();
 	void KeyboardScanCam();
+
+	string renderName;
 
 	vector3D rotation;
 	matrix3D transform;
@@ -82,13 +87,22 @@ private:
 	float initRotY;
 	float initRotZ;
 
+	float FOV;
 	float camX;
 	float camY;
 	float camZ;
 
-	bool isDown;
+	float camTargetX;
+	float camTargetY;
+	float camTargetZ;
+
+	bool LMB_DOWN;
+	bool RMB_DOWN;
 	float oldRotX;
 	float oldRotY;
+	float oldCamTargetX;
+	float oldCamTargetY;
+	float oldCamTargetZ;
 	POINT mousePosOrigin;
 	POINT mousePosCurrent;
 };

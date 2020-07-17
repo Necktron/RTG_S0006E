@@ -6,11 +6,14 @@
 #include "Renderer.h"
 
 //Init all components
-void Renderer::Init(float resX, float resY)
+void Renderer::Init(float resX, float resY, string name)
 {
+	renderName = name;
+
 	meshPTR = std::make_shared<Mesh>();
 	shaderPTR = std::make_shared<Shader>();
 	texturePTR = std::make_shared<Texture>();
+	lightPTR = std::make_shared<Light>();
 
 	rot = 0.0f;
 	rotSpeed = 1.0f;
@@ -34,12 +37,21 @@ void Renderer::Init(float resX, float resY)
 	initRotX = 0.0f;
 	initRotY = 0.0f;
 	initRotZ = 0.0f;
+
 	camX = 0.0f;
 	camY = 0.0f;
 	camZ = 4.0f;
 
+	camTargetX = 0.0f;
+	camTargetY = 0.0f;
+	camTargetZ = 1.0f;
+
 	oldRotX = 0.0f;
 	oldRotY = 0.0f;
+
+	oldCamTargetX = 0.0f;
+	oldCamTargetY = 0.0f;
+	oldCamTargetZ = 0.0f;
 
 	window_Width = resX;
 	window_Height = resY;
@@ -53,7 +65,8 @@ void Renderer::Init(float resX, float resY)
 
 	meshPTR->m_DEBUG = false;
 	shaderPTR->m_DEBUG = false;
-	isDown = false;
+	LMB_DOWN = false;
+	RMB_DOWN = false;
 }
 
 //Update values for color anim, rot, etc
@@ -90,7 +103,7 @@ void Renderer::Update()
 	}
 
 	//Setup the vital parts for MVP, Model + View + Projection
-	SetView(vector3D(camX, camY, camZ), vector3D(camX, camY, camZ - 10.0f));
+	SetView(vector3D(camX, camY, camZ), vector3D(camX - camTargetX, camY - camTargetY, camZ - camTargetZ));
 	SetTransform(vector3D(initPosX + moveX, initPosY + moveY, initPosZ + moveZ), vector3D(initScaleX, initScaleY, initScaleZ), vector3D(initRotX + rotX, initRotY + rotY, initRotZ + rotZ));
 	SetProjection(90.0f);
 
@@ -147,7 +160,7 @@ void Renderer::SetTexture(Texture::TextureImage texture)
 	switch (int(texture))
 	{
 		case -1:
-			std::cout << "No texture chosen!" << std::endl;
+			std::cout << "No texture assigned!" << std::endl;
 			break;
 
 		case 0:
@@ -197,6 +210,8 @@ void Renderer::SetTexture(Texture::TextureImage texture)
 //Set shader from a specific path
 void Renderer::SetShader(Shader::ShaderEffect shader)
 {
+	std::cout << "[ SHADER FOR RENDER: " << renderName << " ]" << std::endl;
+
 	switch (int(shader))
 	{
 		//Rainbow Static
@@ -213,11 +228,33 @@ void Renderer::SetShader(Shader::ShaderEffect shader)
 		case 2:
 			shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/ImageTexture.shader");
 			break;
+
+		//Bling bling!
+		case 3:
+			shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/BlinnPhong.shader");
+			break;
 	}
 
 	if(int(texturePTR->textureImage) != -1)
 	{
 		shaderPTR->SetUniform1i("u_Texture", 0);
+	}
+}
+
+//Set a light source
+void Renderer::SetLight(Light::LightSource lightsource)
+{
+	switch (int(lightsource))
+	{
+		//No light source
+		case -1:
+			std::cout << "No light source assigned!" << std::endl;
+			break;
+
+		//Point Light
+		case 0:
+			lightPTR->GetPointLight();
+			break;
 	}
 }
 
@@ -283,21 +320,21 @@ void Renderer::Clear() const
 }
 
 //Return current Mesh data
-Mesh Renderer::GetMesh()
+std::shared_ptr<Mesh> Renderer::GetMesh()
 {
-	return Mesh();
+	return meshPTR;
 }
 
 //Return current Texture data
-Texture Renderer::GetTexture()
+std::shared_ptr<Texture> Renderer::GetTexture()
 {
-	return Texture();
+	return texturePTR;
 }
 
 //Return current Shader data
-Shader Renderer::GetShader()
+std::shared_ptr<Shader> Renderer::GetShader()
 {
-	return Shader();
+	return shaderPTR;
 }
 
 //Return current Transform
@@ -343,15 +380,15 @@ void Renderer::MouseScan()
 		camZ -= 0.06f;
 
 	//ROTATION FOR MODEL
-	if (GetAsyncKeyState(LMB) & 0x8000 && !isDown)
+	if (GetAsyncKeyState(LMB) & 0x8000 && !LMB_DOWN)
 	{
 		GetCursorPos(&mousePosOrigin);
 		oldRotX = rotX;
 		oldRotY = rotY;
-		isDown = true;
+		LMB_DOWN = true;
 	}
 
-	else if (GetAsyncKeyState(LMB) & 0x8000 && isDown)
+	else if (GetAsyncKeyState(LMB) & 0x8000 && LMB_DOWN)
 	{
 		GetCursorPos(&mousePosCurrent);
 
@@ -363,7 +400,30 @@ void Renderer::MouseScan()
 	}
 
 	else
-		isDown = false;
+		LMB_DOWN = false;
+
+	//ROTATION FOR CAMERA
+	if (GetAsyncKeyState(RMB) & 0x8000 && !RMB_DOWN)
+	{
+		GetCursorPos(&mousePosOrigin);
+		oldCamTargetX = camTargetX * 0.01f;
+		oldCamTargetY = camTargetY * 0.01f;
+		RMB_DOWN = true;
+	}
+
+	else if (GetAsyncKeyState(RMB) & 0x8000 && RMB_DOWN)
+	{
+		GetCursorPos(&mousePosCurrent);
+
+		float currX = mousePosCurrent.x - mousePosOrigin.x;
+		float currY = mousePosCurrent.y - mousePosOrigin.y;
+
+		camTargetX = (-currY + oldCamTargetX) * 0.01f;
+		camTargetY = (-currX + oldCamTargetY) * 0.01f;
+	}
+
+	else
+		RMB_DOWN = false;
 }
 
 //Handle input form keyboard, Everything

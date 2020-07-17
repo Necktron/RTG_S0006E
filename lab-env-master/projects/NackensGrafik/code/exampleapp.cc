@@ -272,11 +272,8 @@ namespace Example
 			if(renderMode == 0)
 			{
 				// do stuff
-<<<<<<< HEAD
-=======
 				trans.setPosition(vector3D(movmentX, movmentY, movmentZ));
 				meshPTR->DrawOBJ();
->>>>>>> master
 				this->graphic.Draw();
 			}
 

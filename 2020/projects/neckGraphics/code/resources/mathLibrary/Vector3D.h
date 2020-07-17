@@ -23,6 +23,7 @@ public:
 	//Operators
 	float operator* (const vector3D &other);
 	vector3D operator*(float);
+	vector3D operator/(const float);
 	vector3D operator+(vector3D other);
 	vector3D operator-(vector3D other);
 	vector3D operator=(const vector3D &other);
@@ -204,6 +205,15 @@ inline vector3D vector3D::operator*(float x)
 	this->vecOrigin[0] *= x;
 	this->vecOrigin[1] *= x;
 	this->vecOrigin[2] *= x;
+	return *this;
+}
+
+//Operator /
+inline vector3D vector3D::operator/(float x)
+{
+	this->vecOrigin[0] /= x;
+	this->vecOrigin[1] /= x;
+	this->vecOrigin[2] /= x;
 	return *this;
 }
 
