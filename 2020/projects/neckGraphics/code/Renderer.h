@@ -24,8 +24,7 @@ public:
 	void InputScanOnlyCamera();
 
 	//Set functions
-	void SetMesh(int meshType); //Set a mesh from the pre-defined types, triangle / quad / cube
-	void SetMesh(const char* filepath); //Set a mesh from file path, load OBJ, next assignment
+	void SetMesh(Mesh::OBJ); //Set a mesh from the pre-defined types, triangle / quad / cube / custom
 	void SetTexture(Texture::TextureImage); //Set texture from a specific path
 	void SetShader(Shader::ShaderEffect); //Set shader from a specific path
 	void SetLight(Light::LightSource); //Set shader from a specific path

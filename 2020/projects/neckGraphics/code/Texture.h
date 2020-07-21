@@ -24,7 +24,8 @@ public:
 		CAT = 6,
 		IKEA = 7,
 		LAGER = 8,
-		MICKE = 9
+		MICKE = 9,
+		RIO = 10
 	};
 
 	TextureImage textureImage = TextureImage::NONE;

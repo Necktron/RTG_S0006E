@@ -126,11 +126,15 @@ void Renderer::InputScanOnlyCamera()
 }
 
 //Set a mesh from the pre-defined types, triangle / quad / cube
-void Renderer::SetMesh(int meshType)
+void Renderer::SetMesh(Mesh::OBJ obj)
 {
 	//WIP
-	switch (meshType)
+	switch (int(obj))
 	{
+		case -1:
+			std::cout << "No OBJ selected" << std::endl;
+			break;
+
 		//Triangle
 		case 0:
 			meshPTR->Triangle();
@@ -145,13 +149,19 @@ void Renderer::SetMesh(int meshType)
 		case 2:
 			meshPTR->Cube();
 			break;
-	}
-}
 
-//Set a mesh from file path, load OBJ, next assignment
-void Renderer::SetMesh(const char* filepath)
-{
-	//meshPTR->MeshFile(filepath);
+		//Cat
+		case 3:
+			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/cat.obj");
+			break;
+
+		//RIO
+		case 4:
+			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/ChristRio.obj");
+			break;
+	}
+
+	this->meshPTR->meshOBJ = obj;
 }
 
 //Set texture from a specific path
@@ -201,6 +211,10 @@ void Renderer::SetTexture(Texture::TextureImage texture)
 
 		case 9:
 			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/Micke.jpg");
+			break;
+
+		case 10:
+			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/figure_diffuse.jpg");
 			break;
 	}
 
@@ -307,7 +321,13 @@ void Renderer::Draw()
 	shaderPTR->SetUniformMat4fv("u_MVP", MVP);
 	shaderPTR->SetUniform4f("u_Move", 0.0f, 0.0f, 0.0f, 1.0f);
 
-	glDrawElements(GL_TRIANGLES, 36 * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
+	//Custom mesh
+	if(int(meshPTR->meshOBJ) == 3 || int(meshPTR->meshOBJ) == 4)
+		glDrawElements(GL_TRIANGLES, meshPTR->indices.size(), GL_UNSIGNED_INT, NULL);
+
+	//Anything else
+	else
+		glDrawElements(GL_TRIANGLES, 36 * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
 
 	Unbind();
 }
@@ -465,6 +485,29 @@ void Renderer::MouseScanCam()
 
 	if (GetAsyncKeyState(M4) & 0x8000)
 		camZ -= 0.06f;
+
+	//ROTATION FOR CAMERA
+	if (GetAsyncKeyState(RMB) & 0x8000 && !RMB_DOWN)
+	{
+		GetCursorPos(&mousePosOrigin);
+		oldCamTargetX = camTargetX * 0.01f;
+		oldCamTargetY = camTargetY * 0.01f;
+		RMB_DOWN = true;
+	}
+
+	else if (GetAsyncKeyState(RMB) & 0x8000 && RMB_DOWN)
+	{
+		GetCursorPos(&mousePosCurrent);
+
+		float currX = mousePosCurrent.x - mousePosOrigin.x;
+		float currY = mousePosCurrent.y - mousePosOrigin.y;
+
+		camTargetX = (-currY + oldCamTargetX) * 0.01f;
+		camTargetY = (-currX + oldCamTargetY) * 0.01f;
+	}
+
+	else
+		RMB_DOWN = false;
 }
 
 //Handle input form keyboard to the camera
