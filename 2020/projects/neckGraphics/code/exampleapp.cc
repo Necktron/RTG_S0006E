@@ -64,10 +64,10 @@ ExampleApp::Open()
 		renderInstanceA.shaderPTR->m_DEBUG = true;
 
 		//Setup mesh with VBO, VAO and IBO
-		renderInstanceA.SetMesh(Mesh::OBJ::CAT);
+		renderInstanceA.SetMesh(Mesh::OBJ::WINDMILL);
 
 		//Select a shader, ( You must know what shader makes what effects )
-		renderInstanceA.SetShader(Shader::ShaderEffect::IMAGE_TEXTURE);
+		renderInstanceA.SetShader(Shader::ShaderEffect::STATIC_RAINBOW);
 
 		//Select a texture, we must make sure we got a shader that support textures above
 		renderInstanceA.SetTexture(Texture::TextureImage::CAT);
@@ -94,22 +94,22 @@ ExampleApp::Open()
 void
 ExampleApp::Run()
 {
-	renderInstanceA.SetStartTransform(vector3D(-1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
+	renderInstanceA.SetStartTransform(vector3D(0.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
 	renderInstanceB.SetStartTransform(vector3D(1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
 
 	while (this->window->IsOpen())
 	{
 		//CLEAR
 		renderInstanceA.Clear();
-		renderInstanceB.Clear();
+		//renderInstanceB.Clear();
 
 		//INPUT
 		renderInstanceA.InputScan();
-		renderInstanceB.InputScanOnlyCamera();
+		//renderInstanceB.InputScanOnlyCamera();
 
 		//DRAW
 		renderInstanceA.Draw();
-		renderInstanceB.Draw();
+		//renderInstanceB.Draw();
 
 		this->window->Update();
 

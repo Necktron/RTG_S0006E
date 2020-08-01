@@ -27,7 +27,8 @@ class Mesh
 			CUBE = 2,
 			CAT = 3,
 			STOOL = 4,
-			BOX = 5
+			BOX = 5,
+			WINDMILL = 6
 		};
 
 		struct Vertex {

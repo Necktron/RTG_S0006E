@@ -25,7 +25,8 @@ public:
 		IKEA = 7,
 		LAGER = 8,
 		MICKE = 9,
-		BOX = 10
+		BOX = 10,
+		WINDMILL = 11
 	};
 
 	TextureImage textureImage = TextureImage::NONE;

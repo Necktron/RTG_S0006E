@@ -176,9 +176,9 @@ void Renderer::SetMesh(Mesh::OBJ obj)
 			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/cubeLow.obj");
 			break;
 
-		//SARA CUBE
+		//WINDMILL
 		case 6:
-			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/saraCube.obj");
+			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/windmill.obj");
 			break;
 	}
 
@@ -240,9 +240,9 @@ void Renderer::SetTexture(Texture::TextureImage texture)
 			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/cubeLow.jpg");
 			break;
 
-		//SARACUBE
+		//WINDMILL
 		case 11:
-			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/saraCubeUV2.tga");
+			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/windmill.jpg");
 			break;
 	}
 
@@ -352,8 +352,8 @@ void Renderer::Draw()
 	shaderPTR->SetUniform4f("u_Move", 0.0f, 0.0f, 0.0f, 1.0f);
 
 	//Custom mesh
-	if(int(meshPTR->meshOBJ) == 3 || int(meshPTR->meshOBJ) == 4)
-		glDrawElements(GL_TRIANGLES, meshPTR->indices.size(), GL_UNSIGNED_INT, NULL);
+	if(int(meshPTR->meshOBJ) >= 3)
+		glDrawElements(GL_TRIANGLES, meshPTR->indices.size() * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
 
 	//Anything else
 	else
