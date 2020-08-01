@@ -64,16 +64,16 @@ ExampleApp::Open()
 		renderInstanceA.shaderPTR->m_DEBUG = true;
 
 		//Setup mesh with VBO, VAO and IBO
-		renderInstanceA.SetMesh(Mesh::OBJ::RIO);
+		renderInstanceA.SetMesh(Mesh::OBJ::CAT);
 
 		//Select a shader, ( You must know what shader makes what effects )
 		renderInstanceA.SetShader(Shader::ShaderEffect::IMAGE_TEXTURE);
 
 		//Select a texture, we must make sure we got a shader that support textures above
-		renderInstanceA.SetTexture(Texture::TextureImage::RIO);
+		renderInstanceA.SetTexture(Texture::TextureImage::CAT);
 
 		//Select a light source
-		//renderInstanceA.SetLight(Light::LightSource::POINT_LIGHT);
+		renderInstanceA.SetLight(Light::LightSource::POINT_LIGHT);
 
 		//RENDER B
 		renderInstanceB.Init(resolution[0], resolution[1], "Instance B");
@@ -94,7 +94,7 @@ ExampleApp::Open()
 void
 ExampleApp::Run()
 {
-	renderInstanceA.SetStartTransform(vector3D(-1.0f, 0.0f, 0.0f), vector3D(3.0f, 3.0f, 3.0f), vector3D(0.0f, 0.0f, 0.0f));
+	renderInstanceA.SetStartTransform(vector3D(-1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
 	renderInstanceB.SetStartTransform(vector3D(1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
 
 	while (this->window->IsOpen())

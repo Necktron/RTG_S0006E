@@ -37,17 +37,17 @@ uniform sampler2D testTex;
 uniform vec4 u_Color;
 uniform sampler2D u_Texture;
 
-const vec3 lightOrigin = vec3(5.0f, 5.0f, 3.0f);
-const vec3 ambientColor = vec3(0.1f, 0.1f, 0.1f);
-const vec3 diffuseColor = vec3(0.1f, 0.1f, 0.1f);
-const vec3 specColor = vec3(0.1f, 0.1f, 0.1f);
-const float shiny = 22.0f;
+uniform vec3 u_LightOrigin;
+uniform vec3 u_AmbientColor;
+uniform vec3 u_DiffuseColor;
+uniform vec3 u_SpecColor;
+const float shiny = 10.0f;
 const float screenGamma = 2.2f;
 
 void main()
 {
 	vec3 normal = normalize(v_NormalInterp);
-	vec3 lightDirection = normalize(lightOrigin - v_VertPos);
+	vec3 lightDirection = normalize(u_LightOrigin - v_VertPos);
 
 	float lambertian = max(dot(lightDirection, normal), 0.0f);
 	float specular = 0.0f;
@@ -62,7 +62,7 @@ void main()
 	}
 
 	vec3 col = texture(testTex, vec2(v_TexCoord.x, 1.0f - v_TexCoord.y)).rgb;
-	vec3 colorLinear = (ambientColor + lambertian * diffuseColor + specular * specColor) * col;
+	vec3 colorLinear = (u_AmbientColor + lambertian * u_DiffuseColor + specular * u_SpecColor) * col;
 
 	vec3 colorGammaCorrected = pow(colorLinear, vec3(1.0 / screenGamma));
 

@@ -2,8 +2,11 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <sstream>
 #include <fstream>
 #include <iostream>
+#include <algorithm>
+#include "config.h"
 #include "core/app.h"
 #include "resources/mathLibrary/Vector3D.h";
 #include "resources/mathLibrary/Vector2D.h";
@@ -23,54 +26,39 @@ class Mesh
 			QUAD = 1,
 			CUBE = 2,
 			CAT = 3,
-			RIO = 4
+			STOOL = 4,
+			BOX = 5
 		};
 
-		struct vertex {
+		struct Vertex {
 			vector3D pos;
-			vector2D uv;
+			vector2D texCoord;
 			vector3D norm;
 		};
 
-		struct uv {
-			float U, V;
+		//A vertex in a face with pos, texCoord and norm
+		struct FaceSetup
+		{
+			int pos;
+			int texCoord;
+			int norm;
 		};
 
-		struct normal {
-			float X, Y, Z;
-		};
-
-		struct faceVertex {
-			int pos, uv, norm;
-		};
-
-		struct Face {
+		struct Face
+		{
 			vector<unsigned int> verts;
 		};
-
-		typedef vector<faceVertex> faceCalculations;
-		vector<faceCalculations> faces;
-		vector<vertex> vboV;
-		vector<unsigned int> indices;
-		vector<Face> meshFaces;
 
 		OBJ meshOBJ = OBJ::NONE;
 
 		void Triangle(); //Set triangle
 		void Quad(); //Set quad
 		void Cube(); //Set cube
-		void CustomMesh(const char* filepath); //Set cube
-		string FaceValidation(int pos, int uv, int norm);
+		void CustomMesh(const char* filepath); //Set OBJ
+		string FaceKey(int pos, int uv, int norm);
 
 		void Bind();
 		void Unbind();
-		
-		//TEMP
-		vector<vector3D> temp_vertices;
-		vector<vector2D> temp_uvies;
-		vector<vector3D> temp_normals;
-		
-		map<string, int> vertexMap;
 
 		bool m_DEBUG; //Debug bool for matrix values of the mesh
 
@@ -79,6 +67,15 @@ class Mesh
 		unsigned int vao; //VAO
 		unsigned int ibo; //IBO
 
-	private:
-		string file;
+		vector<Vertex> vertices;
+		vector<unsigned int> indices;
+
+		vector<vector3D> temp_vertices;
+		vector<vector2D> temp_uvs;
+		vector<vector3D> temp_normals;
+
+		typedef vector<FaceSetup> Faces;
+		map<string, int> vertexMap;
+		vector<Face> meshFaces;
+		vector<Faces> faces;
 }; // namespace Example

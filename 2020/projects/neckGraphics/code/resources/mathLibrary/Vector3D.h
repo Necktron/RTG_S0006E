@@ -29,6 +29,7 @@ public:
 	vector3D operator=(const vector3D &other);
 	bool operator==(vector3D &other);
 	bool operator!=(vector3D &other);
+	float operator[](int pos);
 
 	//Functions
 	vector3D vecAdd(vector3D &other);
@@ -256,7 +257,12 @@ inline bool vector3D::operator!=(vector3D &other)
 //Operator =
 inline vector3D vector3D::operator=(const vector3D &other)
 {
-	for (int i = 0; i < 4; ++i)
+	for (int i = 0; i < 4; i++)
 		vecOrigin[i] = other.vecOrigin[i];
 	return *this;
+}
+
+inline float vector3D::operator[](int pos)
+{
+	return vecOrigin[pos];
 }

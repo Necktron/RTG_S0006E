@@ -16,6 +16,10 @@ void Light::GetPointLight()
 	Lighting lightOutput;
 	PointLight lightSource;
 
+	lightSource.diffuseIntensity = 1.0f;
+	lightSource.sourcePos = vector3D(0.0f, 10.0f, 0.0f);
+	targetPos = vector3D(0.0f, 0.1f, 0.0f);
+
 	//Unless the light
 	if (lightSource.diffuseIntensity > 0)
 	{

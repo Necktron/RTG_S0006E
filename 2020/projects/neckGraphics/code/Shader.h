@@ -37,6 +37,7 @@ public:
 	void SetupShader(const std::string& filepath); //Parse and compile a shader
 	void SetUniform1i(const std::string name, int value);
 	void SetUniform1f(const std::string name, float value);
+	void SetUniform3f(const std::string name, float v0, float v1, float v2);
 	void SetUniform4f(const std::string name, float v0, float v1, float v2, float v3);
 	void SetUniformMat4fv(const std::string name, const matrix3D& matrix);
 

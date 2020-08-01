@@ -1,7 +1,5 @@
 #define LMB 0x0001
 #define RMB 0x0002
-#define M4 0x0006
-#define M5 0x0005
 
 #include "Renderer.h"
 
@@ -102,6 +100,19 @@ void Renderer::Update()
 		std::cout << "                " << std::endl;
 	}
 
+	if (shaderPTR->shaderEFK == Shader::ShaderEffect::PULSE_COLOR)
+		shaderPTR->SetUniform4f("u_Color", r, 0.0f, 0.0f, 1.0f);
+
+	if (shaderPTR->shaderEFK == Shader::ShaderEffect::BLINN_PHONG)
+	{
+		g += 0.1f;
+
+		shaderPTR->SetUniform3f("u_LightOrigin", 0.0f, 0.0f, 0.0f);
+		shaderPTR->SetUniform3f("u_AmbientColor", 0.1f, 0.1f, 0.1f);
+		shaderPTR->SetUniform3f("u_DiffuseColor", 0.1f, 0.1f, 0.1f);
+		shaderPTR->SetUniform3f("u_SpecColor", 0.3f, 0.3f, 0.3f);
+	}
+
 	//Setup the vital parts for MVP, Model + View + Projection
 	SetView(vector3D(camX, camY, camZ), vector3D(camX - camTargetX, camY - camTargetY, camZ - camTargetZ));
 	SetTransform(vector3D(initPosX + moveX, initPosY + moveY, initPosZ + moveZ), vector3D(initScaleX, initScaleY, initScaleZ), vector3D(initRotX + rotX, initRotY + rotY, initRotZ + rotZ));
@@ -155,9 +166,19 @@ void Renderer::SetMesh(Mesh::OBJ obj)
 			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/cat.obj");
 			break;
 
-		//RIO
+		//Stool
 		case 4:
-			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/ChristRio.obj");
+			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/Stool.obj");
+			break;
+
+		//CUBE
+		case 5:
+			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/cubeLow.obj");
+			break;
+
+		//SARA CUBE
+		case 6:
+			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/saraCube.obj");
 			break;
 	}
 
@@ -197,6 +218,7 @@ void Renderer::SetTexture(Texture::TextureImage texture)
 			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/InstaTransparent.png");
 			break;
 
+		//CAT
 		case 6:
 			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/cat_diff.tga");
 			break;
@@ -213,8 +235,14 @@ void Renderer::SetTexture(Texture::TextureImage texture)
 			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/Micke.jpg");
 			break;
 
+		//BOX
 		case 10:
-			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/figure_diffuse.jpg");
+			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/cubeLow.jpg");
+			break;
+
+		//SARACUBE
+		case 11:
+			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/saraCubeUV2.tga");
 			break;
 	}
 
@@ -253,6 +281,8 @@ void Renderer::SetShader(Shader::ShaderEffect shader)
 	{
 		shaderPTR->SetUniform1i("u_Texture", 0);
 	}
+
+	this->shaderPTR->shaderEFK = shader;
 }
 
 //Set a light source
@@ -393,10 +423,10 @@ void Renderer::Unbind()
 void Renderer::MouseScan()
 {
 	//CAM Z MOVEMENT
-	if (GetAsyncKeyState(M5) & 0x8000)
+	if (GetAsyncKeyState('E') & 0x8000)
 		camZ += 0.06f;
 
-	if (GetAsyncKeyState(M4) & 0x8000)
+	if (GetAsyncKeyState('Q') & 0x8000)
 		camZ -= 0.06f;
 
 	//ROTATION FOR MODEL
@@ -462,6 +492,12 @@ void Renderer::KeyboardScan()
 	if (GetAsyncKeyState('D') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
 		moveX += 0.1f;
 
+	if (GetAsyncKeyState('Q') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
+		moveZ -= 0.15f;
+
+	if (GetAsyncKeyState('E') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
+		moveZ += 0.1f;
+
 	//MOVE CAMERA IF RMB IS DOWN
 	if (GetAsyncKeyState('W') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
 		camY += 0.15f;
@@ -480,10 +516,10 @@ void Renderer::KeyboardScan()
 void Renderer::MouseScanCam()
 {
 	//CAM Z MOVEMENT
-	if (GetAsyncKeyState(M5) & 0x8000)
+	if (GetAsyncKeyState('E') & 0x8000)
 		camZ += 0.06f;
 
-	if (GetAsyncKeyState(M4) & 0x8000)
+	if (GetAsyncKeyState('Q') & 0x8000)
 		camZ -= 0.06f;
 
 	//ROTATION FOR CAMERA

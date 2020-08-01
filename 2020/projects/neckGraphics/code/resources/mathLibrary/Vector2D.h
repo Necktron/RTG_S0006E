@@ -43,7 +43,9 @@ class vector2D
 //Empty Constructor
 inline vector2D::vector2D()
 {
-
+	vecOrigin[0] = 0;
+	vecOrigin[1] = 0;
+	vecOrigin[2] = 1;
 }
 
 //Constructor with components

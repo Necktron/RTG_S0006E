@@ -7,6 +7,9 @@
     <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Mesh.cc">
       <Filter>neckGraphics</Filter>
     </ClCompile>
+    <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Rasterizer.cc">
+      <Filter>neckGraphics</Filter>
+    </ClCompile>
     <ClCompile Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Renderer.cc">
       <Filter>neckGraphics</Filter>
     </ClCompile>
@@ -28,6 +31,9 @@
       <Filter>neckGraphics</Filter>
     </ClInclude>
     <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Mesh.h">
+      <Filter>neckGraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Rasterizer.h">
       <Filter>neckGraphics</Filter>
     </ClInclude>
     <ClInclude Include="D:\GitHubUniversity\RTG_S0006E\RTG_S0006E\2020\projects\neckGraphics\code\Renderer.h">

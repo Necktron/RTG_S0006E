@@ -6,7 +6,7 @@
 #include <memory>
 #include <Windows.h>
 
-class Renderer
+class Rasterizer
 {
 public:
 	int window_Width;
@@ -16,7 +16,6 @@ public:
 	std::shared_ptr<Texture> texturePTR;
 	std::shared_ptr<Shader> shaderPTR;
 	std::shared_ptr<Light> lightPTR;
-	//std::shared_ptr<Rasterizer> rastPTR;
 
 	//Setup and handle
 	void Init(float resX, float resY, string name); //Init all components
@@ -43,66 +42,4 @@ public:
 	//Rendering
 	void Draw(); //Draw all data to the screen
 	void Clear() const; //Clear the screen from previous data
-
-private:
-	void Bind(); //Bind buffers for render
-	void Unbind(); //Unbind data so other Renderers can Bind() their data and spare memory
-
-	void MouseScan();
-	void KeyboardScan();
-
-	void MouseScanCam();
-	void KeyboardScanCam();
-
-	string renderName;
-
-	vector3D rotation;
-	matrix3D transform;
-	matrix3D view;
-	matrix3D projection;
-	matrix3D MVP;
-	float rot;
-	float rotSpeed;
-	float angleOfRot;
-	float incrementRGB;
-	float moveX;
-	float moveY;
-	float moveZ;
-	float rotX;
-	float rotY;
-	float rotZ;
-	float r;
-	float g;
-	float b;
-
-	float initPosX;
-	float initPosY;
-	float initPosZ;
-
-	float initScaleX;
-	float initScaleY;
-	float initScaleZ;
-
-	float initRotX;
-	float initRotY;
-	float initRotZ;
-
-	float FOV;
-	float camX;
-	float camY;
-	float camZ;
-
-	float camTargetX;
-	float camTargetY;
-	float camTargetZ;
-
-	bool LMB_DOWN;
-	bool RMB_DOWN;
-	float oldRotX;
-	float oldRotY;
-	float oldCamTargetX;
-	float oldCamTargetY;
-	float oldCamTargetZ;
-	POINT mousePosOrigin;
-	POINT mousePosCurrent;
 };
