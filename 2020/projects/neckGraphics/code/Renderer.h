@@ -65,15 +65,18 @@ private:
 	float rotSpeed;
 	float angleOfRot;
 	float incrementRGB;
-	float moveX;
-	float moveY;
-	float moveZ;
-	float rotX;
-	float rotY;
-	float rotZ;
 	float r;
 	float g;
 	float b;
+
+	//MODEL
+	float moveX;
+	float moveY;
+	float moveZ;
+
+	float rotX;
+	float rotY;
+	float rotZ;
 
 	float initPosX;
 	float initPosY;
@@ -87,6 +90,7 @@ private:
 	float initRotY;
 	float initRotZ;
 
+	//CAMERA
 	float FOV;
 	float camX;
 	float camY;
@@ -96,8 +100,17 @@ private:
 	float camTargetY;
 	float camTargetZ;
 
+	//LIGHT
+	float lightX;
+	float lightY;
+	float lightZ;
+
+	float lightAmbientIntensity;
+	float lightDiffuseIntensity;
+
 	bool LMB_DOWN;
 	bool RMB_DOWN;
+	bool MMB_DOWN;
 	float oldRotX;
 	float oldRotY;
 	float oldCamTargetX;

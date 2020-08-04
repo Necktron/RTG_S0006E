@@ -17,10 +17,10 @@ void Mesh::Triangle()
 {
 	float pos[] =
 	{
-		//( x, y )
-		-0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0,
-		0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f,
-		0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f
+		//( x, y, z, R, G, B, A, normX, normY, normZ )
+		-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+		0.0f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+		0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f
 	};
 
 	unsigned int index[] =
@@ -35,13 +35,15 @@ void Mesh::Triangle()
 	//Vertex Buffer Object, VBO
 	glGenBuffers(1, &this->vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
-	glBufferData(GL_ARRAY_BUFFER, 3 * 2 * sizeof(pos), pos, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
 
 	//Vertex Assosiation Object, VAO
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 6, 0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 6, (GLvoid*)(sizeof(float) * 2));
+	glEnableVertexAttribArray(2);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 10, 0);
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 10, (GLvoid*)(sizeof(float) * 3));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 10, (GLvoid*)(sizeof(float) * 7));
 
 	//Index Buffer Object, IBO
 	glGenBuffers(1, &this->ibo);
@@ -54,11 +56,11 @@ void Mesh::Quad()
 {
 	float pos[] =
 	{
-		//( x, y, textureA, textureB)
-		-0.5f, -0.5f, 0.0f, 0.0f,
-		0.5f, -0.5f, 1.0f, 0.0f,
-		0.5f, 0.5f, 1.0f, 1.0f,
-		-0.5f, 0.5f, 0.0f, 1.0f
+		//( x, y, z, textureA, textureB, norm)
+		-0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+		0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+		0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+		-0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f
 	};
 
 	unsigned int index[] =
@@ -71,16 +73,18 @@ void Mesh::Quad()
 	glGenVertexArrays(1, &this->vao);
 	glBindVertexArray(this->vao);
 
-	//Vertex Buffer Object, VBO
+	//Vertex Buffer
 	glGenBuffers(1, &this->vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
-	glBufferData(GL_ARRAY_BUFFER, 4 * 4 * sizeof(pos), pos, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
 
-	//Vertex Assosiation Object, VAO
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 4, 0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 4, (GLvoid*)(sizeof(float) * 2));
+	//Vertex Array Object, VAO
+	glEnableVertexAttribArray(0); //Pos
+	glEnableVertexAttribArray(1); //Texture
+	glEnableVertexAttribArray(2); //Normal
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, 0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (GLvoid*)(sizeof(float) * 3));
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (GLvoid*)(sizeof(float) * 5));
 
 	//Index Buffer Object, IBO
 	glGenBuffers(1, &this->ibo);
@@ -215,7 +219,7 @@ void Mesh::CustomMesh(const char* filepath)
 		else if (prefix == "vt")
 		{
 			ss >> tempVec2.vecOrigin[0] >> tempVec2.vecOrigin[1];
-			temp_uvs.push_back(tempVec2);
+			temp_texCoord.push_back(tempVec2);
 		}
 
 		//VERTEX NORMALS
@@ -231,7 +235,7 @@ void Mesh::CustomMesh(const char* filepath)
 			int C = 0;
 			int vertexCount = 0;
 
-			vector<unsigned int> vertexIndex, uvIndex, normalIndex;
+			vector<unsigned int> vertexIndex, texCoordIndex, normalIndex;
 
 			validation = count(line.begin(), line.end(), '/'); //Check how many / we got, if it's 6 it's a triangulated. 8 or poly
 
@@ -241,7 +245,7 @@ void Mesh::CustomMesh(const char* filepath)
 					vertexIndex.push_back(tempInt);
 
 				else if (C == 1)
-					uvIndex.push_back(tempInt);
+					texCoordIndex.push_back(tempInt);
 
 				else if (C == 2)
 					normalIndex.push_back(tempInt);
@@ -278,7 +282,7 @@ void Mesh::CustomMesh(const char* filepath)
 				FaceSetup A;
 
 				A.pos = vertexIndex[i] - 1;
-				A.texCoord = uvIndex[i] - 1;
+				A.texCoord = texCoordIndex[i] - 1;
 				A.norm = normalIndex[i] - 1;
 
 				faceVertexList.push_back(A);
@@ -325,16 +329,16 @@ void Mesh::CustomMesh(const char* filepath)
 		for (int j = 0; j < faces[i].size(); j++)
 		{
 			int pos = faces[i][j].pos;
-			int uv = faces[i][j].texCoord;
+			int texCoord = faces[i][j].texCoord;
 			int norm = faces[i][j].norm;
-			string key = this->FaceKey(pos, uv, norm);
+			string key = this->FaceKey(pos, texCoord, norm);
 
 			if (this->vertexMap.find(key) == this->vertexMap.end())
 			{
 				Vertex tempVertex;
 
 				tempVertex.pos = temp_vertices[pos];
-				tempVertex.texCoord = temp_uvs[uv];
+				tempVertex.texCoord = temp_texCoord[texCoord];
 				tempVertex.norm = temp_normals[norm];
 
 				this->vertexMap[key] = this->vertices.size();
@@ -352,9 +356,9 @@ void Mesh::CustomMesh(const char* filepath)
 	}
 
 	//Final mesh
-	for (auto i = 0; i < this->meshFaces.size(); i++)
+	for (int i = 0; i < this->meshFaces.size(); i++)
 	{
-		for (auto j = 1; j < this->meshFaces[i].verts.size() - 1; j++)
+		for (int j = 1; j < this->meshFaces[i].verts.size() - 1; j++)
 		{
 			this->indices.push_back(this->meshFaces[i].verts[0]);
 			this->indices.push_back(this->meshFaces[i].verts[j]);
@@ -376,9 +380,9 @@ void Mesh::CustomMesh(const char* filepath)
 	glEnableVertexAttribArray(0); //Pos
 	glEnableVertexAttribArray(1); //Texture
 	glEnableVertexAttribArray(2); //Normal
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 11, NULL);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 11, (GLvoid*)(sizeof(float) * 4));
-	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 11, (GLvoid*)(sizeof(float) * 7));
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, pos));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, texCoord));
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, norm));
 
 	//Index Buffer Object, IBO
 	glGenBuffers(1, &this->ibo);

@@ -28,7 +28,8 @@ class Mesh
 			CAT = 3,
 			STOOL = 4,
 			BOX = 5,
-			WINDMILL = 6
+			WINDMILL = 6,
+			PENGUIN = 7
 		};
 
 		struct Vertex {
@@ -72,7 +73,7 @@ class Mesh
 		vector<unsigned int> indices;
 
 		vector<vector3D> temp_vertices;
-		vector<vector2D> temp_uvs;
+		vector<vector2D> temp_texCoord;
 		vector<vector3D> temp_normals;
 
 		typedef vector<FaceSetup> Faces;

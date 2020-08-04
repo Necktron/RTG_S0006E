@@ -1,5 +1,6 @@
 #define LMB 0x0001
 #define RMB 0x0002
+#define MMB 0x0004
 
 #include "Renderer.h"
 
@@ -26,16 +27,21 @@ void Renderer::Init(float resX, float resY, string name)
 	r = 1.1f;
 	g = 0.0f;
 	b = 0.0f;
+	
+	//MODEL
 	initPosX = 0.0f;
 	initPosY = 0.0f;
 	initPosZ = 0.0f;
+	
 	initScaleX = 0.0f;
 	initScaleY = 0.0f;
 	initScaleZ = 0.0f;
+
 	initRotX = 0.0f;
 	initRotY = 0.0f;
 	initRotZ = 0.0f;
 
+	//CAMERA
 	camX = 0.0f;
 	camY = 0.0f;
 	camZ = 4.0f;
@@ -51,6 +57,14 @@ void Renderer::Init(float resX, float resY, string name)
 	oldCamTargetY = 0.0f;
 	oldCamTargetZ = 0.0f;
 
+	//LIGHT
+	lightX = 0.0f;
+	lightY = 0.0f;
+	lightZ = 0.0f;
+
+	lightAmbientIntensity = 0.0f;
+	lightDiffuseIntensity = 0.0f;
+
 	window_Width = resX;
 	window_Height = resY;
 
@@ -64,6 +78,7 @@ void Renderer::Init(float resX, float resY, string name)
 	meshPTR->m_DEBUG = false;
 	shaderPTR->m_DEBUG = false;
 	LMB_DOWN = false;
+	MMB_DOWN = false;
 	RMB_DOWN = false;
 }
 
@@ -103,19 +118,18 @@ void Renderer::Update()
 	if (shaderPTR->shaderEFK == Shader::ShaderEffect::PULSE_COLOR)
 		shaderPTR->SetUniform4f("u_Color", r, 0.0f, 0.0f, 1.0f);
 
-	if (shaderPTR->shaderEFK == Shader::ShaderEffect::BLINN_PHONG)
+	if (shaderPTR->shaderEFK == Shader::ShaderEffect::BLINN_PHONG && lightPTR->lightSource == Light::LightSource::POINT_LIGHT)
 	{
-		g += 0.1f;
-
-		shaderPTR->SetUniform3f("u_LightOrigin", 0.0f, 0.0f, 0.0f);
-		shaderPTR->SetUniform3f("u_AmbientColor", 0.1f, 0.1f, 0.1f);
-		shaderPTR->SetUniform3f("u_DiffuseColor", 0.1f, 0.1f, 0.1f);
-		shaderPTR->SetUniform3f("u_SpecColor", 0.3f, 0.3f, 0.3f);
+		shaderPTR->SetUniform3f("u_LightPos", lightPTR->currentLight.Position.vecOrigin[0], lightPTR->currentLight.Position.vecOrigin[1], lightPTR->currentLight.Position.vecOrigin[2]);
+		shaderPTR->SetUniform3f("u_CamPos", camX, camY, camZ);
+		shaderPTR->SetUniform3f("u_AmbientColor", lightPTR->currentLight.Ambient.vecOrigin[0], lightPTR->currentLight.Ambient.vecOrigin[1], lightPTR->currentLight.Ambient.vecOrigin[2]);
+		shaderPTR->SetUniform3f("u_DiffuseColor", lightPTR->currentLight.Diffuse.vecOrigin[0], lightPTR->currentLight.Diffuse.vecOrigin[1], lightPTR->currentLight.Diffuse.vecOrigin[2]);
+		shaderPTR->SetUniform3f("u_SpecularColor", lightPTR->currentLight.Specular.vecOrigin[0], lightPTR->currentLight.Specular.vecOrigin[1], lightPTR->currentLight.Specular.vecOrigin[2]);
 	}
 
 	//Setup the vital parts for MVP, Model + View + Projection
 	SetView(vector3D(camX, camY, camZ), vector3D(camX - camTargetX, camY - camTargetY, camZ - camTargetZ));
-	SetTransform(vector3D(initPosX + moveX, initPosY + moveY, initPosZ + moveZ), vector3D(initScaleX, initScaleY, initScaleZ), vector3D(initRotX + rotX, initRotY + rotY, initRotZ + rotZ));
+	SetTransform(vector3D(initPosX + moveX, initPosX + moveY, initPosZ + moveZ), vector3D(initScaleX, initScaleY, initScaleZ), vector3D(initRotX + rotX, initRotY + rotY, initRotZ + rotZ));
 	SetProjection(90.0f);
 
 	//Merge the matrixes to create MVP. It's now ready to be sent in to the shader
@@ -179,6 +193,11 @@ void Renderer::SetMesh(Mesh::OBJ obj)
 		//WINDMILL
 		case 6:
 			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/windmill.obj");
+			break;
+
+		//PENGUIN
+		case 7:
+			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/Penguin.obj");
 			break;
 	}
 
@@ -244,6 +263,11 @@ void Renderer::SetTexture(Texture::TextureImage texture)
 		case 11:
 			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/windmill.jpg");
 			break;
+
+		//WINDMILL
+		case 12:
+			texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/Penguin.png");
+			break;
 	}
 
 	this->texturePTR->textureImage = texture;
@@ -252,7 +276,7 @@ void Renderer::SetTexture(Texture::TextureImage texture)
 //Set shader from a specific path
 void Renderer::SetShader(Shader::ShaderEffect shader)
 {
-	std::cout << "[ SHADER FOR RENDER: " << renderName << " ]" << std::endl;
+	//std::cout << "[ SHADER FOR RENDER: " << renderName << " ]" << std::endl;
 
 	switch (int(shader))
 	{
@@ -297,7 +321,7 @@ void Renderer::SetLight(Light::LightSource lightsource)
 
 		//Point Light
 		case 0:
-			lightPTR->GetPointLight();
+			lightPTR->PointLight();
 			break;
 	}
 }
@@ -345,19 +369,30 @@ void Renderer::Draw()
 
 	Update();
 
-	//if(int(shaderPTR->shaderEFK) = )
-	//shaderPTR->SetUniform4f("u_Color", r, g, b, 1.0f);
-
 	shaderPTR->SetUniformMat4fv("u_MVP", MVP);
 	shaderPTR->SetUniform4f("u_Move", 0.0f, 0.0f, 0.0f, 1.0f);
 
-	//Custom mesh
-	if(int(meshPTR->meshOBJ) >= 3)
-		glDrawElements(GL_TRIANGLES, meshPTR->indices.size() * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
+	if(shaderPTR->shaderEFK == Shader::ShaderEffect::BLINN_PHONG)
+		shaderPTR->SetUniformMat4fv("u_Model", transform);
 
-	//Anything else
-	else
+	//Triangle
+	if (meshPTR->meshOBJ == Mesh::OBJ::TRIANGLE)
+		glDrawElements(GL_TRIANGLES, 3 * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
+
+	//Quad
+	else if (meshPTR->meshOBJ == Mesh::OBJ::QUAD)
+		glDrawElements(GL_TRIANGLES, 6 * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
+
+	//Cube
+	else if (meshPTR->meshOBJ == Mesh::OBJ::CUBE)
 		glDrawElements(GL_TRIANGLES, 36 * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
+
+	//Custom mesh
+	else if(int(meshPTR->meshOBJ) >= 3)
+		glDrawElements(GL_TRIANGLES, meshPTR->indices.size() * sizeof(unsigned int), GL_UNSIGNED_INT, 0);
+
+	else
+		cout << "No mesh assigned, nothing to render" << endl;
 
 	Unbind();
 }
@@ -422,13 +457,6 @@ void Renderer::Unbind()
 //Handle input form mouse, Everything
 void Renderer::MouseScan()
 {
-	//CAM Z MOVEMENT
-	if (GetAsyncKeyState('E') & 0x8000)
-		camZ += 0.06f;
-
-	if (GetAsyncKeyState('Q') & 0x8000)
-		camZ -= 0.06f;
-
 	//ROTATION FOR MODEL
 	if (GetAsyncKeyState(LMB) & 0x8000 && !LMB_DOWN)
 	{
@@ -474,42 +502,92 @@ void Renderer::MouseScan()
 
 	else
 		RMB_DOWN = false;
+
+	//MMB
+	if (GetAsyncKeyState(MMB) & 0x8000 && !MMB_DOWN)
+		MMB_DOWN = true;
+
+	else if(!(GetAsyncKeyState(MMB) & 0x8000) && MMB_DOWN)
+		MMB_DOWN = false;
 }
 
 //Handle input form keyboard, Everything
 void Renderer::KeyboardScan()
 {
-	//MOVE MODEL IF RMB IS NOT DOWN
-	if (GetAsyncKeyState('W') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
+	//MOVE MODEL IF LMB IS DOWN
+	if (GetAsyncKeyState('W') & 0x8000 && LMB_DOWN)
 		moveY += 0.15f;
 
-	if (GetAsyncKeyState('A') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
+	if (GetAsyncKeyState('A') & 0x8000 && LMB_DOWN)
 		moveX -= 0.1f;
 
-	if (GetAsyncKeyState('S') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
+	if (GetAsyncKeyState('S') & 0x8000 && LMB_DOWN)
 		moveY -= 0.15f;
 
-	if (GetAsyncKeyState('D') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
+	if (GetAsyncKeyState('D') & 0x8000 && LMB_DOWN)
 		moveX += 0.1f;
 
-	if (GetAsyncKeyState('Q') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
+	if (GetAsyncKeyState('Q') & 0x8000 && LMB_DOWN)
 		moveZ -= 0.15f;
 
-	if (GetAsyncKeyState('E') & 0x8000 && !(GetAsyncKeyState(RMB) & 0x8000))
+	if (GetAsyncKeyState('E') & 0x8000 && LMB_DOWN)
 		moveZ += 0.1f;
 
 	//MOVE CAMERA IF RMB IS DOWN
-	if (GetAsyncKeyState('W') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+	if (GetAsyncKeyState('W') & 0x8000 && RMB_DOWN)
 		camY += 0.15f;
 
-	if (GetAsyncKeyState('A') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+	if (GetAsyncKeyState('A') & 0x8000 && RMB_DOWN)
 		camX -= 0.1f;
 
-	if (GetAsyncKeyState('S') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+	if (GetAsyncKeyState('S') & 0x8000 && RMB_DOWN)
 		camY -= 0.15f;
 
-	if (GetAsyncKeyState('D') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+	if (GetAsyncKeyState('D') & 0x8000 && RMB_DOWN)
 		camX += 0.1f;
+
+	//MOVE LIGHT IF MMB IS DOWN
+	if (GetAsyncKeyState('W') & 0x8000 && MMB_DOWN)
+		lightPTR->currentLight.Position.vecOrigin[1] += 0.15f;
+
+	if (GetAsyncKeyState('A') & 0x8000 && MMB_DOWN)
+		lightPTR->currentLight.Position.vecOrigin[0] -= 0.1f;
+
+	if (GetAsyncKeyState('S') & 0x8000 && MMB_DOWN)
+		lightPTR->currentLight.Position.vecOrigin[1] -= 0.15f;
+
+	if (GetAsyncKeyState('D') & 0x8000 && MMB_DOWN)
+		lightPTR->currentLight.Position.vecOrigin[0] += 0.1f;
+
+	if (GetAsyncKeyState('Q') & 0x8000 && MMB_DOWN)
+		lightPTR->currentLight.Position.vecOrigin[2] -= 0.15f;
+
+	if (GetAsyncKeyState('E') & 0x8000 && MMB_DOWN)
+		lightPTR->currentLight.Position.vecOrigin[2] += 0.1f;
+
+	if (GetAsyncKeyState('I') & 0x8000 && MMB_DOWN)
+	{
+		lightPTR->currentLight.Ambient += 0.01f;
+		cout << "Ambient Light: " << lightPTR->currentLight.Ambient.vecOrigin[0] << endl;
+	}
+
+	if (GetAsyncKeyState('J') & 0x8000 && MMB_DOWN)
+	{
+		lightPTR->currentLight.Diffuse -= 0.01f;
+		cout << "Diffusee Light: " << lightPTR->currentLight.Diffuse.vecOrigin[0] << endl;
+	}
+
+	if (GetAsyncKeyState('K') & 0x8000 && MMB_DOWN)
+	{
+		lightPTR->currentLight.Ambient -= 0.01f;
+		cout << "Ambient Light: " << lightPTR->currentLight.Ambient.vecOrigin[0] << endl;
+	}
+
+	if (GetAsyncKeyState('L') & 0x8000 && MMB_DOWN)
+	{
+		lightPTR->currentLight.Diffuse += 0.01f;
+		cout << "Diffusee Light: " << lightPTR->currentLight.Diffuse.vecOrigin[0] << endl;
+	}
 }
 
 //Handle input form mouse to the camera
@@ -550,15 +628,15 @@ void Renderer::MouseScanCam()
 void Renderer::KeyboardScanCam()
 {
 	//MOVE CAMERA IF RMB IS DOWN
-	if (GetAsyncKeyState('W') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+	if (GetAsyncKeyState('W') & 0x8000 && RMB_DOWN)
 		camY += 0.15f;
 
-	if (GetAsyncKeyState('A') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+	if (GetAsyncKeyState('A') & 0x8000 && RMB_DOWN)
 		camX -= 0.1f;
 
-	if (GetAsyncKeyState('S') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+	if (GetAsyncKeyState('S') & 0x8000 && RMB_DOWN)
 		camY -= 0.15f;
 
-	if (GetAsyncKeyState('D') & 0x8000 && GetAsyncKeyState(RMB) & 0x8000)
+	if (GetAsyncKeyState('D') & 0x8000 && RMB_DOWN)
 		camX += 0.1f;
 }

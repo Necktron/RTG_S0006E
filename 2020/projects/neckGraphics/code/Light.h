@@ -18,24 +18,16 @@ public:
 
 	struct Lighting
 	{
-		vector3D Diffuse;
-		vector3D Specular;
-	};
-
-	struct PointLight
-	{
-		vector3D sourcePos;
-		vector3D diffuseColor;
-		vector3D specularColor;
-		float  diffuseIntensity;
-		float  specularIntensity;
+		vector3D Position = vector3D(0.0f, 0.0f, 0.0f);;
+		vector3D Ambient = vector3D(0.1f, 0.1f, 0.1f);;
+		vector3D Diffuse = vector3D(0.0f, 0.0f, 0.0f);;
+		vector3D Specular = vector3D(0.0f, 0.0f, 0.0f);
+		float AmbientIntensity = 0.1f;
+		float DiffuseIntensity = 0.1f;
 	};
 
 	LightSource lightSource = LightSource::NONE;
+	Lighting currentLight;
 
-	void GetPointLight();
-
-	vector3D targetPos;
-	vector3D viewDirection;
-	vector3D normal;
+	void PointLight();
 };

@@ -26,7 +26,8 @@ public:
 		LAGER = 8,
 		MICKE = 9,
 		BOX = 10,
-		WINDMILL = 11
+		WINDMILL = 11,
+		PENGUIN = 12
 	};
 
 	TextureImage textureImage = TextureImage::NONE;

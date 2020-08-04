@@ -42,15 +42,10 @@ ExampleApp::Open()
 
 	this->window->SetSize(resolution[0], resolution[1]);
 
-	/*window->SetKeyPressFunction([this](int32, int32, int32, int32)
-	{
-		this->window->Close();
-	});*/
-
 	if (this->window->Open())
 	{
 		// set clear color to gray
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 		Shader::ShaderProgramSource source;
 
 		//glEnable(GL_BLEND);
@@ -64,13 +59,13 @@ ExampleApp::Open()
 		renderInstanceA.shaderPTR->m_DEBUG = true;
 
 		//Setup mesh with VBO, VAO and IBO
-		renderInstanceA.SetMesh(Mesh::OBJ::WINDMILL);
+		renderInstanceA.SetMesh(Mesh::OBJ::PENGUIN);
 
 		//Select a shader, ( You must know what shader makes what effects )
-		renderInstanceA.SetShader(Shader::ShaderEffect::STATIC_RAINBOW);
+		renderInstanceA.SetShader(Shader::ShaderEffect::BLINN_PHONG);
 
 		//Select a texture, we must make sure we got a shader that support textures above
-		renderInstanceA.SetTexture(Texture::TextureImage::CAT);
+		renderInstanceA.SetTexture(Texture::TextureImage::PENGUIN);
 
 		//Select a light source
 		renderInstanceA.SetLight(Light::LightSource::POINT_LIGHT);
@@ -79,8 +74,8 @@ ExampleApp::Open()
 		renderInstanceB.Init(resolution[0], resolution[1], "Instance B");
 		renderInstanceB.shaderPTR->m_DEBUG = true;
 		renderInstanceB.SetMesh(Mesh::OBJ::CUBE);
-		renderInstanceB.SetShader(Shader::ShaderEffect::IMAGE_TEXTURE);
-		renderInstanceB.SetTexture(Texture::TextureImage::MICKE);
+		renderInstanceB.SetShader(Shader::ShaderEffect::BLINN_PHONG);
+		renderInstanceB.SetTexture(Texture::TextureImage::KOREAN_FLAG);
 
 		return true;
 
@@ -94,22 +89,22 @@ ExampleApp::Open()
 void
 ExampleApp::Run()
 {
-	renderInstanceA.SetStartTransform(vector3D(0.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
-	renderInstanceB.SetStartTransform(vector3D(1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
+	renderInstanceA.SetStartTransform(vector3D(0.0f, 0.0f, 0.0f), vector3D(5.0f, 5.0f, 5.0f), vector3D(0.0f, 0.0f, 0.0f));
+	renderInstanceB.SetStartTransform(vector3D(2.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(30.0f, -25.0f, 0.0f));
 
 	while (this->window->IsOpen())
 	{
 		//CLEAR
 		renderInstanceA.Clear();
-		//renderInstanceB.Clear();
+		renderInstanceB.Clear();
 
 		//INPUT
 		renderInstanceA.InputScan();
-		//renderInstanceB.InputScanOnlyCamera();
+		renderInstanceB.InputScanOnlyCamera();
 
 		//DRAW
 		renderInstanceA.Draw();
-		//renderInstanceB.Draw();
+		renderInstanceB.Draw();
 
 		this->window->Update();
 

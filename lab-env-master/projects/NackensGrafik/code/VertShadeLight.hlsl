@@ -20,6 +20,8 @@ void main()
 	normalInterp = normalize(vec3(matrix * inputNormal));
 }
 
+//FRAGMENT
+
 #version 430
 layout(location = 0) out vec4 Color;
 in vec2 texCoord;

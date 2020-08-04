@@ -22,6 +22,8 @@ public:
 
 	//Operators
 	float operator* (const vector3D &other);
+	vector3D operator+=(float);
+	vector3D operator-=(float);
 	vector3D operator*(float);
 	vector3D operator/(const float);
 	vector3D operator+(vector3D other);
@@ -200,6 +202,24 @@ inline float vector3D::operator*(const vector3D &other)
 	return(this->vecOrigin[0] * other.vecOrigin[0]) + (this->vecOrigin[1] * other.vecOrigin[1]) + (this->vecOrigin[2] * other.vecOrigin[2]);
 }
 
+//Opertaor + for entire vector with a float
+inline vector3D vector3D::operator+=(float number)
+{
+	this->vecOrigin[0] += number;
+	this->vecOrigin[1] += number;
+	this->vecOrigin[2] += number;
+	return *this;
+}
+
+//Opertaor + for entire vector with a float
+inline vector3D vector3D::operator-=(float number)
+{
+	this->vecOrigin[0] -= number;
+	this->vecOrigin[1] -= number;
+	this->vecOrigin[2] -= number;
+	return *this;
+}
+
 //Operator *
 inline vector3D vector3D::operator*(float x)
 {
@@ -218,7 +238,7 @@ inline vector3D vector3D::operator/(float x)
 	return *this;
 }
 
-//Operator +
+//Operator + for vector on vector
 inline vector3D vector3D::operator+(vector3D other)
 {
 	vector3D addOp(0, 0, 0);
