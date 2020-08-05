@@ -8,12 +8,16 @@
 void Renderer::Init(float resX, float resY, string name)
 {
 	renderName = name;
+	controlAccess = false;
 
 	meshPTR = std::make_shared<Mesh>();
 	shaderPTR = std::make_shared<Shader>();
 	texturePTR = std::make_shared<Texture>();
 	lightPTR = std::make_shared<Light>();
 
+	r = 1.1f;
+	g = 0.0f;
+	b = 0.0f;
 	rot = 0.0f;
 	rotSpeed = 1.0f;
 	angleOfRot = 0.0f;
@@ -24,9 +28,6 @@ void Renderer::Init(float resX, float resY, string name)
 	moveX = 0.0f;
 	moveY = 0.0f;
 	moveZ = 0.0f;
-	r = 1.1f;
-	g = 0.0f;
-	b = 0.0f;
 	
 	//MODEL
 	initPosX = 0.0f;
@@ -52,18 +53,22 @@ void Renderer::Init(float resX, float resY, string name)
 
 	oldRotX = 0.0f;
 	oldRotY = 0.0f;
-
-	oldCamTargetX = 0.0f;
-	oldCamTargetY = 0.0f;
+	oldCamTargetX  = 0.0f;
+	oldCamTargetY  = 0.0f;
 	oldCamTargetZ = 0.0f;
 
 	//LIGHT
+	//Pos
 	lightX = 0.0f;
 	lightY = 0.0f;
 	lightZ = 0.0f;
 
+	//Intensity
 	lightAmbientIntensity = 0.0f;
 	lightDiffuseIntensity = 0.0f;
+
+	//Color related
+	colorCounter = 0;
 
 	window_Width = resX;
 	window_Height = resY;
@@ -80,6 +85,7 @@ void Renderer::Init(float resX, float resY, string name)
 	LMB_DOWN = false;
 	MMB_DOWN = false;
 	RMB_DOWN = false;
+	C_DOWN = false;
 }
 
 //Update values for color anim, rot, etc
@@ -125,6 +131,9 @@ void Renderer::Update()
 		shaderPTR->SetUniform3f("u_AmbientColor", lightPTR->currentLight.Ambient.vecOrigin[0], lightPTR->currentLight.Ambient.vecOrigin[1], lightPTR->currentLight.Ambient.vecOrigin[2]);
 		shaderPTR->SetUniform3f("u_DiffuseColor", lightPTR->currentLight.Diffuse.vecOrigin[0], lightPTR->currentLight.Diffuse.vecOrigin[1], lightPTR->currentLight.Diffuse.vecOrigin[2]);
 		shaderPTR->SetUniform3f("u_SpecularColor", lightPTR->currentLight.Specular.vecOrigin[0], lightPTR->currentLight.Specular.vecOrigin[1], lightPTR->currentLight.Specular.vecOrigin[2]);
+		shaderPTR->SetUniform1f("u_AmbientIntensity", lightPTR->currentLight.AmbientIntensity);
+		shaderPTR->SetUniform1f("u_DiffuseIntensity", lightPTR->currentLight.DiffuseIntensity);
+		shaderPTR->SetUniform1f("u_SpecularIntensity", lightPTR->currentLight.SpecularIntensity);
 	}
 
 	//Setup the vital parts for MVP, Model + View + Projection
@@ -139,8 +148,11 @@ void Renderer::Update()
 //Check for keyboard / mouse input overall
 void Renderer::InputScan()
 {
-	MouseScan();
-	KeyboardScan();
+	if(controlAccess)
+	{
+		MouseScan();
+		KeyboardScan();
+	}
 }
 
 //Check for keyboard / mouse input, specifically for camera commands
@@ -276,7 +288,7 @@ void Renderer::SetTexture(Texture::TextureImage texture)
 //Set shader from a specific path
 void Renderer::SetShader(Shader::ShaderEffect shader)
 {
-	//std::cout << "[ SHADER FOR RENDER: " << renderName << " ]" << std::endl;
+	std::cout << "[ SHADER FOR RENDER: " << renderName << " ]" << std::endl;
 
 	switch (int(shader))
 	{
@@ -565,29 +577,99 @@ void Renderer::KeyboardScan()
 	if (GetAsyncKeyState('E') & 0x8000 && MMB_DOWN)
 		lightPTR->currentLight.Position.vecOrigin[2] += 0.1f;
 
+	//SET DIFFUSE AND AMBIENT INTENSITY
 	if (GetAsyncKeyState('I') & 0x8000 && MMB_DOWN)
 	{
-		lightPTR->currentLight.Ambient += 0.01f;
-		cout << "Ambient Light: " << lightPTR->currentLight.Ambient.vecOrigin[0] << endl;
+		if (lightPTR->currentLight.AmbientIntensity < 1.0f)
+		{
+			lightPTR->currentLight.AmbientIntensity += 0.01f;
+			cout << "Ambient Intensity: " << lightPTR->currentLight.AmbientIntensity << endl;
+		}
 	}
 
 	if (GetAsyncKeyState('J') & 0x8000 && MMB_DOWN)
 	{
-		lightPTR->currentLight.Diffuse -= 0.01f;
-		cout << "Diffusee Light: " << lightPTR->currentLight.Diffuse.vecOrigin[0] << endl;
+		if (lightPTR->currentLight.DiffuseIntensity > 0.0f)
+		{
+			lightPTR->currentLight.DiffuseIntensity -= 0.01f;
+			cout << "Diffusee Intensity: " << lightPTR->currentLight.DiffuseIntensity << endl;
+		}
 	}
 
 	if (GetAsyncKeyState('K') & 0x8000 && MMB_DOWN)
 	{
-		lightPTR->currentLight.Ambient -= 0.01f;
-		cout << "Ambient Light: " << lightPTR->currentLight.Ambient.vecOrigin[0] << endl;
+		if (lightPTR->currentLight.AmbientIntensity > 0.0f)
+		{
+			lightPTR->currentLight.AmbientIntensity -= 0.01f;
+			cout << "Ambient Intensity: " << lightPTR->currentLight.AmbientIntensity << endl;
+		}
 	}
 
 	if (GetAsyncKeyState('L') & 0x8000 && MMB_DOWN)
 	{
-		lightPTR->currentLight.Diffuse += 0.01f;
-		cout << "Diffusee Light: " << lightPTR->currentLight.Diffuse.vecOrigin[0] << endl;
+		if (lightPTR->currentLight.DiffuseIntensity < 1.0f)
+		{
+			lightPTR->currentLight.DiffuseIntensity += 0.01f;
+			cout << "Diffusee Intensity: " << lightPTR->currentLight.DiffuseIntensity << endl;
+		}
 	}
+
+	//SET SPECULAR INTENSITY
+	if (GetAsyncKeyState('Z') & 0x8000 && MMB_DOWN)
+	{
+		if (lightPTR->currentLight.SpecularIntensity > 0.0f)
+		{
+			lightPTR->currentLight.SpecularIntensity -= 0.01f;
+			cout << "Specular Intensity: " << lightPTR->currentLight.SpecularIntensity << endl;
+		}
+	}
+
+	if (GetAsyncKeyState('X') & 0x8000 && MMB_DOWN)
+	{
+		if (lightPTR->currentLight.SpecularIntensity < 1.0f)
+		{
+			lightPTR->currentLight.SpecularIntensity += 0.01f;
+			cout << "Specular Intensity: " << lightPTR->currentLight.SpecularIntensity << endl;
+		}
+	}
+
+	//SWITCH COLOR
+	if (GetAsyncKeyState('C') < 0 && MMB_DOWN && !C_DOWN)
+	{
+		switch (colorCounter)
+		{
+			//RED
+			case 0:
+				lightPTR->currentLight.Diffuse.vecOrigin[0] = 0.3f;
+				lightPTR->currentLight.Diffuse.vecOrigin[1] = 0.0f;
+				lightPTR->currentLight.Diffuse.vecOrigin[2] = 0.0f;
+				break;
+
+			//GREEN
+			case 1:
+				lightPTR->currentLight.Diffuse.vecOrigin[0] = 0.0f;
+				lightPTR->currentLight.Diffuse.vecOrigin[1] = 0.3f;
+				lightPTR->currentLight.Diffuse.vecOrigin[2] = 0.0f;
+				break;
+
+			//BLUE
+			case 2:
+				lightPTR->currentLight.Diffuse.vecOrigin[0] = 0.0f;
+				lightPTR->currentLight.Diffuse.vecOrigin[1] = 0.0f;
+				lightPTR->currentLight.Diffuse.vecOrigin[2] = 0.3f;
+				break;
+		}
+
+		colorCounter++;
+
+		if (colorCounter > 2)
+			colorCounter = 0;
+
+		C_DOWN = true;
+	}
+
+	if (GetAsyncKeyState('C') == 0 && C_DOWN)
+		C_DOWN = false;
 }
 
 //Handle input form mouse to the camera

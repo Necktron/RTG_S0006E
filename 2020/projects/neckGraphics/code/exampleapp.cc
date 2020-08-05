@@ -45,7 +45,7 @@ ExampleApp::Open()
 	if (this->window->Open())
 	{
 		// set clear color to gray
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		Shader::ShaderProgramSource source;
 
 		//glEnable(GL_BLEND);
@@ -76,6 +76,7 @@ ExampleApp::Open()
 		renderInstanceB.SetMesh(Mesh::OBJ::CUBE);
 		renderInstanceB.SetShader(Shader::ShaderEffect::BLINN_PHONG);
 		renderInstanceB.SetTexture(Texture::TextureImage::KOREAN_FLAG);
+		renderInstanceB.SetLight(Light::LightSource::POINT_LIGHT);
 
 		return true;
 
@@ -89,8 +90,12 @@ ExampleApp::Open()
 void
 ExampleApp::Run()
 {
+	bool switchingControl = false;
+
 	renderInstanceA.SetStartTransform(vector3D(0.0f, 0.0f, 0.0f), vector3D(5.0f, 5.0f, 5.0f), vector3D(0.0f, 0.0f, 0.0f));
 	renderInstanceB.SetStartTransform(vector3D(2.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(30.0f, -25.0f, 0.0f));
+
+	renderInstanceA.controlAccess = true;
 
 	while (this->window->IsOpen())
 	{
@@ -100,7 +105,29 @@ ExampleApp::Run()
 
 		//INPUT
 		renderInstanceA.InputScan();
-		renderInstanceB.InputScanOnlyCamera();
+		renderInstanceB.InputScan();
+
+		//Not very modular, but it works!
+		//Switch control between renderInstanceA and B
+		if (GetAsyncKeyState('B') < 0 && !switchingControl)
+		{
+			if (renderInstanceA.controlAccess == true)
+			{
+				renderInstanceA.controlAccess = false;
+				renderInstanceB.controlAccess = true;
+			}
+
+			else if (renderInstanceB.controlAccess == true)
+			{
+				renderInstanceA.controlAccess = true;
+				renderInstanceB.controlAccess = false;
+			}
+
+			switchingControl = true;
+		}
+
+		if (GetAsyncKeyState('B') == 0 && switchingControl)
+			switchingControl = false;
 
 		//DRAW
 		renderInstanceA.Draw();

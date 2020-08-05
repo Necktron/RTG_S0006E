@@ -18,12 +18,13 @@ public:
 
 	struct Lighting
 	{
-		vector3D Position = vector3D(0.0f, 0.0f, 0.0f);;
-		vector3D Ambient = vector3D(0.1f, 0.1f, 0.1f);;
-		vector3D Diffuse = vector3D(0.0f, 0.0f, 0.0f);;
-		vector3D Specular = vector3D(0.0f, 0.0f, 0.0f);
-		float AmbientIntensity = 0.1f;
-		float DiffuseIntensity = 0.1f;
+		vector3D Position;
+		vector3D Ambient;
+		vector3D Diffuse;
+		vector3D Specular;
+		float AmbientIntensity;
+		float DiffuseIntensity;
+		float SpecularIntensity;
 	};
 
 	LightSource lightSource = LightSource::NONE;

@@ -12,6 +12,8 @@ public:
 	int window_Width;
 	int window_Height;
 
+	bool controlAccess;
+
 	std::shared_ptr<Mesh> meshPTR;
 	std::shared_ptr<Texture> texturePTR;
 	std::shared_ptr<Shader> shaderPTR;
@@ -108,9 +110,12 @@ private:
 	float lightAmbientIntensity;
 	float lightDiffuseIntensity;
 
+	int colorCounter;
+
 	bool LMB_DOWN;
 	bool RMB_DOWN;
 	bool MMB_DOWN;
+	bool C_DOWN;
 	float oldRotX;
 	float oldRotY;
 	float oldCamTargetX;
