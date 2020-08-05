@@ -9,6 +9,7 @@ void Renderer::Init(float resX, float resY, string name)
 {
 	renderName = name;
 	controlAccess = false;
+	rasterizerOBJ = false;
 
 	meshPTR = std::make_shared<Mesh>();
 	shaderPTR = std::make_shared<Shader>();

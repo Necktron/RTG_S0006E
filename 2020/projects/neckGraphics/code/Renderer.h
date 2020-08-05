@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "Shader.h"
 #include "Light.h"
+#include "Rasterizer.h"
 #include <memory>
 #include <Windows.h>
 
@@ -13,12 +14,13 @@ public:
 	int window_Height;
 
 	bool controlAccess;
+	bool rasterizerOBJ;
 
 	std::shared_ptr<Mesh> meshPTR;
 	std::shared_ptr<Texture> texturePTR;
 	std::shared_ptr<Shader> shaderPTR;
 	std::shared_ptr<Light> lightPTR;
-	//std::shared_ptr<Rasterizer> rastPTR;
+	std::shared_ptr<Rasterizer> rastPTR;
 
 	//Setup and handle
 	void Init(float resX, float resY, string name); //Init all components

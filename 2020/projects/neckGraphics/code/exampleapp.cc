@@ -59,13 +59,13 @@ ExampleApp::Open()
 		renderInstanceA.shaderPTR->m_DEBUG = true;
 
 		//Setup mesh with VBO, VAO and IBO
-		renderInstanceA.SetMesh(Mesh::OBJ::PENGUIN);
+		renderInstanceA.SetMesh(Mesh::OBJ::CUBE);
 
 		//Select a shader, ( You must know what shader makes what effects )
 		renderInstanceA.SetShader(Shader::ShaderEffect::BLINN_PHONG);
 
 		//Select a texture, we must make sure we got a shader that support textures above
-		renderInstanceA.SetTexture(Texture::TextureImage::PENGUIN);
+		renderInstanceA.SetTexture(Texture::TextureImage::IKEA);
 
 		//Select a light source
 		renderInstanceA.SetLight(Light::LightSource::POINT_LIGHT);
@@ -92,7 +92,7 @@ ExampleApp::Run()
 {
 	bool switchingControl = false;
 
-	renderInstanceA.SetStartTransform(vector3D(0.0f, 0.0f, 0.0f), vector3D(5.0f, 5.0f, 5.0f), vector3D(0.0f, 0.0f, 0.0f));
+	renderInstanceA.SetStartTransform(vector3D(-2.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(20.0f, 0.0f, 10.0f));
 	renderInstanceB.SetStartTransform(vector3D(2.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(30.0f, -25.0f, 0.0f));
 
 	renderInstanceA.controlAccess = true;

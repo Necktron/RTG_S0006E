@@ -6,6 +6,13 @@
 #include <memory>
 #include <Windows.h>
 
+/*
+	SOURCES OF GUIDES AND INFO FOR RASTERIZER:
+		- FBO: https://www.khronos.org/opengl/wiki/Framebuffer_Object
+		- LAMBDA FUNCTIONS: https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=vs-2019
+
+*/
+
 class Rasterizer
 {
 public:
@@ -17,29 +24,27 @@ public:
 	std::shared_ptr<Shader> shaderPTR;
 	std::shared_ptr<Light> lightPTR;
 
-	//Setup and handle
-	void Init(float resX, float resY, string name); //Init all components
-	void Update(); //Update values for color anim, rot, etc
-	void InputScan();
-	void InputScanOnlyCamera();
+	//Set the Rasterizers Mesh buffer with data, triangle with texture and light applied 
+	void SetupRasterizerBuffer(); //Mesh + Texture + Shader + Light source
+	void SetupFrameBuffer(); // Setup FBO with arbitrary dimensions
+	void GetFrameBufferPointer(); //Retrieve a pointer to the FBO
+	void GetFrameBufferSize(); //Retrieve the size of the FBO
+	void SetShader(/* INSERT LAMBDA FUNCTION */); //Set vertex and pixel shader by lambda function as argument
+	void SetupMVP(); //Set MVP matrix for rasterizer object
+	void SetupTexture(); //Set a texture to the triangle
+	void IndexToFrame(/* INSERT IBO AS ARGUMENT */); //Write data from IBO to FBO
+	void Rasterize(); // Final rasterizing
+	void RasterTriangle( /* 3x vertecies with pos, tex, norm */);
 
-	//Set functions
-	void SetMesh(Mesh::OBJ); //Set a mesh from the pre-defined types, triangle / quad / cube / custom
-	void SetTexture(Texture::TextureImage); //Set texture from a specific path
-	void SetShader(Shader::ShaderEffect); //Set shader from a specific path
-	void SetLight(Light::LightSource); //Set light source
-	void SetStartTransform(vector3D pos, vector3D scale, vector3D rot); //Set everything for the transform
-	void SetTransform(vector3D pos, vector3D scale, vector3D rot); //Set everything for the transform
-	void SetView(vector3D origin, vector3D target);
-	void SetProjection(float FOV);
+	/*
+		RASTER TRIANGLE:
+			1. Interpolate normals and texture smoothly over the surface, "Barycentric coords"
+			2. Raster it using scanline functions. Use Bresenham algorithm
+			3. Call vertex shader for each vertex and fragment shader for each pixel, store color results in framebuffer
 
-	//Get functions
-	std::shared_ptr<Mesh> GetMesh(); //Get current mesh
-	std::shared_ptr<Texture> GetTexture(); //Get current texture
-	std::shared_ptr<Shader> GetShader(); //Get current shader
-	matrix3D GetTransform(); //Get everything from the transform
+			To be continued...
+	
+	*/
 
-	//Rendering
-	void Draw(); //Draw all data to the screen
-	void Clear() const; //Clear the screen from previous data
+	unsigned int fbo; //FBO
 };
