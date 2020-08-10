@@ -26,7 +26,6 @@ public:
 	void Init(float resX, float resY, string name); //Init all components
 	void Update(); //Update values for color anim, rot, etc
 	void InputScan();
-	void InputScanOnlyCamera();
 
 	//Set functions
 	void SetMesh(Mesh::OBJ); //Set a mesh from the pre-defined types, triangle / quad / cube / custom

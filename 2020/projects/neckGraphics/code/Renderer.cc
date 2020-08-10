@@ -149,18 +149,8 @@ void Renderer::Update()
 //Check for keyboard / mouse input overall
 void Renderer::InputScan()
 {
-	if(controlAccess)
-	{
-		MouseScan();
-		KeyboardScan();
-	}
-}
-
-//Check for keyboard / mouse input, specifically for camera commands
-void Renderer::InputScanOnlyCamera()
-{
-	MouseScanCam();
-	KeyboardScanCam();
+	MouseScan();
+	KeyboardScan();
 }
 
 //Set a mesh from the pre-defined types, triangle / quad / cube
@@ -470,48 +460,37 @@ void Renderer::Unbind()
 //Handle input form mouse, Everything
 void Renderer::MouseScan()
 {
-	//ROTATION FOR MODEL
-	if (GetAsyncKeyState(LMB) & 0x8000 && !LMB_DOWN)
+	if (controlAccess)
 	{
-		GetCursorPos(&mousePosOrigin);
-		oldRotX = rotX;
-		oldRotY = rotY;
-		LMB_DOWN = true;
+		//ROTATION FOR MODEL
+		if (GetAsyncKeyState(LMB) & 0x8000 && !LMB_DOWN)
+		{
+			GetCursorPos(&mousePosOrigin);
+			oldRotX = rotX;
+			oldRotY = rotY;
+			LMB_DOWN = true;
+		}
+
+		else if (GetAsyncKeyState(LMB) & 0x8000 && LMB_DOWN)
+		{
+			GetCursorPos(&mousePosCurrent);
+
+			float currX = mousePosCurrent.x - mousePosOrigin.x;
+			float currY = mousePosCurrent.y - mousePosOrigin.y;
+
+			rotX = -currY + oldRotX;
+			rotY = -currX + oldRotY;
+		}
+
+		else
+			LMB_DOWN = false;
 	}
 
-	else if (GetAsyncKeyState(LMB) & 0x8000 && LMB_DOWN)
-	{
-		GetCursorPos(&mousePosCurrent);
-
-		float currX = mousePosCurrent.x - mousePosOrigin.x;
-		float currY = mousePosCurrent.y - mousePosOrigin.y;
-
-		rotX = -currY + oldRotX;
-		rotY = -currX + oldRotY;
-	}
-
-	else
-		LMB_DOWN = false;
-
-	//ROTATION FOR CAMERA
+	//ACTIVATE COMMANDS FOR CAMERA
 	if (GetAsyncKeyState(RMB) & 0x8000 && !RMB_DOWN)
-	{
-		GetCursorPos(&mousePosOrigin);
-		oldCamTargetX = camTargetX * 0.01f;
-		oldCamTargetY = camTargetY * 0.01f;
 		RMB_DOWN = true;
-	}
 
-	else if (GetAsyncKeyState(RMB) & 0x8000 && RMB_DOWN)
-	{
-		GetCursorPos(&mousePosCurrent);
-
-		float currX = mousePosCurrent.x - mousePosOrigin.x;
-		float currY = mousePosCurrent.y - mousePosOrigin.y;
-
-		camTargetX = (-currY + oldCamTargetX) * 0.01f;
-		camTargetY = (-currX + oldCamTargetY) * 0.01f;
-	}
+	else if (GetAsyncKeyState(RMB) & 0x8000 && RMB_DOWN) {}
 
 	else
 		RMB_DOWN = false;
@@ -527,24 +506,27 @@ void Renderer::MouseScan()
 //Handle input form keyboard, Everything
 void Renderer::KeyboardScan()
 {
-	//MOVE MODEL IF LMB IS DOWN
-	if (GetAsyncKeyState('W') & 0x8000 && LMB_DOWN)
-		moveY += 0.15f;
+	if (controlAccess)
+	{
+		//MOVE MODEL IF LMB IS DOWN
+		if (GetAsyncKeyState('W') & 0x8000 && LMB_DOWN)
+			moveY += 0.15f;
 
-	if (GetAsyncKeyState('A') & 0x8000 && LMB_DOWN)
-		moveX -= 0.1f;
+		if (GetAsyncKeyState('A') & 0x8000 && LMB_DOWN)
+			moveX -= 0.1f;
 
-	if (GetAsyncKeyState('S') & 0x8000 && LMB_DOWN)
-		moveY -= 0.15f;
+		if (GetAsyncKeyState('S') & 0x8000 && LMB_DOWN)
+			moveY -= 0.15f;
 
-	if (GetAsyncKeyState('D') & 0x8000 && LMB_DOWN)
-		moveX += 0.1f;
+		if (GetAsyncKeyState('D') & 0x8000 && LMB_DOWN)
+			moveX += 0.1f;
 
-	if (GetAsyncKeyState('Q') & 0x8000 && LMB_DOWN)
-		moveZ -= 0.15f;
+		if (GetAsyncKeyState('Q') & 0x8000 && LMB_DOWN)
+			moveZ -= 0.15f;
 
-	if (GetAsyncKeyState('E') & 0x8000 && LMB_DOWN)
-		moveZ += 0.1f;
+		if (GetAsyncKeyState('E') & 0x8000 && LMB_DOWN)
+			moveZ += 0.1f;
+	}
 
 	//MOVE CAMERA IF RMB IS DOWN
 	if (GetAsyncKeyState('W') & 0x8000 && RMB_DOWN)
@@ -558,6 +540,12 @@ void Renderer::KeyboardScan()
 
 	if (GetAsyncKeyState('D') & 0x8000 && RMB_DOWN)
 		camX += 0.1f;
+
+	if (GetAsyncKeyState('Q') & 0x8000 && RMB_DOWN)
+		camZ -= 0.06f;
+
+	if (GetAsyncKeyState('E') & 0x8000 && RMB_DOWN)
+		camZ += 0.06f;
 
 	//MOVE LIGHT IF MMB IS DOWN
 	if (GetAsyncKeyState('W') & 0x8000 && MMB_DOWN)
@@ -644,6 +632,10 @@ void Renderer::KeyboardScan()
 				lightPTR->currentLight.Diffuse.vecOrigin[0] = 0.3f;
 				lightPTR->currentLight.Diffuse.vecOrigin[1] = 0.0f;
 				lightPTR->currentLight.Diffuse.vecOrigin[2] = 0.0f;
+
+				lightPTR->currentLight.Specular.vecOrigin[0] = 0.5f;
+				lightPTR->currentLight.Specular.vecOrigin[1] = 0.0f;
+				lightPTR->currentLight.Specular.vecOrigin[2] = 0.0f;
 				break;
 
 			//GREEN
@@ -651,6 +643,10 @@ void Renderer::KeyboardScan()
 				lightPTR->currentLight.Diffuse.vecOrigin[0] = 0.0f;
 				lightPTR->currentLight.Diffuse.vecOrigin[1] = 0.3f;
 				lightPTR->currentLight.Diffuse.vecOrigin[2] = 0.0f;
+
+				lightPTR->currentLight.Specular.vecOrigin[0] = 0.0f;
+				lightPTR->currentLight.Specular.vecOrigin[1] = 0.5f;
+				lightPTR->currentLight.Specular.vecOrigin[2] = 0.0f;
 				break;
 
 			//BLUE
@@ -658,12 +654,27 @@ void Renderer::KeyboardScan()
 				lightPTR->currentLight.Diffuse.vecOrigin[0] = 0.0f;
 				lightPTR->currentLight.Diffuse.vecOrigin[1] = 0.0f;
 				lightPTR->currentLight.Diffuse.vecOrigin[2] = 0.3f;
+
+				lightPTR->currentLight.Specular.vecOrigin[0] = 0.0f;
+				lightPTR->currentLight.Specular.vecOrigin[1] = 0.0f;
+				lightPTR->currentLight.Specular.vecOrigin[2] = 0.5f;
+				break;
+
+			//WHITE
+			case 3:
+				lightPTR->currentLight.Diffuse.vecOrigin[0] = 0.3f;
+				lightPTR->currentLight.Diffuse.vecOrigin[1] = 0.3f;
+				lightPTR->currentLight.Diffuse.vecOrigin[2] = 0.3f;
+
+				lightPTR->currentLight.Specular.vecOrigin[0] = 0.5f;
+				lightPTR->currentLight.Specular.vecOrigin[1] = 0.5f;
+				lightPTR->currentLight.Specular.vecOrigin[2] = 0.5f;
 				break;
 		}
 
 		colorCounter++;
 
-		if (colorCounter > 2)
+		if (colorCounter > 3)
 			colorCounter = 0;
 
 		C_DOWN = true;
@@ -671,55 +682,4 @@ void Renderer::KeyboardScan()
 
 	if (GetAsyncKeyState('C') == 0 && C_DOWN)
 		C_DOWN = false;
-}
-
-//Handle input form mouse to the camera
-void Renderer::MouseScanCam()
-{
-	//CAM Z MOVEMENT
-	if (GetAsyncKeyState('E') & 0x8000)
-		camZ += 0.06f;
-
-	if (GetAsyncKeyState('Q') & 0x8000)
-		camZ -= 0.06f;
-
-	//ROTATION FOR CAMERA
-	if (GetAsyncKeyState(RMB) & 0x8000 && !RMB_DOWN)
-	{
-		GetCursorPos(&mousePosOrigin);
-		oldCamTargetX = camTargetX * 0.01f;
-		oldCamTargetY = camTargetY * 0.01f;
-		RMB_DOWN = true;
-	}
-
-	else if (GetAsyncKeyState(RMB) & 0x8000 && RMB_DOWN)
-	{
-		GetCursorPos(&mousePosCurrent);
-
-		float currX = mousePosCurrent.x - mousePosOrigin.x;
-		float currY = mousePosCurrent.y - mousePosOrigin.y;
-
-		camTargetX = (-currY + oldCamTargetX) * 0.01f;
-		camTargetY = (-currX + oldCamTargetY) * 0.01f;
-	}
-
-	else
-		RMB_DOWN = false;
-}
-
-//Handle input form keyboard to the camera
-void Renderer::KeyboardScanCam()
-{
-	//MOVE CAMERA IF RMB IS DOWN
-	if (GetAsyncKeyState('W') & 0x8000 && RMB_DOWN)
-		camY += 0.15f;
-
-	if (GetAsyncKeyState('A') & 0x8000 && RMB_DOWN)
-		camX -= 0.1f;
-
-	if (GetAsyncKeyState('S') & 0x8000 && RMB_DOWN)
-		camY -= 0.15f;
-
-	if (GetAsyncKeyState('D') & 0x8000 && RMB_DOWN)
-		camX += 0.1f;
 }

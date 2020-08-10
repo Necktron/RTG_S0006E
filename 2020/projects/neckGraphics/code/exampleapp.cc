@@ -92,8 +92,8 @@ ExampleApp::Run()
 {
 	bool switchingControl = false;
 
-	renderInstanceA.SetStartTransform(vector3D(-2.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(20.0f, 0.0f, 10.0f));
-	renderInstanceB.SetStartTransform(vector3D(2.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(30.0f, -25.0f, 0.0f));
+	renderInstanceA.SetStartTransform(vector3D(-1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
+	renderInstanceB.SetStartTransform(vector3D(1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
 
 	renderInstanceA.controlAccess = true;
 
