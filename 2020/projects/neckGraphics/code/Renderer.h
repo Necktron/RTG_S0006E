@@ -14,13 +14,11 @@ public:
 	int window_Height;
 
 	bool controlAccess;
-	bool rasterizerOBJ;
 
 	std::shared_ptr<Mesh> meshPTR;
 	std::shared_ptr<Texture> texturePTR;
 	std::shared_ptr<Shader> shaderPTR;
 	std::shared_ptr<Light> lightPTR;
-	std::shared_ptr<Rasterizer> rastPTR;
 
 	//Setup and handle
 	void Init(float resX, float resY, string name); //Init all components
@@ -42,6 +40,10 @@ public:
 	std::shared_ptr<Texture> GetTexture(); //Get current texture
 	std::shared_ptr<Shader> GetShader(); //Get current shader
 	matrix3D GetTransform(); //Get everything from the transform
+	
+	matrix3D GetMVP();
+	matrix3D GetModelView();
+	matrix3D GetProj();
 
 	//Rendering
 	void Draw(); //Draw all data to the screen
@@ -53,9 +55,6 @@ private:
 
 	void MouseScan();
 	void KeyboardScan();
-
-	void MouseScanCam();
-	void KeyboardScanCam();
 
 	string renderName;
 

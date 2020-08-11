@@ -9,7 +9,6 @@ void Renderer::Init(float resX, float resY, string name)
 {
 	renderName = name;
 	controlAccess = false;
-	rasterizerOBJ = false;
 
 	meshPTR = std::make_shared<Mesh>();
 	shaderPTR = std::make_shared<Shader>();
@@ -429,6 +428,21 @@ std::shared_ptr<Shader> Renderer::GetShader()
 matrix3D Renderer::GetTransform()
 {
 	return transform;
+}
+
+matrix3D Renderer::GetMVP()
+{
+	return MVP;
+}
+
+matrix3D Renderer::GetModelView()
+{
+	return this->view * this->transform;
+}
+
+matrix3D Renderer::GetProj()
+{
+	return this->projection;
 }
 
 // * * * PRIVATE FUNCTIONS * * *

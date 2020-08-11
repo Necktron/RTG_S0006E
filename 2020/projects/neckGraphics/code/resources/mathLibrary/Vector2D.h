@@ -23,11 +23,13 @@ class vector2D
 		//Operators
 		float operator* (const vector2D &other);
 		vector2D operator*(float);
+		vector2D operator/(float);
 		vector2D operator+(vector2D other);
 		vector2D operator-(vector2D other);
 		vector2D operator=(const vector2D &other);
 		bool operator==(vector2D &other);
 		bool operator!=(vector2D &other);
+		float operator[](int& pos);
 
 		//Functions
 		vector2D vecAdd(vector2D &other);
@@ -171,6 +173,14 @@ inline vector2D vector2D::operator*(float x)
 {
 	this->vecOrigin[0] *= x;
 	this->vecOrigin[1] *= x;
+	return *this;
+}
+
+//Operator /
+inline vector2D vector2D::operator/(float x)
+{
+	this->vecOrigin[0] /= x;
+	this->vecOrigin[1] /= x;
 	return *this;
 }
 

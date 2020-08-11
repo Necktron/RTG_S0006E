@@ -12,6 +12,7 @@
 #include "Texture.h"
 #include "Shader.h"
 #include "Renderer.h"
+#include "Rasterizer.h"
 #include "resources/mathLibrary/Matrix3D.h"
 #include <memory>
 
@@ -30,6 +31,8 @@ public:
 
 	Renderer renderInstanceA;
 	Renderer renderInstanceB;
+	Renderer renderInstanceC;
+	Rasterizer rasterInstance;
 
 private:
 	unsigned int shader;

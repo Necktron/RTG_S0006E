@@ -6,6 +6,7 @@
 #include "exampleapp.h"
 #include <cstring>
 #include <iostream>
+#include <algorithm> 
 
 using namespace Display;
 namespace Example
@@ -40,17 +41,14 @@ ExampleApp::Open()
 	resolution[0] = 800.0f;
 	resolution[1] = 600.0f;
 
+	rasterInstance.Init(resolution[0], resolution[1]);
+
 	this->window->SetSize(resolution[0], resolution[1]);
 
 	if (this->window->Open())
 	{
 		// set clear color to gray
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-		Shader::ShaderProgramSource source;
-
-		//glEnable(GL_BLEND);
-		//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
 		glEnable(GL_DEPTH_TEST);
 
 		renderInstanceA.Init(resolution[0], resolution[1], "Instance A");
@@ -78,6 +76,59 @@ ExampleApp::Open()
 		renderInstanceB.SetTexture(Texture::TextureImage::KOREAN_FLAG);
 		renderInstanceB.SetLight(Light::LightSource::POINT_LIGHT);
 
+		//RENDER C
+		renderInstanceC.Init(resolution[0], resolution[1], "Rasterizer Canvas");
+		renderInstanceC.shaderPTR->m_DEBUG = true;
+		renderInstanceC.SetMesh(Mesh::OBJ::QUAD);
+		renderInstanceC.SetShader(Shader::ShaderEffect::PULSE_COLOR);
+		renderInstanceC.SetLight(Light::LightSource::POINT_LIGHT);
+
+		//RASTERIZER SETUP
+		rasterInstance.SetupMVP();
+		//rasterInstance.SetupFrameBuffer();
+		//rasterInstance.SetupRasterizerBuffer();
+		//unsigned int* results = rasterInstance.GetFrameBufferPointer();
+		//cout << "FrameBuffer (" << *results <<") Size is: " << rasterInstance.GetFrameBufferSize() << endl; //Print results from frame buffer
+
+		//Lambda functions for Rasterizer usage
+		auto lambdaVS = [](vector3D pos, vector3D norm, matrix3D nMat) -> vector3D
+		{
+			vector3D aColor(1.0f, 1.0f, 1.0f);
+			vector3D ambientColor(0.6f, 0.6f, 0.6f);
+			vector3D lightPos(0, 3, -3);
+			matrix3D mvMat = nMat;
+
+			vector3D modelViewVertex = (mvMat * pos);
+			vector3D modelViewNormal = (mvMat * norm);
+
+			vector3D tempLightDir = (lightPos - modelViewVertex);
+			vector3D lightVector = tempLightDir.vecNormilisation();
+
+			float diffuse = max(modelViewNormal.dotProd(lightVector), 0.1f);
+			float ambient = ambientColor.dotProd(vector3D(1.0f, 1.0f, 1.0f));
+
+			vector3D v_Color = aColor * (diffuse + ambient);
+
+			return v_Color;
+		};
+		auto lambdaFS = [](vector2D tex, vector3D norm, unsigned char* image, int w, int h, int n) -> Rasterizer::PixelColor
+		{
+			int u = abs((int)(tex.vecOrigin[0] * (w - 1)) % w);
+			int v = abs((int)(tex.vecOrigin[1] * (h - 1)) % h);
+
+			int index = (u * n + v * n * w);
+
+			Rasterizer::PixelColor color;
+			color.r = image[index];
+			color.g = image[index + 1];
+			color.b = image[index + 2];
+
+			return color;
+		};
+
+		rasterInstance.SetVertexShader(lambdaVS);
+		rasterInstance.SetPixelShader(lambdaFS);
+
 		return true;
 
 	}
@@ -92,8 +143,9 @@ ExampleApp::Run()
 {
 	bool switchingControl = false;
 
-	renderInstanceA.SetStartTransform(vector3D(-1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
-	renderInstanceB.SetStartTransform(vector3D(1.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
+	renderInstanceA.SetStartTransform(vector3D(-4.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(30.0f, 20.0f, 0.0f));
+	renderInstanceB.SetStartTransform(vector3D(4.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(80.0f, 0.0f, 0.0f));
+	renderInstanceC.SetStartTransform(vector3D(0.0f, 0.0f, 3.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
 
 	renderInstanceA.controlAccess = true;
 
@@ -102,6 +154,7 @@ ExampleApp::Run()
 		//CLEAR
 		renderInstanceA.Clear();
 		renderInstanceB.Clear();
+		renderInstanceC.Clear();
 
 		//INPUT
 		renderInstanceA.InputScan();
@@ -129,9 +182,13 @@ ExampleApp::Run()
 		if (GetAsyncKeyState('B') == 0 && switchingControl)
 			switchingControl = false;
 
-		//DRAW
+		//Rasterizer Draw
+		//rasterInstance.Draw();
+
+		//DRAW, back at normal buffer 0
 		renderInstanceA.Draw();
 		renderInstanceB.Draw();
+		renderInstanceC.Draw();
 
 		this->window->Update();
 
