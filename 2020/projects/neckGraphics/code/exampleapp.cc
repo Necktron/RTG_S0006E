@@ -41,8 +41,6 @@ ExampleApp::Open()
 	resolution[0] = 800.0f;
 	resolution[1] = 600.0f;
 
-	rasterInstance.Init(resolution[0], resolution[1]);
-
 	this->window->SetSize(resolution[0], resolution[1]);
 
 	if (this->window->Open())
@@ -80,15 +78,20 @@ ExampleApp::Open()
 		renderInstanceC.Init(resolution[0], resolution[1], "Rasterizer Canvas");
 		renderInstanceC.shaderPTR->m_DEBUG = true;
 		renderInstanceC.SetMesh(Mesh::OBJ::QUAD);
-		renderInstanceC.SetShader(Shader::ShaderEffect::PULSE_COLOR);
+		renderInstanceC.SetShader(Shader::ShaderEffect::BLINN_PHONG);
+		renderInstanceC.SetTexture(Texture::TextureImage::KOREAN_FLAG);
 		renderInstanceC.SetLight(Light::LightSource::POINT_LIGHT);
 
 		//RASTERIZER SETUP
-		rasterInstance.SetupMVP();
-		//rasterInstance.SetupFrameBuffer();
-		//rasterInstance.SetupRasterizerBuffer();
-		//unsigned int* results = rasterInstance.GetFrameBufferPointer();
-		//cout << "FrameBuffer (" << *results <<") Size is: " << rasterInstance.GetFrameBufferSize() << endl; //Print results from frame buffer
+		rasterInstance.Init(resolution[0], resolution[1], "Rasterizer OBJ");
+		rasterInstance.SetupFrameBuffer(); //Setup the FBO for the rasterizer
+		rasterInstance.shaderPTR->m_DEBUG = false;
+		rasterInstance.SetMesh(Mesh::OBJ::RAST_TRIANGLE);
+		rasterInstance.SetTexture(Texture::TextureImage::IKEA);
+		rasterInstance.SetLight(Light::LightSource::POINT_LIGHT);
+
+		unsigned char* results = rasterInstance.GetFrameBufferPointer(); //Get size of FBO, typical 800x600 or something like that
+		cout << "FrameBuffer (" << &results <<") Size is: " << rasterInstance.GetFrameBufferSize() << endl; //Print results from frame buffer
 
 		//Lambda functions for Rasterizer usage
 		auto lambdaVS = [](vector3D pos, vector3D norm, matrix3D nMat) -> vector3D
@@ -130,14 +133,15 @@ ExampleApp::Open()
 		rasterInstance.SetPixelShader(lambdaFS);
 
 		return true;
-
 	}
+
 	return false;
 }
 
 //------------------------------------------------------------------------------
 /**
 */
+
 void
 ExampleApp::Run()
 {
@@ -145,9 +149,10 @@ ExampleApp::Run()
 
 	renderInstanceA.SetStartTransform(vector3D(-4.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(30.0f, 20.0f, 0.0f));
 	renderInstanceB.SetStartTransform(vector3D(4.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(80.0f, 0.0f, 0.0f));
-	renderInstanceC.SetStartTransform(vector3D(0.0f, 0.0f, 3.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
+	renderInstanceC.SetStartTransform(vector3D(0.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
+	rasterInstance.SetStartTransform(vector3D(0.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
 
-	renderInstanceA.controlAccess = true;
+	rasterInstance.controlAccess = true;
 
 	while (this->window->IsOpen())
 	{
@@ -155,25 +160,29 @@ ExampleApp::Run()
 		renderInstanceA.Clear();
 		renderInstanceB.Clear();
 		renderInstanceC.Clear();
+		rasterInstance.Clear();
 
 		//INPUT
 		renderInstanceA.InputScan();
 		renderInstanceB.InputScan();
+		renderInstanceC.InputScan();
+		rasterInstance.InputScan();
 
 		//Not very modular, but it works!
 		//Switch control between renderInstanceA and B
 		if (GetAsyncKeyState('B') < 0 && !switchingControl)
 		{
+			//TODO: Set so it switches between Render control and Rasterizer control
 			if (renderInstanceA.controlAccess == true)
 			{
 				renderInstanceA.controlAccess = false;
-				renderInstanceB.controlAccess = true;
+				rasterInstance.controlAccess = true;
 			}
 
-			else if (renderInstanceB.controlAccess == true)
+			else if (rasterInstance.controlAccess == true)
 			{
 				renderInstanceA.controlAccess = true;
-				renderInstanceB.controlAccess = false;
+				rasterInstance.controlAccess = false;
 			}
 
 			switchingControl = true;
@@ -183,7 +192,9 @@ ExampleApp::Run()
 			switchingControl = false;
 
 		//Rasterizer Draw
-		//rasterInstance.Draw();
+		rasterInstance.Draw(); //Draw the rasterizer data
+		rasterInstance.IndexToFrame(); //Set FreameBuffer with data from rasterization
+		renderInstanceC.SetRastTexture(rasterInstance.GetFrameBufferPointer()); //Set it as a texture for Target C
 
 		//DRAW, back at normal buffer 0
 		renderInstanceA.Draw();

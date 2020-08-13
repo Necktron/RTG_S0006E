@@ -12,7 +12,46 @@ Mesh::~Mesh()
 	glDeleteBuffers(1, &this->ibo);
 }
 
-//BIND A QUAD TO THE BUFFER
+//BIND A TRIANGLE TO THE RASTERIZER
+void Mesh::RastTriangle()
+{
+	float pos[] =
+	{
+		//( x, y, z, textureA, textureB, normX, normY, normZ )
+		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+		0.0f, 1.0f, 0.0f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
+		1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f
+	};
+
+	unsigned int index[] =
+	{
+		0, 1, 2
+	};
+
+	//Vertex Array
+	glGenVertexArrays(1, &this->vao);
+	glBindVertexArray(this->vao);
+
+	//Vertex Buffer
+	glGenBuffers(1, &this->vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
+
+	//Vertex Array Object, VAO
+	glEnableVertexAttribArray(0); //Pos
+	glEnableVertexAttribArray(1); //Texture
+	glEnableVertexAttribArray(2); //Normal
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, 0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (GLvoid*)(sizeof(float) * 3));
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (GLvoid*)(sizeof(float) * 5));
+
+	//Index Buffer Object, IBO
+	glGenBuffers(1, &this->ibo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ibo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
+}
+
+//BIND A TRIANGLE TO THE BUFFER
 void Mesh::Triangle()
 {
 	float pos[] =

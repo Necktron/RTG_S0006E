@@ -162,43 +162,48 @@ void Renderer::SetMesh(Mesh::OBJ obj)
 			std::cout << "No OBJ selected" << std::endl;
 			break;
 
-		//Triangle
+		//Rast Triangle
 		case 0:
+			meshPTR->RastTriangle();
+			break;
+
+		//Triangle
+		case 1:
 			meshPTR->Triangle();
 			break;
 
 		//Quad
-		case 1:
+		case 2:
 			meshPTR->Quad();
 			break;
 
 		//Cube
-		case 2:
+		case 3:
 			meshPTR->Cube();
 			break;
 
 		//Cat
-		case 3:
+		case 4:
 			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/cat.obj");
 			break;
 
 		//Stool
-		case 4:
+		case 5:
 			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/Stool.obj");
 			break;
 
 		//CUBE
-		case 5:
+		case 6:
 			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/cubeLow.obj");
 			break;
 
 		//WINDMILL
-		case 6:
+		case 7:
 			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/windmill.obj");
 			break;
 
 		//PENGUIN
-		case 7:
+		case 8:
 			meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/Penguin.obj");
 			break;
 	}
@@ -273,6 +278,11 @@ void Renderer::SetTexture(Texture::TextureImage texture)
 	}
 
 	this->texturePTR->textureImage = texture;
+}
+
+void Renderer::SetRastTexture(unsigned char* FBO)
+{
+	texturePTR->SetupTexture(FBO);
 }
 
 //Set shader from a specific path
@@ -377,8 +387,12 @@ void Renderer::Draw()
 	if(shaderPTR->shaderEFK == Shader::ShaderEffect::BLINN_PHONG)
 		shaderPTR->SetUniformMat4fv("u_Model", transform);
 
+	//Rast Triangle
+	if(meshPTR->meshOBJ == Mesh::OBJ::RAST_TRIANGLE)
+		glDrawElements(GL_TRIANGLES, 3 * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
+
 	//Triangle
-	if (meshPTR->meshOBJ == Mesh::OBJ::TRIANGLE)
+	else if (meshPTR->meshOBJ == Mesh::OBJ::TRIANGLE)
 		glDrawElements(GL_TRIANGLES, 3 * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
 
 	//Quad

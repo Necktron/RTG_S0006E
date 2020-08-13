@@ -33,6 +33,7 @@ public:
 	TextureImage textureImage = TextureImage::NONE;
 
 	void SetupTexture(const std::string& filepath); //Scan and setup texture
+	void SetupTexture(unsigned char* FBO); //Scan and setup texture from a frame buffer
 	void Bind(unsigned int slot = 0) const;
 	void Unbind();
 

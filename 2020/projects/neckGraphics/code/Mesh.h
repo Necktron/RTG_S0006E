@@ -22,14 +22,15 @@ class Mesh
 		enum class OBJ
 		{
 			NONE = -1,
-			TRIANGLE = 0,
-			QUAD = 1,
-			CUBE = 2,
-			CAT = 3,
-			STOOL = 4,
-			BOX = 5,
-			WINDMILL = 6,
-			PENGUIN = 7
+			RAST_TRIANGLE = 0,
+			TRIANGLE = 1,
+			QUAD = 2,
+			CUBE = 3,
+			CAT = 4,
+			STOOL = 5,
+			BOX = 6,
+			WINDMILL = 7,
+			PENGUIN = 8
 		};
 
 		struct Vertex {
@@ -53,6 +54,7 @@ class Mesh
 
 		OBJ meshOBJ = OBJ::NONE;
 
+		void RastTriangle(); //Rasterizer Triangle
 		void Triangle(); //Set triangle
 		void Quad(); //Set quad
 		void Cube(); //Set cube
