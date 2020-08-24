@@ -28,7 +28,7 @@ public:
 	//Set functions
 	void SetMesh(Mesh::OBJ); //Set a mesh from the pre-defined types, triangle / quad / cube / custom
 	void SetTexture(Texture::TextureImage); //Set texture from a specific path
-	void SetRastTexture(unsigned char* FBO);
+	void SetRastTexture(shared_ptr<Rasterizer> rastRef);
 	void SetShader(Shader::ShaderEffect); //Set shader from a specific path
 	void SetLight(Light::LightSource); //Set light source
 	void SetStartTransform(vector3D pos, vector3D scale, vector3D rot); //Set everything for the transform

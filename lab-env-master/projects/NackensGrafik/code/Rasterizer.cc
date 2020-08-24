@@ -1,3 +1,5 @@
+#include "..\..\..\..\2020\projects\neckGraphics\code\Rasterizer.h"
+#include "..\..\..\..\2020\projects\neckGraphics\code\Rasterizer.h"
 #include "Rasterizer.h"
 #include <iostream>
 #include <string>

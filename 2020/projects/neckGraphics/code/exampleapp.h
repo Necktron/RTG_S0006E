@@ -15,6 +15,7 @@
 #include "Rasterizer.h"
 #include "resources/mathLibrary/Matrix3D.h"
 #include <memory>
+#include <Windows.h>
 
 namespace Example
 {
@@ -32,7 +33,7 @@ public:
 	Renderer renderInstanceA;
 	Renderer renderInstanceB;
 	Renderer renderInstanceC;
-	Rasterizer rasterInstance;
+	shared_ptr<Rasterizer> rasterInstance;
 
 private:
 	unsigned int shader;

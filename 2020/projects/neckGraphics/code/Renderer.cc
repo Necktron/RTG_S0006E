@@ -10,10 +10,10 @@ void Renderer::Init(float resX, float resY, string name)
 	renderName = name;
 	controlAccess = false;
 
-	meshPTR = std::make_shared<Mesh>();
-	shaderPTR = std::make_shared<Shader>();
-	texturePTR = std::make_shared<Texture>();
-	lightPTR = std::make_shared<Light>();
+	meshPTR = make_shared<Mesh>();
+	shaderPTR = make_shared<Shader>();
+	texturePTR = make_shared<Texture>();
+	lightPTR = make_shared<Light>();
 
 	r = 1.1f;
 	g = 0.0f;
@@ -280,9 +280,23 @@ void Renderer::SetTexture(Texture::TextureImage texture)
 	this->texturePTR->textureImage = texture;
 }
 
-void Renderer::SetRastTexture(unsigned char* FBO)
+//WIP
+void Renderer::SetRastTexture(shared_ptr<Rasterizer> rastRef)
 {
-	texturePTR->SetupTexture(FBO);
+	glGenTextures(1, &this->texturePTR->m_RendererID);
+
+	glBindTexture(GL_TEXTURE_2D, this->texturePTR->m_RendererID);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, rastRef->window_Width, rastRef->window_Height, 0, GL_RGB, GL_UNSIGNED_BYTE, &rastRef->PixelRetriver()[0]);
+	glBindTexture(GL_TEXTURE_2D, 0);
+
+	this->texturePTR->textureImage = rastRef->texturePTR->textureImage;
 }
 
 //Set shader from a specific path
@@ -310,6 +324,10 @@ void Renderer::SetShader(Shader::ShaderEffect shader)
 		//Bling bling!
 		case 3:
 			shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/BlinnPhong.shader");
+			break;
+
+		case 4:
+			shaderPTR->SetupShader(".. /../../projects/neckGraphics/code/resources/shaders/RasterCanvas.shader");
 			break;
 	}
 
@@ -389,7 +407,7 @@ void Renderer::Draw()
 
 	//Rast Triangle
 	if(meshPTR->meshOBJ == Mesh::OBJ::RAST_TRIANGLE)
-		glDrawElements(GL_TRIANGLES, 3 * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
+		glDrawElements(GL_TRIANGLES, meshPTR->indices.size() * sizeof(unsigned int), GL_UNSIGNED_INT, nullptr);
 
 	//Triangle
 	else if (meshPTR->meshOBJ == Mesh::OBJ::TRIANGLE)

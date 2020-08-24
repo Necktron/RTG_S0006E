@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "Shader.h"
 #include "Light.h"
+#include "Framebuffer.h"
 #include <memory>
 #include <string>
 #include <sstream>
@@ -15,14 +16,15 @@
 		- FBO: https://www.khronos.org/opengl/wiki/Framebuffer_Object
 		- LAMBDA FUNCTIONS: https://www.youtube.com/watch?v=mWgmBBz0y8c
 		- RASTERIZATION TUTORIAL: https://www.youtube.com/watch?v=t7Ztio8cwqM
+		- BRESENHAM ALGORITHM: https://www.thecrazyprogrammer.com/2017/01/bresenhams-line-drawing-algorithm-c-c.html
 
 */
 
 class Rasterizer
 {
 public:
-	int window_Width;
-	int window_Height;
+	const int window_Width = 256;
+	const int window_Height = 256;
 
 	bool controlAccess;
 
@@ -46,36 +48,33 @@ public:
 	//Scanline
 	class Scanline
 	{
-		public:
-			Scanline(int xOne, int xTwo, int y);
-			int xBegin, xEnd, Y;
+	public:
+		Scanline(int xOne, int xTwo, int y);
+		int xBegin, xEnd, Y;
 	};
 
 	//Edge
 	class Edge
 	{
-		public:
-			Edge(vector3D vOne, vector3D vTwo);
-			Octant oct;
-			int x, y, xb, xe, yb, ye, d, dy, dx, e, ne;
+	public:
+		Edge(vector3D vOne, vector3D vTwo);
+
+		Octant oct;
+		int x, y, xb, xe, yb, ye, d, dy, dx, e, ne;
 	};
 
 	shared_ptr<Mesh> meshPTR;
 	shared_ptr<Texture> texturePTR;
-	shared_ptr<Shader> shaderPTR;
 	shared_ptr<Light> lightPTR;
-	shared_ptr<unsigned int> fboPTR;
+	shared_ptr<FrameBuffer> frameBufferPTR;
 
-	//PART 1.
-	//Set the Rasterizers Mesh buffer with data, triangle with texture and light applied 
-	void Init(float x, float y, string name); //DONE
+	void Init(string name); //DONE
 	void Update(); //Update values for color anim, rot, etc
 	void InputScan();
 
 	//Similar to Renderer functions
 	void SetMesh(Mesh::OBJ obj); //Set a mesh from the pre-defined types, triangle / quad / cube
 	void SetTexture(Texture::TextureImage texture); //Set texture from a specific path
-	void SetShader(Shader::ShaderEffect shader); //Set shader from a specific path
 	void SetLight(Light::LightSource lightsource); //Set a light source
 	void SetStartTransform(vector3D pos, vector3D scale, vector3D rot); //Set everything for the transform
 	void SetTransform(vector3D pos, vector3D scale, vector3D rot); //Set everything for the transform
@@ -83,60 +82,28 @@ public:
 	void SetProjection(float FOV);
 
 	//Rasterizer specific
-	void SetupFrameBuffer(); // Setup FBO with arbitrary dimensions - DONE
-	unsigned char* GetFrameBufferPointer(); //Retrieve a pointer to the FBO - DONE
+	void SetupFrameBuffer(unsigned int x, unsigned int y); // Setup FBO with arbitrary dimensions - DONE
+	int* GetFrameBufferPointer(); //Retrieve a pointer to the FBO - DONE
 	string GetFrameBufferSize(); //Retrieve the size of the FBO - DONE
 	vector<Rasterizer::PixelColor> GetPixel(); //Get pixel value - WIP
 	void SetVertexShader(const function<vector3D(vector3D pos, vector3D normal, matrix3D normalMatrix)>& func); //Set vertex shader by lambda function as argument - DONE
 	void SetPixelShader(const function<PixelColor(vector2D texture, vector3D normal, unsigned char* image, int w, int h, int n)>& func); //Set pixel shader by lambda function as argument - DONE
-	void IndexToFrame(/* INSERT IBO AS ARGUMENT */); //CALLS FUNCTION BELOW FOR EACH TRIANGLE
-	
+
+	//Rasterizer logic
+	void Rasterize(Mesh::Vertex v1, Mesh::Vertex v2, Mesh::Vertex v3);
+	void scanline(const Scanline& scan);
 	void Increment(Edge& edge);
-	void Rasterize(vector3D vOne, vector3D vTwo, vector3D vThree); //REQUIERED VS AND FS SET - WIP
-	void Perspective(vector3D&, vector3D&, vector3D&); //WIP
-	void Barycentric(vector2D p, vector2D a, vector2D b, vector2D c, float& u, float& v, float& w); //WIP
-	void scanline(const Scanline& scan); //WIP
-	bool ToggleFrameBuffer(); //DONE
+	void Barycentric(vector2D p, vector2D a, vector2D b, vector2D c, float& u, float& v, float& w);
+	void Perspective(vector3D& vOne, vector3D& vTwo, vector3D& vThree);
+	vector<Rasterizer::PixelColor> PixelRetriver();
 
 	//Render
 	void Draw(); //Draw to the FBO - WIP
 	void Clear() const; //Clear the screen from previous data - WIP
 	void Flush(); //WIP
 
-	/*
-		PART 2 - RASTER TRIANGLE:
-			1. Interpolate normals and texture smoothly over the surface, "Barycentric coords"
-			2. Raster it using scanline functions. Use Bresenham algorithm
-			3. Call vertex shader for each vertex and fragment shader for each pixel, store color results in framebuffer
-
-			To be continued...
-
-		PART 3 - SetVertexShader - "DONE", make sure it works
-			1. Take a single vertex with 3D pos, TexCoord and normal
-			2. Transform vertex attributes using MVP matrix
-			3. Return data needed for Pixel Shader
-
-		PART 4 - SetPixelShader - "DONE", make sure it works
-			1. Take TexCoord, Normal and Texture as argument
-			2. Return a pixel color
-			3. Shader it with Blinn-Phong
-			4. Texture it with the texture provided
-
-		PART 5 - Frame Buffer
-			Have a accompanying z-Buffer used for depth test to discard useless pixels
-
-		PART 6 - Add clipping
-			1. RasterTriangle will discard pixels outside of the view
-			2. (OPTIONAL) - The draw function should discard any triangles that are entirely outside the view
-
-		PART 7 - Functionality for move and rotation of the rasterizer OBJ
-			* TODO: Copy / Paste code from Renderer class
-
-		PART 8 - Render the Rasterizer OBJ framebuffer onto a quad as a texture
-			Add this code:
-			* rastPTR->draw(MatrixA, MatrixRasterizer); // Render the RastOBJ
-			* texPTR->loadFromRast(rastPTR); //Set the texture of the Quad
-	*/
+	void Bind();
+	void Unbind();
 
 	//Transform and such
 	vector3D rotation;
@@ -145,19 +112,8 @@ public:
 	matrix3D projection;
 	matrix3D MVP;
 
-	unsigned int fbo; //FBO
-	unsigned int tcb; //Texture Color Buffer
-	unsigned int rbo; //Render Buffer Object
-
-	//Functions
-	function<vector3D(vector3D pos, vector3D normal, matrix3D normalMatrix)> vertexShader;
-	function<PixelColor(vector2D texture, vector3D normal, unsigned char* image, int w, int h, int n)> pixelShader;
-
 private:
 	string rasterizerName;
-
-	void Bind();
-	void Unbind();
 
 	void MouseScan();
 	void KeyboardScan();
@@ -223,17 +179,21 @@ private:
 	POINT mousePosOrigin;
 	POINT mousePosCurrent;
 
-	vector3D rastVertexOne, rastVertexTwo, rastVertexThree;
-	vector2D rastUVOne, rastUVTwo;
-	vector3D rastNormOne, rastNormTwo, rastNormThree;
-	vector3D rastDiffColorOne, rastDiffColorTwo, rastDiffColorThree;
+	int leftY, rightY, bottomY, leftX, rightX, bottomX;
+	vector3D vertexOne, vertexTwo, vertexThree;
+	vector2D uvOne, uvTwo, uvThree;
+	vector3D normOne, normTwo, normThree;
+	vector3D diffColorOne, diffColorTwo, diffColorThree;
+	vector<Mesh::Vertex> rasterVerticies;
+	vector<unsigned int> indices;
 	vector<PixelColor> pixels;
-	vector<Mesh::Vertex> meshData;
+
+	//Functions
+	function<vector3D(vector3D pos, vector3D normal, matrix3D normalMatrix)> vertexShader;
+	function<PixelColor(vector2D texture, vector3D normal, unsigned char* image, int w, int h, int n)> pixelShader;
 
 	vector<float> zDepth;
-	int w, h, n;
+	int W, H, N;
 	float wOne, wTwo, wThree;
 	unsigned char* image;
-
-	bool frameBufferToggle;
 };

@@ -15,18 +15,31 @@ Mesh::~Mesh()
 //BIND A TRIANGLE TO THE RASTERIZER
 void Mesh::RastTriangle()
 {
-	float pos[] =
-	{
-		//( x, y, z, textureA, textureB, normX, normY, normZ )
-		-1.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-		0.0f, 1.0f, 0.0f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f,
-		1.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f
-	};
+	Vertex vOne;
+	Vertex vTwo;
+	Vertex vThree;
 
-	unsigned int index[] =
-	{
-		0, 1, 2
-	};
+	vector3D normal(0.0f, 0.0f, 1.0f);
+
+	vOne.pos = vector3D(-1.0f, -1.0f, 0.0f);
+	vOne.texCoord = vector2D(0.0f, 0.0f);
+	vOne.norm = normal;
+
+	vTwo.pos = vector3D(0.0f, 1.0f, 0.0f);
+	vTwo.texCoord = vector2D(0.0f, 1.0f);
+	vTwo.norm = normal;
+
+	vThree.pos = vector3D(1.0f, -1.0f, 0.0f);
+	vThree.texCoord = vector2D(0.5f, 0.5f);
+	vThree.norm = normal;
+
+	this->vertices.push_back(vOne);
+	this->vertices.push_back(vTwo);
+	this->vertices.push_back(vThree);
+
+	this->indices.push_back(0);
+	this->indices.push_back(1);
+	this->indices.push_back(2);
 
 	//Vertex Array
 	glGenVertexArrays(1, &this->vao);
@@ -35,20 +48,20 @@ void Mesh::RastTriangle()
 	//Vertex Buffer
 	glGenBuffers(1, &this->vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, this->vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(pos), pos, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
 
 	//Vertex Array Object, VAO
 	glEnableVertexAttribArray(0); //Pos
 	glEnableVertexAttribArray(1); //Texture
 	glEnableVertexAttribArray(2); //Normal
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, 0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (GLvoid*)(sizeof(float) * 3));
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 8, (GLvoid*)(sizeof(float) * 5));
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, pos));
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, texCoord));
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid*)offsetof(Vertex, norm));
 
 	//Index Buffer Object, IBO
 	glGenBuffers(1, &this->ibo);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->ibo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), &indices[0], GL_STATIC_DRAW);
 }
 
 //BIND A TRIANGLE TO THE BUFFER

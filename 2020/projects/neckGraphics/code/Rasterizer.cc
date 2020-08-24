@@ -5,17 +5,13 @@
 #include "Rasterizer.h"
 
 //DONE
-void Rasterizer::Init(float x, float y, string name)
+void Rasterizer::Init(string name)
 {
 	rasterizerName = name;
-	frameBufferToggle = false;
-	window_Width = x;
-	window_Height = y;
 	meshPTR = make_shared<Mesh>();
-	shaderPTR = make_shared<Shader>();
 	texturePTR = make_shared<Texture>();
 	lightPTR = make_shared<Light>();
-	fboPTR = make_shared<unsigned int>();
+	frameBufferPTR = make_shared<FrameBuffer>();
 
 	r = 1.1f;
 	g = 0.0f;
@@ -45,6 +41,7 @@ void Rasterizer::Init(float x, float y, string name)
 	initRotZ = 0.0f;
 
 	//CAMERA
+	FOV = 90.0f;
 	camX = 0.0f;
 	camY = 0.0f;
 	camZ = 4.0f;
@@ -80,11 +77,18 @@ void Rasterizer::Init(float x, float y, string name)
 	rotation = vector3D();
 
 	meshPTR->m_DEBUG = false;
-	shaderPTR->m_DEBUG = false;
 	LMB_DOWN = false;
 	MMB_DOWN = false;
 	RMB_DOWN = false;
 	C_DOWN = false;
+
+	PixelColor col;
+	col.r = 0;
+	col.g = 0;
+	col.b = 0;
+
+	pixels.assign(256 * 256, col);
+	zDepth.assign(256 * 256, 0.0f);
 }
 
 //DONE
@@ -120,25 +124,10 @@ void Rasterizer::Update()
 		std::cout << "                " << std::endl;
 	}
 
-	if (shaderPTR->shaderEFK == Shader::ShaderEffect::PULSE_COLOR)
-		shaderPTR->SetUniform4f("u_Color", r, 0.0f, 0.0f, 1.0f);
-
-	if (shaderPTR->shaderEFK == Shader::ShaderEffect::BLINN_PHONG && lightPTR->lightSource == Light::LightSource::POINT_LIGHT)
-	{
-		shaderPTR->SetUniform3f("u_LightPos", lightPTR->currentLight.Position.vecOrigin[0], lightPTR->currentLight.Position.vecOrigin[1], lightPTR->currentLight.Position.vecOrigin[2]);
-		shaderPTR->SetUniform3f("u_CamPos", camX, camY, camZ);
-		shaderPTR->SetUniform3f("u_AmbientColor", lightPTR->currentLight.Ambient.vecOrigin[0], lightPTR->currentLight.Ambient.vecOrigin[1], lightPTR->currentLight.Ambient.vecOrigin[2]);
-		shaderPTR->SetUniform3f("u_DiffuseColor", lightPTR->currentLight.Diffuse.vecOrigin[0], lightPTR->currentLight.Diffuse.vecOrigin[1], lightPTR->currentLight.Diffuse.vecOrigin[2]);
-		shaderPTR->SetUniform3f("u_SpecularColor", lightPTR->currentLight.Specular.vecOrigin[0], lightPTR->currentLight.Specular.vecOrigin[1], lightPTR->currentLight.Specular.vecOrigin[2]);
-		shaderPTR->SetUniform1f("u_AmbientIntensity", lightPTR->currentLight.AmbientIntensity);
-		shaderPTR->SetUniform1f("u_DiffuseIntensity", lightPTR->currentLight.DiffuseIntensity);
-		shaderPTR->SetUniform1f("u_SpecularIntensity", lightPTR->currentLight.SpecularIntensity);
-	}
-
 	//Setup the vital parts for MVP, Model + View + Projection
 	SetView(vector3D(camX, camY, camZ), vector3D(camX - camTargetX, camY - camTargetY, camZ - camTargetZ));
 	SetTransform(vector3D(initPosX + moveX, initPosX + moveY, initPosZ + moveZ), vector3D(initScaleX, initScaleY, initScaleZ), vector3D(initRotX + rotX, initRotY + rotY, initRotZ + rotZ));
-	SetProjection(90.0f);
+	SetProjection(FOV);
 
 	//Merge the matrixes to create MVP. It's now ready to be sent in to the shader
 	this->MVP = this->projection * this->view * this->transform;
@@ -279,42 +268,6 @@ void Rasterizer::SetTexture(Texture::TextureImage texture)
 	this->texturePTR->textureImage = texture;
 }
 
-//Set shader from a specific path
-void Rasterizer::SetShader(Shader::ShaderEffect shader)
-{
-	std::cout << "[ SHADER FOR RENDER: " << rasterizerName << " ]" << std::endl;
-
-	switch (int(shader))
-	{
-		//Rainbow Static
-	case 0:
-		shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/StaticRainbow.shader");
-		break;
-
-		//Pulse Color
-	case 1:
-		shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/PulseColor.shader");
-		break;
-
-		//Texture from file
-	case 2:
-		shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/ImageTexture.shader");
-		break;
-
-		//Bling bling!
-	case 3:
-		shaderPTR->SetupShader("../../../projects/neckGraphics/code/resources/shaders/BlinnPhong.shader");
-		break;
-	}
-
-	if (int(texturePTR->textureImage) != -1)
-	{
-		shaderPTR->SetUniform1i("u_Texture", 0);
-	}
-
-	this->shaderPTR->shaderEFK = shader;
-}
-
 //Set a light source
 void Rasterizer::SetLight(Light::LightSource lightsource)
 {
@@ -368,40 +321,21 @@ void Rasterizer::SetProjection(float FOV)
 	this->projection = matrix3D::perspectiveProj(FOV, this->window_Width, this->window_Height, 0.1f, 100.0f).transpose();
 }
 
-//DONE
-void Rasterizer::SetupFrameBuffer()
+//WIP
+void Rasterizer::SetupFrameBuffer(unsigned int x, unsigned int y)
 {
-	glGenFramebuffers(1, &this->fbo);
-
-	//Create a color attachment texture
-	glGenTextures(1, &this->tcb);
-	glBindTexture(GL_TEXTURE_2D, this->tcb);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, window_Width, window_Height, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	//Create a renderbuffer object for depth and stencil attachment ( we won't be sampling these )
-	glGenRenderbuffers(1, &this->rbo);
-	glBindRenderbuffer(GL_RENDERBUFFER, this->rbo);
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, window_Width, window_Height);
-
-	//Attach the texture and renderbuffer
-	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, this->fbo); //DRAW (Write ops), READ (Read ops), GL_FRAMEBUFFER (Both)
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->tcb, 0);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, this->rbo);
-
-	//Verify if it's complete
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		cout << "FRAMEBUFFER ERROR: Not completed!" << endl;
+	frameBufferPTR->CreateFrameBuffer(x, y);
 }
 
-//DONE
-unsigned char* Rasterizer::GetFrameBufferPointer()
+//WIP
+int* Rasterizer::GetFrameBufferPointer()
 {
-	return this->image;
+	int val = GL_VIEWPORT;
+	int* pointer = &val;
+	return pointer;
 }
 
-//DONE
+//WIP
 string Rasterizer::GetFrameBufferSize()
 {
 	string widthHeight;
@@ -413,6 +347,7 @@ string Rasterizer::GetFrameBufferSize()
 	return widthHeight;
 }
 
+//WIP
 vector<Rasterizer::PixelColor> Rasterizer::GetPixel()
 {
 	return this->pixels;
@@ -430,10 +365,213 @@ void Rasterizer::SetPixelShader(const function<PixelColor(vector2D texture, vect
 	this->pixelShader = func;
 }
 
-//WIP - Set IBO to FrameBuffer
-void Rasterizer::IndexToFrame()
+Rasterizer::Scanline::Scanline(int xOne, int xTwo, int y)
 {
-	//TODO: Fix this
+	if (xOne > xTwo)
+	{
+		xBegin = xTwo, xEnd = xOne;
+	}
+	else
+	{
+		xBegin = xOne, xEnd = xTwo;
+	}
+
+	Y = y;
+}
+
+//DONT TOUCH - WORKS
+Rasterizer::Edge::Edge(vector3D vOne, vector3D vTwo)
+{
+	if (vOne.vecOrigin[1] < vTwo.vecOrigin[1])
+	{
+		xb = vOne.vecOrigin[0];
+		yb = vOne.vecOrigin[1];
+		xe = vTwo.vecOrigin[0];
+		ye = vTwo.vecOrigin[1];
+	}
+	else
+	{
+		xb = vTwo.vecOrigin[0];
+		yb = vTwo.vecOrigin[1];
+		xe = vOne.vecOrigin[0];
+		ye = vOne.vecOrigin[1];
+	}
+
+	dx = (xe - xb);
+	dy = (ye - yb);
+
+	if (dx >= 0)
+	{
+		if (dy > dx)
+		{
+			oct = OctantTwo;
+			std::swap(dx, dy);
+		}
+		else
+		{
+			oct = OctantOne;
+		}
+	}
+	else
+	{
+		if (dy > -dx)
+		{
+			oct = OctantThree;
+			std::swap(dx, dy);
+		}
+		else
+		{
+			oct = OctantFour;
+		}
+	}
+
+	dx = abs(dx);
+	dy = abs(dy);
+
+	d = 2 * dy - dx;
+	e = 2 * dy;
+	ne = 2 * (dy - dx);
+
+	x = xb;
+	y = yb;
+}
+
+
+//RASTERIZER AREA
+//WIP
+void Rasterizer::Rasterize(Mesh::Vertex vOne, Mesh::Vertex vTwo, Mesh::Vertex vThree)
+{
+	Edge edges[3] =
+	{
+		Edge(vOne.pos, vTwo.pos),
+		Edge(vOne.pos, vThree.pos),
+		Edge(vThree.pos, vTwo.pos)
+	};
+
+	int maxLength = 0, EdgeL = 0;
+
+	for (int i = 0; i < 3; i++)
+	{
+		int length = edges[i].ye - edges[i].yb;
+		if (length > maxLength)
+		{
+			maxLength = length;
+			EdgeL = i;
+		}
+	}
+
+	int EdgeOneS, EdgeTwoS;
+
+	if (edges[(EdgeL + 1) % 3].yb > edges[(EdgeL + 2) % 3].yb)
+	{
+		EdgeTwoS = (EdgeL + 1) % 3;
+		EdgeOneS = (EdgeL + 2) % 3;
+	}
+
+	else
+	{
+		EdgeOneS = (EdgeL + 1) % 3;
+		EdgeTwoS = (EdgeL + 2) % 3;
+	}
+
+	while (edges[EdgeL].y < edges[EdgeL].ye)
+	{
+		int obsoleteY = edges[EdgeL].y;
+
+		while (edges[EdgeL].y == obsoleteY)
+			Increment(edges[EdgeL]);
+
+		if (edges[EdgeL].y <= edges[EdgeOneS].ye)
+		{
+			while (edges[EdgeL].y > edges[EdgeOneS].y)
+				Increment(edges[EdgeOneS]);
+
+			scanline(Scanline(edges[EdgeOneS].x, edges[EdgeL].x, edges[EdgeL].y));
+		}
+		else
+		{
+			while (edges[EdgeL].y > edges[EdgeTwoS].y)
+				Increment(edges[EdgeTwoS]);
+
+			scanline(Scanline(edges[EdgeTwoS].x, edges[EdgeL].x, edges[EdgeL].y));
+		}
+	}
+}
+
+//WIP
+void Rasterizer::scanline(const Scanline& scan)
+{
+	int diffX = scan.xEnd - scan.xBegin;
+
+	if (diffX == 0)
+	{
+		return;
+	}
+
+	for (int x = scan.xBegin; x <= scan.xEnd; x++)
+	{
+		float u, v, w;
+		Barycentric(vector2D(x, scan.Y), vector2D(vertexOne.vecOrigin[0], vertexOne.vecOrigin[1]), vector2D(vertexTwo.vecOrigin[0], vertexTwo.vecOrigin[1]), vector2D(vertexThree.vecOrigin[0], vertexThree.vecOrigin[1]), u, v, w);
+		float corrW = (u * wOne + v * wTwo + w * wThree);
+		float zPixel = ((vertexOne.vecOrigin[2] * u) + (vertexTwo.vecOrigin[2] * v) + (vertexThree.vecOrigin[2] * w));
+
+		int index = (scan.Y * window_Width + x);
+
+		if (index < 0 || index >= (window_Width * window_Height))
+		{
+			continue;
+		}
+
+		if (zDepth[index] > zPixel)
+		{
+			continue;
+		}
+
+		zDepth[index] = zPixel;
+
+		//TEST VERSION
+		vector2D texture = (((uvOne * u) * wOne), ((uvTwo * v) * wTwo) / corrW);
+		vector3D normal = ((normOne * u) * wOne + (normTwo * v) * wTwo + (normThree * w) * wThree) / corrW;
+		vector3D diff = ((diffColorOne * u) * wOne + (diffColorTwo * v) * wTwo + (diffColorThree * w) * wThree) / corrW;
+
+		//ORIGINAL
+		/*vector2D texture = ((uvOne * u) * wOne + (uvTwo * v) * wTwo + (uvThree * w) * wThree) / corrW;
+		vector3D normal = ((normOne * u) * wOne + (normTwo * v) * wTwo + (normThree * w) * wThree) / corrW;
+		vector3D diff = ((diffColorOne * u) * wOne + (diffColorTwo * v) * wTwo + (diffColorThree * w) * wThree) / corrW;*/
+
+		PixelColor col = pixelShader({ texture.vecOrigin[0], 1 - texture.vecOrigin[1] }, normal, image, this->W, this->H, N);
+
+		//PixelColor col = fragments(texture, normal, image, this->w, this->h, n);
+
+		/* ALL WHITE */
+		/*col.r = std::min(255.0f, 255.0f);
+		col.g = std::min(255.0f, 255.0f);
+		col.b = std::min(255.0f, 255.0f);*/
+
+		/* Some blue */
+		/*col.r = texture.vecOrigin[0] * 255;
+		col.g = texture.vecOrigin[1] * 255;
+		col.b = 255;*/
+
+		/* USE THIS AS FINAL */
+		col.r = ((col.r * diff.vecOrigin[0]), (col.r * diff.vecOrigin[0]));
+		col.g = ((col.g * diff.vecOrigin[1]), (col.g * diff.vecOrigin[1]));
+		col.b = ((col.b * diff.vecOrigin[2]), (col.b * diff.vecOrigin[2]));
+
+		if ((scan.Y * window_Width + x) < 0)
+		{
+			continue;
+		}
+		else if ((scan.Y * window_Width + x) >= window_Width * window_Height)
+		{
+			continue;
+		}
+
+		if (x > 0 && x < window_Width)
+		{
+			this->pixels[index] = col;
+		}
+	}
 }
 
 //WIP
@@ -494,74 +632,26 @@ void Rasterizer::Increment(Edge& edge)
 	}
 }
 
-//WIP
-void Rasterizer::Rasterize(vector3D vOne, vector3D vTwo, vector3D vThree)
+//DONT TOUCH - WORKS
+void Rasterizer::Barycentric(vector2D p, vector2D a, vector2D b, vector2D c, float& u, float& v, float& w)
 {
-	Edge edges[3] =
-	{
-		Edge(vOne, vTwo),
-		Edge(vOne, vThree),
-		Edge(vThree, vTwo)
-	};
+	vector2D vZero = b - a;
+	vector2D vOne = c - a;
+	vector2D vTwo = p - a;
 
-	int maxLength = 0, EdgeL = 0;
-
-	for (int i = 0; i < 3; i++)
-	{
-		int length = edges[i].ye - edges[i].yb;
-		if (length > maxLength)
-		{
-			maxLength = length;
-			EdgeL = i;
-		}
-	}
-
-	int EdgeOneS, EdgeTwoS;
-
-	if (edges[(EdgeL + 1) % 3].yb > edges[(EdgeL + 2) % 3].yb)
-	{
-		EdgeTwoS = (EdgeL + 1) % 3;
-		EdgeOneS = (EdgeL + 2) % 3;
-	}
-
-	else
-	{
-		EdgeOneS = (EdgeL + 1) % 3;
-		EdgeTwoS = (EdgeL + 2) % 3;
-	}
-
-	while (edges[EdgeL].y < edges[EdgeL].ye)
-	{
-		int obsoleteY = edges[EdgeL].y;
-
-		while (edges[EdgeL].y == obsoleteY)
-		{
-			Increment(edges[EdgeL]);
-		}
-
-		if (edges[EdgeL].y <= edges[EdgeOneS].ye)
-		{
-			while (edges[EdgeL].y > edges[EdgeOneS].y)
-			{
-				Increment(edges[EdgeOneS]);
-			}
-
-			scanline(Scanline(edges[EdgeOneS].x, edges[EdgeL].x, edges[EdgeL].y));
-		}
-		else
-		{
-			while (edges[EdgeL].y > edges[EdgeTwoS].y)
-			{
-				Increment(edges[EdgeTwoS]);
-			}
-
-			scanline(Scanline(edges[EdgeTwoS].x, edges[EdgeL].x, edges[EdgeL].y));
-		}
-	}
+	float D00 = vZero.dotProd(vZero);
+	float D01 = vZero.dotProd(vOne);
+	float D11 = vOne.dotProd(vOne);
+	float D20 = vTwo.dotProd(vZero);
+	float D21 = vTwo.dotProd(vOne);
+	float denom = D00 * D11 - D01 * D01;
+	v = (D11 * D20 - D01 * D21) / denom;
+	w = (D00 * D21 - D01 * D20) / denom;
+	u = 1.0f - v - w;
 }
 
-//WIP
-void Rasterizer::Perspective(vector3D &vOne, vector3D &vTwo, vector3D &vThree)
+//DONT TOUCH - WORKS
+void Rasterizer::Perspective(vector3D& vOne, vector3D& vTwo, vector3D& vThree)
 {
 	wOne = 1 / vOne.vecOrigin[3];
 	wTwo = 1 / vTwo.vecOrigin[3];
@@ -581,235 +671,78 @@ void Rasterizer::Perspective(vector3D &vOne, vector3D &vTwo, vector3D &vThree)
 }
 
 //WIP
-void Rasterizer::Barycentric(vector2D p, vector2D a, vector2D b, vector2D c, float& u, float& v, float& w)
-{
-	vector2D vZero = b - a;
-	vector2D vOne = c - a;
-	vector2D vTwo = p - a;
-
-	float D00 = vZero.dotProd(vZero);
-	float D01 = vZero.dotProd(vOne);
-	float D11 = vOne.dotProd(vOne);
-	float D20 = vTwo.dotProd(vZero);
-	float D21 = vTwo.dotProd(vOne);
-	float denom = D00 * D11 - D01 * D01;
-	v = (D11 * D20 - D01 * D21) / denom;
-	w = (D00 * D21 - D01 * D20) / denom;
-	u = 1.0f - v - w;
-}
-
-//WIP
-void Rasterizer::scanline(const Scanline& scan)
-{
-	int diffX = scan.xEnd - scan.xBegin;
-
-	if (diffX == 0)
-	{
-		return;
-	}
-
-	for (int x = scan.xBegin; x <= scan.xEnd; x++)
-	{
-		float u, v, w;
-		Barycentric(vector2D(x, scan.Y), vector2D(rastVertexOne.vecOrigin[0], rastVertexOne.vecOrigin[1]), vector2D(rastVertexTwo.vecOrigin[0], rastVertexTwo.vecOrigin[1]), vector2D(rastVertexThree.vecOrigin[0], rastVertexThree.vecOrigin[1]), u, v, w);
-		float corrW = (u * wOne + v * wTwo + w * wThree);
-		float zPixel = ((rastVertexOne.vecOrigin[2] * u) + (rastVertexTwo.vecOrigin[2] * v) + (rastVertexThree.vecOrigin[2] * w));
-
-		int index = (scan.Y * window_Width + x);
-
-		if (index < 0 || index >= (window_Width * window_Height))
-		{
-			continue;
-		}
-
-		if (zDepth[index] > zPixel)
-		{
-			continue;
-		}
-
-		zDepth[index] = zPixel;
-
-		//TEST VERSION
-		vector2D texture = (((rastUVOne * u) * wOne), ((rastUVTwo * v) * wTwo) / corrW);
-		vector3D normal = ((rastNormOne * u) * wOne + (rastNormTwo * v) * wTwo + (rastNormThree * w) * wThree) / corrW;
-		vector3D diff = ((rastDiffColorOne * u) * wOne + (rastDiffColorTwo * v) * wTwo + (rastDiffColorThree * w) * wThree) / corrW;
-
-		//ORIGINAL
-		/*vector2D texture = ((uvOne * u) * wOne + (uvTwo * v) * wTwo + (uvThree * w) * wThree) / corrW;
-		vector3D normal = ((normOne * u) * wOne + (normTwo * v) * wTwo + (normThree * w) * wThree) / corrW;
-		vector3D diff = ((diffColorOne * u) * wOne + (diffColorTwo * v) * wTwo + (diffColorThree * w) * wThree) / corrW;*/
-
-		PixelColor col = pixelShader({ texture.vecOrigin[0], 1 - texture.vecOrigin[1] }, normal, image, this->w, this->h, n);
-
-		//PixelColor col = fragments(texture, normal, image, this->w, this->h, n);
-
-		/* ALL WHITE */
-		/*col.r = std::min(255.0f, 255.0f);
-		col.g = std::min(255.0f, 255.0f);
-		col.b = std::min(255.0f, 255.0f);*/
-
-		/* Some blue */
-		/*col.r = texture.vecOrigin[0] * 255;
-		col.g = texture.vecOrigin[1] * 255;
-		col.b = 255;*/
-
-		/* USE THIS AS FINAL */
-		col.r = ((col.r * diff.vecOrigin[0]), (col.r * diff.vecOrigin[0]));
-		col.g = ((col.g * diff.vecOrigin[1]), (col.g * diff.vecOrigin[1]));
-		col.b = ((col.b * diff.vecOrigin[2]), (col.b * diff.vecOrigin[2]));
-
-		if ((scan.Y * window_Width + x) < 0)
-		{
-			continue;
-		}
-		else if ((scan.Y * window_Width + x) >= window_Width * window_Height)
-		{
-			continue;
-		}
-
-		if (x > 0 && x < window_Width)
-		{
-			this->pixels[index] = col;
-		}
-	}
-}
-
-//WIP
-Rasterizer::Scanline::Scanline(int xOne, int xTwo, int y)
-{
-	if (xOne > xTwo)
-	{
-		xBegin = xTwo, xEnd = xOne;
-	}
-	else
-	{
-		xBegin = xOne, xEnd = xTwo;
-	}
-
-	Y = y;
-}
-
-//WIP
-Rasterizer::Edge::Edge(vector3D vOne, vector3D vTwo)
-{
-	if (vOne.vecOrigin[1] < vTwo.vecOrigin[1])
-	{
-		xb = vOne.vecOrigin[0];
-		yb = vOne.vecOrigin[1];
-		xe = vTwo.vecOrigin[0];
-		ye = vTwo.vecOrigin[1];
-	}
-	else
-	{
-		xb = vTwo.vecOrigin[0];
-		yb = vTwo.vecOrigin[1];
-		xe = vOne.vecOrigin[0];
-		ye = vOne.vecOrigin[1];
-	}
-
-	dx = (xe - xb);
-	dy = (ye - yb);
-
-	if (dx >= 0)
-	{
-		if (dy > dx)
-		{
-			oct = OctantTwo;
-			std::swap(dx, dy);
-		}
-		else
-		{
-			oct = OctantOne;
-		}
-	}
-	else
-	{
-		if (dy > -dx)
-		{
-			oct = OctantThree;
-			std::swap(dx, dy);
-		}
-		else
-		{
-			oct = OctantFour;
-		}
-	}
-
-	dx = abs(dx);
-	dy = abs(dy);
-
-	d = 2 * dy - dx;
-	e = 2 * dy;
-	ne = 2 * (dy - dx);
-
-	x = xb;
-	y = yb;
-}
-
-//Not requiered! Testing
-bool Rasterizer::ToggleFrameBuffer()
-{
-	//If it's toggled, switch back
-	if (frameBufferToggle)
-	{
-		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		frameBufferToggle = false;
-	}
-
-	//If it's not, switch it on
-	else
-	{
-		glBindFramebuffer(GL_DRAW_FRAMEBUFFER, this->fbo);
-		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		frameBufferToggle = true;
-	}
-
-	return frameBufferToggle;
-}
+vector<Rasterizer::PixelColor> Rasterizer::PixelRetriver() { return this->pixels; }
 
 //WIP
 void Rasterizer::Draw()
 {
+	/*
+		1. Get shape verticies, 3 vertices
+		2. Get vertex pos relative to world space / screen space
+		3. Examine edges, from A -> B, B -> C, C -> A
+		4. Interpolate X(Y) = startPos + (distBetweenStartAndEnd) * (howFarWeTraveled) / (How far are we going to travel)
+		5. Save all vertices along the edge
+		6. Sort all vertices in vectors for each Y values, from lowest to highest
+		
+	*/
+
+	Bind();
+
 	const vector<Mesh::Vertex>& meshData = this->meshPTR->vertices;
+	indices = this->meshPTR->indices;
 
-	for (int i = 0; i < this->meshPTR->indices.size(); i += 3)
+	Update();
+
+	for (int i = 0; i < indices.size(); i += 3)
 	{
-		vector3D vOne(meshData[this->meshPTR->indices[i]].pos.vecOrigin[0], meshData[this->meshPTR->indices[i]].pos.vecOrigin[1], meshData[this->meshPTR->indices[i]].pos.vecOrigin[2]);
-		vector3D vTwo(meshData[this->meshPTR->indices[i + 1]].pos.vecOrigin[0], meshData[this->meshPTR->indices[i + 1]].pos.vecOrigin[1], meshData[this->meshPTR->indices[i + 1]].pos.vecOrigin[2]);
-		vector3D vThree(meshData[this->meshPTR->indices[i + 2]].pos.vecOrigin[0], meshData[this->meshPTR->indices[i + 2]].pos.vecOrigin[1], meshData[this->meshPTR->indices[i + 2]].pos.vecOrigin[2]);
+		vector3D vOne(meshData[indices[i]].pos.vecOrigin[0], meshData[indices[i]].pos.vecOrigin[1], meshData[indices[i]].pos.vecOrigin[2]);
+		vector3D vTwo(meshData[indices[i + 1]].pos.vecOrigin[0], meshData[indices[i + 1]].pos.vecOrigin[1], meshData[indices[i + 1]].pos.vecOrigin[2]);
+		vector3D vThree(meshData[indices[i + 2]].pos.vecOrigin[0], meshData[indices[i + 2]].pos.vecOrigin[1], meshData[indices[i + 2]].pos.vecOrigin[2]);
 
-		vector2D uOne(meshData[this->meshPTR->indices[i]].texCoord.vecOrigin[0], meshData[this->meshPTR->indices[i]].texCoord.vecOrigin[1]);
-		vector2D uTwo(meshData[this->meshPTR->indices[i + 1]].texCoord.vecOrigin[0], meshData[this->meshPTR->indices[i + 1]].texCoord.vecOrigin[1]);
-		vector2D uThree(meshData[this->meshPTR->indices[i + 2]].texCoord.vecOrigin[0], meshData[this->meshPTR->indices[i + 2]].texCoord.vecOrigin[1]);
+		vector2D uOne(meshData[indices[i]].texCoord.vecOrigin[0], meshData[indices[i]].texCoord.vecOrigin[1]);
+		vector2D uTwo(meshData[indices[i + 1]].texCoord.vecOrigin[0], meshData[indices[i + 1]].texCoord.vecOrigin[1]);
+		vector2D uThree(meshData[indices[i + 2]].texCoord.vecOrigin[0], meshData[indices[i + 2]].texCoord.vecOrigin[1]);
 
-		vector3D nOne(meshData[this->meshPTR->indices[i]].norm.vecOrigin[0], meshData[this->meshPTR->indices[i]].norm.vecOrigin[1], meshData[this->meshPTR->indices[i]].norm.vecOrigin[2]);
-		vector3D nTwo(meshData[this->meshPTR->indices[i + 1]].norm.vecOrigin[0], meshData[this->meshPTR->indices[i + 1]].norm.vecOrigin[1], meshData[this->meshPTR->indices[i + 1]].norm.vecOrigin[2]);
-		vector3D nThree(meshData[this->meshPTR->indices[i + 2]].norm.vecOrigin[0], meshData[this->meshPTR->indices[i + 2]].norm.vecOrigin[1], meshData[this->meshPTR->indices[i + 2]].norm.vecOrigin[2]);
+		vector3D nOne(meshData[indices[i]].norm.vecOrigin[0], meshData[indices[i]].norm.vecOrigin[1], meshData[indices[i]].norm.vecOrigin[2]);
+		vector3D nTwo(meshData[indices[i + 1]].norm.vecOrigin[0], meshData[indices[i + 1]].norm.vecOrigin[1], meshData[indices[i + 1]].norm.vecOrigin[2]);
+		vector3D nThree(meshData[indices[i + 2]].norm.vecOrigin[0], meshData[indices[i + 2]].norm.vecOrigin[1], meshData[indices[i + 2]].norm.vecOrigin[2]);
 
-		rastVertexOne = projection * transform * vOne;
-		rastVertexTwo = projection * transform * vTwo;
-		rastVertexThree = projection * transform * vThree;
+		vertexOne = (view * projection) * transform * vOne;
+		vertexTwo = (view * projection) * transform * vTwo;
+		vertexThree = (view * projection) * transform * vThree;
 
-		Perspective(rastVertexOne, rastVertexTwo, rastVertexThree);
+		Perspective(vertexOne, vertexTwo, vertexThree);
 
-		rastUVOne = uOne;
-		rastUVTwo = uTwo;
+		uvOne = uOne;
+		uvTwo = uTwo;
+		uvThree = uThree;
 
-		rastNormOne = nOne;
-		rastNormTwo = nTwo;
-		rastNormThree = nThree;
+		normOne = nOne;
+		normTwo = nTwo;
+		normThree = nThree;
 
-		rastDiffColorOne = vertexShader(meshData[this->meshPTR->indices[i]].pos, meshData[this->meshPTR->indices[i]].norm, transform);
-		rastDiffColorTwo = vertexShader(meshData[this->meshPTR->indices[i + 1]].pos, meshData[this->meshPTR->indices[i + 1]].norm, transform);
-		rastDiffColorThree = vertexShader(meshData[this->meshPTR->indices[i + 2]].pos, meshData[this->meshPTR->indices[i + 2]].norm, transform);
+		diffColorOne = vertexShader(meshData[indices[i]].pos, meshData[indices[i]].norm, transform);
+		diffColorTwo = vertexShader(meshData[indices[i + 1]].pos, meshData[indices[i + 1]].norm, transform);
+		diffColorThree = vertexShader(meshData[indices[i + 2]].pos, meshData[indices[i + 2]].norm, transform);
 
-		Rasterize(rastVertexOne, rastVertexTwo, rastVertexThree);
+		Mesh::Vertex vA, vB, vC;
+
+		vA.pos = vertexOne;
+		vA.texCoord = uvOne;
+		vA.norm = normOne;
+
+		vB.pos = vertexTwo;
+		vB.texCoord = uvTwo;
+		vB.norm = normTwo;
+
+		vC.pos = vertexThree;
+		vC.texCoord = uvThree;
+		vC.norm = normThree;
+
+		Rasterize(vA, vB, vC);
 	}
+
+	Unbind();
 }
 
 //Clear the screen from previous data
@@ -823,7 +756,7 @@ void Rasterizer::Clear() const
 //DONE
 void Rasterizer::Bind()
 {
-	shaderPTR->Bind();
+	frameBufferPTR->Bind();
 	meshPTR->Bind();
 
 	if (int(texturePTR->textureImage) != -1)
@@ -841,7 +774,7 @@ void Rasterizer::Unbind()
 	}
 
 	meshPTR->Unbind();
-	shaderPTR->Unbind();
+	frameBufferPTR->Unbind();
 }
 
 //DONE
@@ -1071,8 +1004,9 @@ void Rasterizer::KeyboardScan()
 		C_DOWN = false;
 }
 
+//WIP
 void Rasterizer::Flush()
 {
-	//memset(&pixels[0], 0, sizeof(pixels[0]) * pixels.size());
-	//zDepth.assign(width * height, 0);
+	memset(&pixels[0], 0, sizeof(pixels[0]) * pixels.size());
+	zDepth.assign(window_Width * window_Height, 0);
 }

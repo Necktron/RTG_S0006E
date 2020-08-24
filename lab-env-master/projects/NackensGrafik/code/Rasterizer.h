@@ -48,7 +48,7 @@ class Rasterizer
 			Octant oct;
 			int x, y, xb, xe, yb, ye, d, dy, dx, e, ne;
 		};
-
+		
 		std::vector<Rasterizer::PixelColor> pixelRetriver();
 
 		//Scanline function
