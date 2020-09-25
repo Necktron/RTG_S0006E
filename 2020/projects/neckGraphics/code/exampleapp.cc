@@ -2,11 +2,13 @@
 // exampleapp.cc
 // (C) 2015-2020 Individual contributors, see AUTHORS file
 //------------------------------------------------------------------------------
+#define TASK_COMPLETED ShellExecute(NULL, "open", "https://www.youtube.com/watch?v=5r06heQ5HsI", NULL, NULL, SW_SHOWNORMAL);
+
 #include "config.h"
 #include "exampleapp.h"
 #include <cstring>
 #include <iostream>
-#include <algorithm> 
+#include <algorithm>
 
 using namespace Display;
 namespace Example
@@ -38,11 +40,10 @@ ExampleApp::Open()
 	this->window = new Display::Window;
 	this->window->SetTitle("Necktronian Graphics Inc.");
 
-	resolution[0] = 800.0f;
-	resolution[1] = 600.0f;
+	resolution[0] = 1920.0f;
+	resolution[1] = 1080.0f;
 
 	this->window->SetSize(resolution[0], resolution[1]);
-	rasterInstance = make_shared<Rasterizer>();
 
 	if (this->window->Open())
 	{
@@ -50,53 +51,54 @@ ExampleApp::Open()
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glEnable(GL_DEPTH_TEST);
 
-		renderInstanceA.Init(resolution[0], resolution[1], "Instance A");
+		renderInstance = Renderer(resolution[0], resolution[1]);
+		rasterInstance = Rasterizer(256, 256);
+		controlManager = ControlManager(renderInstance, rasterInstance);
 
-		//Do you want the shader to be printed out for closer inspection? Simply comment out this line if you don't want to. It's disabled by default
-		renderInstanceA.shaderPTR->m_DEBUG = true;
+		//Entity A
+		Entity entA = Entity("Rasterizer Canvas");
+		entA.shaderPTR->m_DEBUG = false;
+		entA.SetMesh(Mesh::OBJ::QUAD);
+		entA.SetShader(Shader::ShaderEffect::BLINN_PHONG);
+		entA.SetTexture(Texture::TextureImage::LAGER);
 
-		//Setup mesh with VBO, VAO and IBO
-		renderInstanceA.SetMesh(Mesh::OBJ::CUBE);
+		//Entity B
+		/*Entity entB = Entity("Korean Flag");
+		entB.shaderPTR->m_DEBUG = false;
+		entB.SetMesh(Mesh::OBJ::CUBE);
+		entB.SetShader(Shader::ShaderEffect::BLINN_PHONG);
+		entB.SetTexture(Texture::TextureImage::MICKE);*/
 
-		//Select a shader, ( You must know what shader makes what effects )
-		renderInstanceA.SetShader(Shader::ShaderEffect::BLINN_PHONG);
+		renderInstance.AddEntity(entA);
+		//renderInstance.AddEntity(entB);
 
-		//Select a texture, we must make sure we got a shader that support textures above
-		renderInstanceA.SetTexture(Texture::TextureImage::IKEA);
+		/*int element = 0;
+		int row = 0;
 
-		//Select a light source
-		renderInstanceA.SetLight(Light::LightSource::POINT_LIGHT);
+		for (int i = 0; i < 100; i++)
+		{
+			Entity entTest = Entity("LoopObject_" + std::to_string(i));
+			entTest.shaderPTR->m_DEBUG = false;
+			entTest.SetMesh(Mesh::OBJ::CAT);
+			entTest.SetShader(Shader::ShaderEffect::BLINN_PHONG);
+			entTest.SetTexture(Texture::TextureImage::CAT);
 
-		//RENDER B
-		renderInstanceB.Init(resolution[0], resolution[1], "Instance B");
-		renderInstanceB.shaderPTR->m_DEBUG = false;
-		renderInstanceB.SetMesh(Mesh::OBJ::CUBE);
-		renderInstanceB.SetShader(Shader::ShaderEffect::BLINN_PHONG);
-		renderInstanceB.SetTexture(Texture::TextureImage::BLUEBERRIES);
-		renderInstanceB.SetLight(Light::LightSource::POINT_LIGHT);
+			renderInstance.AddEntity(entTest);
 
-		//RENDER C
-		renderInstanceC.Init(resolution[0], resolution[1], "Rasterizer Canvas");
-		renderInstanceC.shaderPTR->m_DEBUG = false;
-		renderInstanceC.SetMesh(Mesh::OBJ::QUAD);
-		renderInstanceC.SetShader(Shader::ShaderEffect::BLINN_PHONG);
-		//renderInstanceC.SetTexture(Texture::TextureImage::KOREAN_FLAG);
-		renderInstanceC.SetLight(Light::LightSource::POINT_LIGHT);
+			renderInstance.entityList[i].SetTransform(vector3D(element * 2, row * 2, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
+			element++;
+
+			if (element > 9)
+			{
+				element = 0;
+				row++;
+			}
+		}*/
 
 		//RASTERIZER SETUP
-		rasterInstance->Init("Rasterizer OBJ");
-		rasterInstance->SetupFrameBuffer(256, 256); //Setup the FBO for the rasterizer
-		rasterInstance->SetMesh(Mesh::OBJ::CAT);
-		rasterInstance->SetTexture(Texture::TextureImage::CAT);
-		rasterInstance->SetLight(Light::LightSource::POINT_LIGHT);
-
-		rasterInstance->frameBufferPTR->Bind();
-		int* frameBuff = rasterInstance->GetFrameBufferPointer();
-		cout << "FrameBuffer " << frameBuff << " Size is: " << rasterInstance->GetFrameBufferSize() << endl; //Print results from frame buffer
-		rasterInstance->frameBufferPTR->Unbind();
-
-		frameBuff = rasterInstance->GetFrameBufferPointer();
-		cout << "FrameBuffer " << frameBuff << " Size is: " << rasterInstance->GetFrameBufferSize() << endl; //Print results from frame buffer
+		rasterInstance.SetupFrameBuffer(); //Setup the FBO for the rasterizer
+		rasterInstance.SetMesh(Mesh::OBJ::PENGUIN);
+		rasterInstance.SetTexture(Texture::TextureImage::PENGUIN);
 
 		//Lambda functions for Rasterizer usage
 		auto lambdaVS = [](vector3D pos, vector3D norm, matrix3D nMat) -> vector3D
@@ -134,8 +136,8 @@ ExampleApp::Open()
 			return color;
 		};
 
-		rasterInstance->SetVertexShader(lambdaVS);
-		rasterInstance->SetPixelShader(lambdaFS);
+		rasterInstance.SetVertexShader(lambdaVS);
+		rasterInstance.SetPixelShader(lambdaFS);
 
 		return true;
 	}
@@ -151,43 +153,62 @@ void
 ExampleApp::Run()
 {
 	bool switchingControl = false;
+	int currentController = 0;
 
-	renderInstanceA.SetStartTransform(vector3D(-4.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(30.0f, 20.0f, 0.0f));
-	renderInstanceB.SetStartTransform(vector3D(4.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(80.0f, 0.0f, 0.0f));
-	renderInstanceC.SetStartTransform(vector3D(0.0f, 0.0f, 0.0f), vector3D(3.0f, 3.0f, 3.0f), vector3D(0.0f, 0.0f, 0.0f));
-	rasterInstance->SetStartTransform(vector3D(0.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
+	//Set transform of models & raster
+	renderInstance.entityList[0].SetTransform(vector3D(0.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
+	//renderInstance.entityList[1].SetTransform(vector3D(0.0f, 2.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
+	rasterInstance.SetTransform(vector3D(0.0f, 0.0f, 0.0f), vector3D(1.0f, 1.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f));
 
-	renderInstanceC.controlAccess = true;
+	//Set light source pos and cam pos
+	renderInstance.SetLightPos(vector3D(0.0f, 0.0f, 2.0f));
+	renderInstance.SetCamPos(vector3D(0.0f, 0.0f, 10.0f));
+
+	renderInstance.entityList[0].controlAccess = true;
 
 	while (this->window->IsOpen())
 	{
 		//CLEAR
-		renderInstanceA.Clear();
-		renderInstanceB.Clear();
-		renderInstanceC.Clear();
-		rasterInstance->Clear();
+		renderInstance.Clear();
 
 		//INPUT
-		renderInstanceA.InputScan();
-		renderInstanceB.InputScan();
-		renderInstanceC.InputScan();
-		rasterInstance->InputScan();
+		controlManager.InputScan();
 
-		//Not very modular, but it works!
-		//Switch control between renderInstanceA and B
-		if (GetAsyncKeyState('B') < 0 && !switchingControl)
+		//Switch control between all entities, one by one
+		/*if (GetAsyncKeyState('B') < 0 && !switchingControl)
 		{
-			//TODO: Set so it switches between Render control and Rasterizer control
-			if (renderInstanceC.controlAccess == true)
+			if (currentController == renderInstance.entityList.size() - 1)
 			{
-				renderInstanceC.controlAccess = false;
-				rasterInstance->controlAccess = true;
+				renderInstance.entityList[currentController].controlAccess = false;
+				renderInstance.entityList[0].controlAccess = true;
+				currentController = 0;
 			}
 
-			else if (rasterInstance->controlAccess == true)
+			else
 			{
-				renderInstanceC.controlAccess = true;
-				rasterInstance->controlAccess = false;
+				renderInstance.entityList[currentController].controlAccess = false;
+				renderInstance.entityList[currentController + 1].controlAccess = true;
+				currentController++;
+			}
+
+			switchingControl = true;
+		}*/
+
+		//Switch control between entity and raster OBJ
+		if (GetAsyncKeyState('B') < 0 && !switchingControl)
+		{
+			if (renderInstance.entityList[0].controlAccess == true)
+			{
+				renderInstance.entityList[0].controlAccess = false;
+				rasterInstance.controlAccess = true;
+				printf("Rasterizer is now in control");
+			}
+
+			else
+			{
+				renderInstance.entityList[0].controlAccess = true;
+				rasterInstance.controlAccess = false;
+				printf("Renderer is now in control");
 			}
 
 			switchingControl = true;
@@ -197,15 +218,14 @@ ExampleApp::Run()
 			switchingControl = false;
 
 		//Rasterizer Draw
-		rasterInstance->Draw();
-		renderInstanceC.SetRastTexture(rasterInstance);
+		rasterInstance.Draw();
+		//renderInstance.entityList[0].SetTexture(rasterInstance.renderTarget->renderTexture);
 
-		//Draw, back at normal buffer 0
-		renderInstanceA.Draw();
-		renderInstanceB.Draw();
-		renderInstanceC.Draw();
+		//Draw
+		renderInstance.Draw();
+		TASK_COMPLETED;
 
-		rasterInstance->Flush();
+		rasterInstance.Flush();
 
 		this->window->Update();
 

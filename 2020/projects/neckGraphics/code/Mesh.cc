@@ -252,7 +252,7 @@ void Mesh::CustomMesh(const char* filepath)
 	vector2D tempVec2;
 	int tempInt;
 
-	if (!file.is_open()) { ERROR_TRIGGER; }
+	if (!file.is_open()){ ERROR_TRIGGER; } //Mesh could not be opened, please validate search path!
 
 	while (getline(file, line))
 	{

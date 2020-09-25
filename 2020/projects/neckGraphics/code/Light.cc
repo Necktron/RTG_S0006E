@@ -3,7 +3,14 @@
 
 Light::Light()
 {
-
+	currentLight.Position = vector3D(0.0f, 0.0f, 0.0f);
+	currentLight.Diffuse = vector3D(0.0f, 0.0f, 0.0f);
+	currentLight.Specular = vector3D(0.0f, 0.0f, 0.0f);
+	currentLight.Ambient = vector3D(0.0f, 0.0f, 0.0f);
+	currentLight.AmbientIntensity = 0.0f;
+	currentLight.DiffuseIntensity = 0.0f;
+	currentLight.SpecularIntensity = 0.0f;
+	lightSource = Light::LightSource::NONE;
 }
 
 Light::~Light()

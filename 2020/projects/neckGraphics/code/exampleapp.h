@@ -8,11 +8,11 @@
 //------------------------------------------------------------------------------
 #include "core/app.h"
 #include "render/window.h"
-#include "Mesh.h"
-#include "Texture.h"
-#include "Shader.h"
+#include "Entity.h"
+#include "Light.h"
 #include "Renderer.h"
 #include "Rasterizer.h"
+#include "ControlManager.h"
 #include "resources/mathLibrary/Matrix3D.h"
 #include <memory>
 #include <Windows.h>
@@ -30,10 +30,9 @@ public:
 	bool Open();
 	void Run();
 
-	Renderer renderInstanceA;
-	Renderer renderInstanceB;
-	Renderer renderInstanceC;
-	shared_ptr<Rasterizer> rasterInstance;
+	Renderer renderInstance;
+	Rasterizer rasterInstance;
+	ControlManager controlManager;
 
 private:
 	unsigned int shader;

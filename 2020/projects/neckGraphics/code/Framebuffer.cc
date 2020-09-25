@@ -1,13 +1,23 @@
 #define ERROR_TRIGGER __debugbreak();
 #include "Framebuffer.h"
 
-void FrameBuffer::CreateFrameBuffer(unsigned int x, unsigned int y)
+FrameBuffer::FrameBuffer()
+{
+	resX = 0;
+	resY = 0;
+
+	frameBuffer = 0;
+	renderTexture = 0;
+	depthBuffer = 0;
+}
+
+FrameBuffer::FrameBuffer(unsigned int x, unsigned int y)
 {
 	resX = x;
 	resY = y;
 
 	//Setup Framebuffer
-	frameBuffer = 1;
+	frameBuffer = 0;
 	glGenFramebuffers(1, &frameBuffer);
 	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
 
@@ -34,15 +44,20 @@ void FrameBuffer::CreateFrameBuffer(unsigned int x, unsigned int y)
 		ERROR_TRIGGER; //Something does not work properly!
 }
 
+FrameBuffer::~FrameBuffer()
+{
+
+}
+
 void FrameBuffer::Bind()
 {
-	glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-	glViewport(0, 0, resX, resY);
+	glBindFramebuffer(GL_FRAMEBUFFER, this->frameBuffer);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
 //Back to normal frameBuffer
 void FrameBuffer::Unbind()
 {
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0, 0, 800, 600);
+	glViewport(0, 0, 1920, 1080);
 }

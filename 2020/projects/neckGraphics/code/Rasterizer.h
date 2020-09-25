@@ -23,9 +23,11 @@
 class Rasterizer
 {
 public:
-	const int window_Width = 256;
-	const int window_Height = 256;
-
+	unsigned int window_Width, window_Height;
+	matrix3D transform;
+	shared_ptr<Mesh> meshPTR;
+	shared_ptr<Texture> texturePTR;
+	FrameBuffer* renderTarget;
 	bool controlAccess;
 
 	//Octant
@@ -63,26 +65,19 @@ public:
 		int x, y, xb, xe, yb, ye, d, dy, dx, e, ne;
 	};
 
-	shared_ptr<Mesh> meshPTR;
-	shared_ptr<Texture> texturePTR;
-	shared_ptr<Light> lightPTR;
-	shared_ptr<FrameBuffer> frameBufferPTR;
+	Rasterizer();
+	Rasterizer(unsigned int resX, unsigned int resY);
+	~Rasterizer();
 
-	void Init(string name); //DONE
 	void Update(); //Update values for color anim, rot, etc
-	void InputScan();
 
 	//Similar to Renderer functions
 	void SetMesh(Mesh::OBJ obj); //Set a mesh from the pre-defined types, triangle / quad / cube
 	void SetTexture(Texture::TextureImage texture); //Set texture from a specific path
-	void SetLight(Light::LightSource lightsource); //Set a light source
-	void SetStartTransform(vector3D pos, vector3D scale, vector3D rot); //Set everything for the transform
 	void SetTransform(vector3D pos, vector3D scale, vector3D rot); //Set everything for the transform
-	void SetView(vector3D origin, vector3D target);
-	void SetProjection(float FOV);
 
 	//Rasterizer specific
-	void SetupFrameBuffer(unsigned int x, unsigned int y); // Setup FBO with arbitrary dimensions - DONE
+	void SetupFrameBuffer(); // Setup FBO with arbitrary dimensions - DONE
 	int* GetFrameBufferPointer(); //Retrieve a pointer to the FBO - DONE
 	string GetFrameBufferSize(); //Retrieve the size of the FBO - DONE
 	vector<Rasterizer::PixelColor> GetPixel(); //Get pixel value - WIP
@@ -90,7 +85,7 @@ public:
 	void SetPixelShader(const function<PixelColor(vector2D texture, vector3D normal, unsigned char* image, int w, int h, int n)>& func); //Set pixel shader by lambda function as argument - DONE
 
 	//Rasterizer logic
-	void Rasterize(Mesh::Vertex v1, Mesh::Vertex v2, Mesh::Vertex v3);
+	void Rasterize(vector3D v1, vector3D v2, vector3D v3);
 	void scanline(const Scanline& scan);
 	void Increment(Edge& edge);
 	void Barycentric(vector2D p, vector2D a, vector2D b, vector2D c, float& u, float& v, float& w);
@@ -105,79 +100,20 @@ public:
 	void Bind();
 	void Unbind();
 
-	//Transform and such
-	vector3D rotation;
-	matrix3D transform;
+	//MODEL
+	vector3D pos;
+	vector3D scale;
+	vector3D rotVec;
+	vector3D oldRotVec;
+
+private:
+	float rotFloat;
+	float rotSpeed;
+	float angleOfRot;
+
 	matrix3D view;
 	matrix3D projection;
 	matrix3D MVP;
-
-private:
-	string rasterizerName;
-
-	void MouseScan();
-	void KeyboardScan();
-
-	float rot;
-	float rotSpeed;
-	float angleOfRot;
-	float incrementRGB;
-	float r;
-	float g;
-	float b;
-
-	//MODEL
-	float moveX;
-	float moveY;
-	float moveZ;
-
-	float rotX;
-	float rotY;
-	float rotZ;
-
-	float initPosX;
-	float initPosY;
-	float initPosZ;
-
-	float initScaleX;
-	float initScaleY;
-	float initScaleZ;
-
-	float initRotX;
-	float initRotY;
-	float initRotZ;
-
-	//CAMERA
-	float FOV;
-	float camX;
-	float camY;
-	float camZ;
-
-	float camTargetX;
-	float camTargetY;
-	float camTargetZ;
-
-	//LIGHT
-	float lightX;
-	float lightY;
-	float lightZ;
-
-	float lightAmbientIntensity;
-	float lightDiffuseIntensity;
-
-	int colorCounter;
-
-	bool LMB_DOWN;
-	bool RMB_DOWN;
-	bool MMB_DOWN;
-	bool C_DOWN;
-	float oldRotX;
-	float oldRotY;
-	float oldCamTargetX;
-	float oldCamTargetY;
-	float oldCamTargetZ;
-	POINT mousePosOrigin;
-	POINT mousePosCurrent;
 
 	int leftY, rightY, bottomY, leftX, rightX, bottomX;
 	vector3D vertexOne, vertexTwo, vertexThree;

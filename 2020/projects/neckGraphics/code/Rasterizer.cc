@@ -1,143 +1,85 @@
 #define LMB 0x0001
 #define RMB 0x0002
 #define MMB 0x0004
+#define JOBS_DONE ShellExecute(NULL, "open", "https://www.youtube.com/watch?v=5r06heQ5HsI", NULL, NULL, SW_SHOWNORMAL);
+
+//Testing
+#include <iostream>
+#include <chrono>
 
 #include "Rasterizer.h"
 
-//DONE
-void Rasterizer::Init(string name)
+//Default constructor
+Rasterizer::Rasterizer()
 {
-	rasterizerName = name;
+	window_Width = 256;
+	window_Height = 256;
+
 	meshPTR = make_shared<Mesh>();
 	texturePTR = make_shared<Texture>();
-	lightPTR = make_shared<Light>();
-	frameBufferPTR = make_shared<FrameBuffer>();
-
-	r = 1.1f;
-	g = 0.0f;
-	b = 0.0f;
-	rot = 0.0f;
-	rotSpeed = 1.0f;
-	angleOfRot = 0.0f;
-	incrementRGB = 0.0f;
-	rotX = 0.0f;
-	rotY = 0.0f;
-	rotZ = 0.0f;
-	moveX = 0.0f;
-	moveY = 0.0f;
-	moveZ = 0.0f;
-
-	//MODEL
-	initPosX = 0.0f;
-	initPosY = 0.0f;
-	initPosZ = 0.0f;
-
-	initScaleX = 0.0f;
-	initScaleY = 0.0f;
-	initScaleZ = 0.0f;
-
-	initRotX = 0.0f;
-	initRotY = 0.0f;
-	initRotZ = 0.0f;
-
-	//CAMERA
-	FOV = 90.0f;
-	camX = 0.0f;
-	camY = 0.0f;
-	camZ = 4.0f;
-
-	camTargetX = 0.0f;
-	camTargetY = 0.0f;
-	camTargetZ = 1.0f;
-
-	oldRotX = 0.0f;
-	oldRotY = 0.0f;
-	oldCamTargetX = 0.0f;
-	oldCamTargetY = 0.0f;
-	oldCamTargetZ = 0.0f;
-
-	//LIGHT
-	//Pos
-	lightX = 0.0f;
-	lightY = 0.0f;
-	lightZ = 0.0f;
-
-	//Intensity
-	lightAmbientIntensity = 0.0f;
-	lightDiffuseIntensity = 0.0f;
-
-	//Color related
-	colorCounter = 0;
-
-	transform = matrix3D();
-	view = matrix3D();
-	projection = matrix3D();
-	MVP = matrix3D();
-
-	rotation = vector3D();
-
-	meshPTR->m_DEBUG = false;
-	LMB_DOWN = false;
-	MMB_DOWN = false;
-	RMB_DOWN = false;
-	C_DOWN = false;
+	controlAccess = false;
 
 	PixelColor col;
 	col.r = 0;
 	col.g = 0;
 	col.b = 0;
 
+	this->view = matrix3D::LookAt(vector3D(0, 0, 5), vector3D(0, 0, 0), vector3D(0.0f, 1.0f, 0.0f));
+	this->projection = matrix3D::perspectiveProj(90, 256, 256, 0.1f, 100.0f).transpose();
+
+	//W = window_Width;
+	//H = window_Height;
+	//N = 4;
+
 	pixels.assign(256 * 256, col);
 	zDepth.assign(256 * 256, 0.0f);
+}
+
+Rasterizer::Rasterizer(unsigned int width, unsigned int height)
+{
+	window_Width = width;
+	window_Height = height;
+
+	meshPTR = make_shared<Mesh>();
+	texturePTR = make_shared<Texture>();
+	controlAccess = false;
+
+	PixelColor col;
+	col.r = 0;
+	col.g = 0;
+	col.b = 0;
+
+	this->view = matrix3D::LookAt(vector3D(0.0f, 0.0f, 1.0f), vector3D(0.0f, 0.0f, 0.0f), vector3D(0.0f, 1.0f, 0.0f));
+	this->projection = matrix3D::perspectiveProj(90, window_Width, window_Height, 0.1f, 100.0f).transpose();
+
+	W = window_Width;
+	H = window_Height;
+	//N = 4;
+
+	pixels.assign(window_Width * window_Height, col);
+	zDepth.assign(window_Width * window_Height, 0.0f);
+}
+
+Rasterizer::~Rasterizer()
+{
+
 }
 
 //DONE
 void Rasterizer::Update()
 {
-	//COLOR ANIM
-	if (this->r > 1.0f)
-		incrementRGB = -0.02f;
-	else if (this->r < -1.0f)
-		incrementRGB = 0.02f;
-
-	this->r += incrementRGB;
-
 	//ROT MOVE
 	if (this->angleOfRot > 360.0f)
 		this->angleOfRot = 0.0f;
 
 	this->angleOfRot += 1.0f;
 
-	this->rot = this->angleOfRot * this->rotSpeed;
+	this->rotFloat = this->angleOfRot * this->rotSpeed;
 
-	//Print out matrix values per frame
-	if (meshPTR->m_DEBUG)
-	{
-		std::cout << "MATRIX VALUES" << std::endl;
-		std::cout << MVP.mxOrigin[0][0] << " " << MVP.mxOrigin[0][1] << " " << MVP.mxOrigin[0][2] << " " << MVP.mxOrigin[0][3] << std::endl;
-		std::cout << "----------------" << std::endl;
-		std::cout << MVP.mxOrigin[1][0] << " " << MVP.mxOrigin[1][1] << " " << MVP.mxOrigin[1][2] << " " << MVP.mxOrigin[1][3] << std::endl;
-		std::cout << "----------------" << std::endl;
-		std::cout << MVP.mxOrigin[2][0] << " " << MVP.mxOrigin[2][1] << " " << MVP.mxOrigin[2][2] << " " << MVP.mxOrigin[2][3] << std::endl;
-		std::cout << "----------------" << std::endl;
-		std::cout << MVP.mxOrigin[3][0] << " " << MVP.mxOrigin[3][1] << " " << MVP.mxOrigin[3][2] << " " << MVP.mxOrigin[3][3] << std::endl;
-		std::cout << "                " << std::endl;
-	}
-
-	//Setup the vital parts for MVP, Model + View + Projection
-	SetView(vector3D(camX, camY, camZ), vector3D(camX - camTargetX, camY - camTargetY, camZ - camTargetZ));
-	SetTransform(vector3D(initPosX + moveX, initPosX + moveY, initPosZ + moveZ), vector3D(initScaleX, initScaleY, initScaleZ), vector3D(initRotX + rotX, initRotY + rotY, initRotZ + rotZ));
-	SetProjection(FOV);
+	SetTransform(this->pos, this->scale, this->rotVec);
 
 	//Merge the matrixes to create MVP. It's now ready to be sent in to the shader
 	this->MVP = this->projection * this->view * this->transform;
-}
-
-//DONE
-void Rasterizer::InputScan()
-{
-	MouseScan();
-	KeyboardScan();
 }
 
 //Set a mesh from the pre-defined types, triangle / quad / cube
@@ -172,27 +114,27 @@ void Rasterizer::SetMesh(Mesh::OBJ obj)
 
 		//Cat
 	case 4:
-		meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/cat.obj");
+		meshPTR->CustomMesh("resources/meshes/cat.obj");
 		break;
 
 		//Stool
 	case 5:
-		meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/Stool.obj");
+		meshPTR->CustomMesh("resources/meshes/Stool.obj");
 		break;
 
 		//CUBE
 	case 6:
-		meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/cubeLow.obj");
+		meshPTR->CustomMesh("resources/meshes/cubeLow.obj");
 		break;
 
 		//WINDMILL
 	case 7:
-		meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/windmill.obj");
+		meshPTR->CustomMesh("resources/meshes/windmill.obj");
 		break;
 
 		//PENGUIN
 	case 8:
-		meshPTR->CustomMesh("../../../projects/neckGraphics/code/resources/meshes/Penguin.obj");
+		meshPTR->CustomMesh("resources/meshes/Penguin.obj");
 		break;
 	}
 
@@ -209,122 +151,92 @@ void Rasterizer::SetTexture(Texture::TextureImage texture)
 		break;
 
 	case 0:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/YellowBrickWall.jpg");
+		texturePTR->SetupTexture("resources/textures/YellowBrickWall.jpg");
+		this->image = stbi_load("resources/textures/YellowBrickWall.jpg", &W, &H, &N, 0);
 		break;
 
 	case 1:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/TurquoiseWoodWall.jpg");
+		texturePTR->SetupTexture("resources/textures/TurquoiseWoodWall.jpg");
+		this->image = stbi_load("resources/textures/TurquoiseWoodWall.jpg", &W, &H, &N, 0);
 		break;
 
 	case 2:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/KoreanFlag.png");
+		texturePTR->SetupTexture("resources/textures/KoreanFlag.png");
+		this->image = stbi_load("resources/textures/KoreanFlag.png", &W, &H, &N, 0);
 		break;
 
 	case 3:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/Blueberries.jpg");
+		texturePTR->SetupTexture("resources/textures/Blueberries.jpg");
+		this->image = stbi_load("resources/textures/Blueberries.jpg", &W, &H, &N, 0);
 		break;
 
 	case 4:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/OpenGLLogo.png");
+		texturePTR->SetupTexture("resources/textures/OpenGLLogo.png");
+		this->image = stbi_load("resources/textures/OpenGLLogo.png", &W, &H, &N, 0);
 		break;
 
 	case 5:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/InstaTransparent.png");
+		texturePTR->SetupTexture("resources/textures/InstaTransparent.png");
+		this->image = stbi_load("resources/textures/InstaTransparent.png", &W, &H, &N, 0);
 		break;
 
 		//CAT
 	case 6:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/cat_diff.tga");
+		texturePTR->SetupTexture("resources/textures/cat_diff.tga");
+		this->image = stbi_load("resources/textures/cat_diff.tga", &W, &H, &N, 0);
 		break;
 
 	case 7:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/IKEA.jpg");
+		texturePTR->SetupTexture("resources/textures/IKEA.jpg");
+		this->image = stbi_load("resources/textures/IKEA.jpg", &W, &H, &N, 0);
 		break;
 
 	case 8:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/Richard.jpg");
+		texturePTR->SetupTexture("resources/textures/Richard.jpg");
+		this->image = stbi_load("resources/textures/Richard.jpg", &W, &H, &N, 0);
 		break;
 
 	case 9:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/Micke.jpg");
+		texturePTR->SetupTexture("resources/textures/Micke.jpg");
+		this->image = stbi_load("resources/textures/Micke.jpg", &W, &H, &N, 0);
 		break;
 
 		//BOX
 	case 10:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/cubeLow.jpg");
+		texturePTR->SetupTexture("resources/textures/cubeLow.jpg");
+		this->image = stbi_load("resources/textures/cubeLow.jpg", &W, &H, &N, 0);
 		break;
 
 		//WINDMILL
 	case 11:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/windmill.jpg");
+		texturePTR->SetupTexture("resources/textures/windmill.jpg");
+		this->image = stbi_load("resources/textures/windmill.jpg", &W, &H, &N, 0);
 		break;
 
 		//WINDMILL
 	case 12:
-		texturePTR->SetupTexture("../../../projects/neckGraphics/code/resources/textures/Penguin.png");
+		texturePTR->SetupTexture("resources/textures/Penguin.png");
+		this->image = stbi_load("resources/textures/Penguin.png", &W, &H, &N, 0);
 		break;
 	}
 
 	this->texturePTR->textureImage = texture;
 }
 
-//Set a light source
-void Rasterizer::SetLight(Light::LightSource lightsource)
-{
-	switch (int(lightsource))
-	{
-		//No light source
-	case -1:
-		std::cout << "No light source assigned!" << std::endl;
-		break;
-
-		//Point Light
-	case 0:
-		lightPTR->PointLight();
-		break;
-	}
-}
-
-//Set the initial transform of the model with Position / Scale / Rotation directions
-void Rasterizer::SetStartTransform(vector3D pos, vector3D scale, vector3D rot)
-{
-	this->transform = matrix3D::translate(pos) * matrix3D::scale(scale) * matrix3D::mxRotAroundVec(rot, 0);
-
-	initPosX = pos.vecGet(0);
-	initPosY = pos.vecGet(1);
-	initPosZ = pos.vecGet(2);
-
-	initScaleX = scale.vecGet(0);
-	initScaleY = scale.vecGet(1);
-	initScaleZ = scale.vecGet(2);
-
-	initRotX = rot.vecGet(0);
-	initRotY = rot.vecGet(1);
-	initRotZ = rot.vecGet(2);
-}
-
 //Set the transform of the model with Position / Scale / Rotation directions
 void Rasterizer::SetTransform(vector3D pos, vector3D scale, vector3D rot)
 {
-	this->transform = matrix3D::translate(pos) * matrix3D::scale(scale) * matrix3D::mxRotX(rot.vecOrigin[0]) * matrix3D::mxRotY(rot.vecOrigin[1]) * matrix3D::mxRotZ(rot.vecOrigin[2]);
-}
+	this->pos = pos;
+	this->scale = scale;
+	this->rotVec = rot;
 
-//Set the position and target location of the camera
-void Rasterizer::SetView(vector3D origin, vector3D target)
-{
-	this->view = matrix3D::LookAt(origin, target, vector3D(0.0f, 1.0f, 0.0f));
-}
-
-//Set the FOV
-void Rasterizer::SetProjection(float FOV)
-{
-	this->projection = matrix3D::perspectiveProj(FOV, this->window_Width, this->window_Height, 0.1f, 100.0f).transpose();
+	this->transform = matrix3D::translate(this->pos) * matrix3D::scale(this->scale) * matrix3D::mxRotX(this->rotVec.vecOrigin[0]) * matrix3D::mxRotY(this->rotVec.vecOrigin[1]) * matrix3D::mxRotZ(this->rotVec.vecOrigin[2]);
 }
 
 //WIP
-void Rasterizer::SetupFrameBuffer(unsigned int x, unsigned int y)
+void Rasterizer::SetupFrameBuffer()
 {
-	frameBufferPTR->CreateFrameBuffer(x, y);
+	renderTarget = new FrameBuffer(256, 256);
 }
 
 //WIP
@@ -436,16 +348,15 @@ Rasterizer::Edge::Edge(vector3D vOne, vector3D vTwo)
 	y = yb;
 }
 
-
 //RASTERIZER AREA
 //WIP
-void Rasterizer::Rasterize(Mesh::Vertex vOne, Mesh::Vertex vTwo, Mesh::Vertex vThree)
+void Rasterizer::Rasterize(vector3D vOne, vector3D vTwo, vector3D vThree)
 {
 	Edge edges[3] =
 	{
-		Edge(vOne.pos, vTwo.pos),
-		Edge(vOne.pos, vThree.pos),
-		Edge(vThree.pos, vTwo.pos)
+		Edge(vOne, vTwo),
+		Edge(vOne, vThree),
+		Edge(vThree, vTwo)
 	};
 
 	int maxLength = 0, EdgeL = 0;
@@ -474,8 +385,12 @@ void Rasterizer::Rasterize(Mesh::Vertex vOne, Mesh::Vertex vTwo, Mesh::Vertex vT
 		EdgeTwoS = (EdgeL + 2) % 3;
 	}
 
+	//INVESTIGATE THIS
 	while (edges[EdgeL].y < edges[EdgeL].ye)
 	{
+		//printf("%i : ", edges[EdgeL].y);
+		//printf("%i \n", edges[EdgeL].ye);
+
 		int obsoleteY = edges[EdgeL].y;
 
 		while (edges[EdgeL].y == obsoleteY)
@@ -539,7 +454,7 @@ void Rasterizer::scanline(const Scanline& scan)
 		vector3D normal = ((normOne * u) * wOne + (normTwo * v) * wTwo + (normThree * w) * wThree) / corrW;
 		vector3D diff = ((diffColorOne * u) * wOne + (diffColorTwo * v) * wTwo + (diffColorThree * w) * wThree) / corrW;*/
 
-		PixelColor col = pixelShader({ texture.vecOrigin[0], 1 - texture.vecOrigin[1] }, normal, image, this->W, this->H, N);
+		PixelColor col = pixelShader({ texture.vecOrigin[0], 1 - texture.vecOrigin[1] }, normal, image, 256, 256, 3);
 
 		//PixelColor col = fragments(texture, normal, image, this->w, this->h, n);
 
@@ -562,7 +477,7 @@ void Rasterizer::scanline(const Scanline& scan)
 		{
 			continue;
 		}
-		else if ((scan.Y * window_Width + x) >= window_Width * window_Height)
+		else if ((scan.Y * window_Height + x) >= window_Width * window_Height)
 		{
 			continue;
 		}
@@ -633,7 +548,7 @@ void Rasterizer::Increment(Edge& edge)
 }
 
 //DONT TOUCH - WORKS
-void Rasterizer::Barycentric(vector2D p, vector2D a, vector2D b, vector2D c, float& u, float& v, float& w)
+void Rasterizer::Barycentric(vector2D p, vector2D a, vector2D b, vector2D c, float &u, float &v, float &w)
 {
 	vector2D vZero = b - a;
 	vector2D vOne = c - a;
@@ -651,7 +566,7 @@ void Rasterizer::Barycentric(vector2D p, vector2D a, vector2D b, vector2D c, flo
 }
 
 //DONT TOUCH - WORKS
-void Rasterizer::Perspective(vector3D& vOne, vector3D& vTwo, vector3D& vThree)
+void Rasterizer::Perspective(vector3D &vOne, vector3D &vTwo, vector3D &vThree)
 {
 	wOne = 1 / vOne.vecOrigin[3];
 	wTwo = 1 / vTwo.vecOrigin[3];
@@ -693,6 +608,8 @@ void Rasterizer::Draw()
 
 	Update();
 
+	auto start = chrono::steady_clock::now();
+
 	for (int i = 0; i < indices.size(); i += 3)
 	{
 		vector3D vOne(meshData[indices[i]].pos.vecOrigin[0], meshData[indices[i]].pos.vecOrigin[1], meshData[indices[i]].pos.vecOrigin[2]);
@@ -707,9 +624,11 @@ void Rasterizer::Draw()
 		vector3D nTwo(meshData[indices[i + 1]].norm.vecOrigin[0], meshData[indices[i + 1]].norm.vecOrigin[1], meshData[indices[i + 1]].norm.vecOrigin[2]);
 		vector3D nThree(meshData[indices[i + 2]].norm.vecOrigin[0], meshData[indices[i + 2]].norm.vecOrigin[1], meshData[indices[i + 2]].norm.vecOrigin[2]);
 
-		vertexOne = (view * projection) * transform * vOne;
-		vertexTwo = (view * projection) * transform * vTwo;
-		vertexThree = (view * projection) * transform * vThree;
+		vertexOne = projection * transform * vOne;
+		vertexTwo = projection * transform * vTwo;
+		vertexThree = projection * transform * vThree;
+
+		//INVESTIGATE
 
 		Perspective(vertexOne, vertexTwo, vertexThree);
 
@@ -725,22 +644,16 @@ void Rasterizer::Draw()
 		diffColorTwo = vertexShader(meshData[indices[i + 1]].pos, meshData[indices[i + 1]].norm, transform);
 		diffColorThree = vertexShader(meshData[indices[i + 2]].pos, meshData[indices[i + 2]].norm, transform);
 
-		Mesh::Vertex vA, vB, vC;
-
-		vA.pos = vertexOne;
-		vA.texCoord = uvOne;
-		vA.norm = normOne;
-
-		vB.pos = vertexTwo;
-		vB.texCoord = uvTwo;
-		vB.norm = normTwo;
-
-		vC.pos = vertexThree;
-		vC.texCoord = uvThree;
-		vC.norm = normThree;
-
-		Rasterize(vA, vB, vC);
+		Rasterize(vertexOne, vertexTwo, vertexThree);
 	}
+
+	//TODO: Check so rasterization actually works 100%
+	auto end = chrono::steady_clock::now();
+	chrono::duration<double> totalTime = end - start;
+	printf("Total time: %d", totalTime.count());
+	JOBS_DONE;
+	printf("Jesus... that's a lot of time!");
+	printf("");
 
 	Unbind();
 }
@@ -756,7 +669,7 @@ void Rasterizer::Clear() const
 //DONE
 void Rasterizer::Bind()
 {
-	frameBufferPTR->Bind();
+	renderTarget->Bind();
 	meshPTR->Bind();
 
 	if (int(texturePTR->textureImage) != -1)
@@ -774,234 +687,7 @@ void Rasterizer::Unbind()
 	}
 
 	meshPTR->Unbind();
-	frameBufferPTR->Unbind();
-}
-
-//DONE
-void Rasterizer::MouseScan()
-{
-	if (controlAccess)
-	{
-		//ROTATION FOR MODEL
-		if (GetAsyncKeyState(LMB) & 0x8000 && !LMB_DOWN)
-		{
-			GetCursorPos(&mousePosOrigin);
-			oldRotX = rotX;
-			oldRotY = rotY;
-			LMB_DOWN = true;
-		}
-
-		else if (GetAsyncKeyState(LMB) & 0x8000 && LMB_DOWN)
-		{
-			GetCursorPos(&mousePosCurrent);
-
-			float currX = mousePosCurrent.x - mousePosOrigin.x;
-			float currY = mousePosCurrent.y - mousePosOrigin.y;
-
-			rotX = -currY + oldRotX;
-			rotY = -currX + oldRotY;
-		}
-
-		else
-			LMB_DOWN = false;
-	}
-
-	//ACTIVATE COMMANDS FOR CAMERA
-	if (GetAsyncKeyState(RMB) & 0x8000 && !RMB_DOWN)
-		RMB_DOWN = true;
-
-	else if (GetAsyncKeyState(RMB) & 0x8000 && RMB_DOWN) {}
-
-	else
-		RMB_DOWN = false;
-
-	//MMB
-	if (GetAsyncKeyState(MMB) & 0x8000 && !MMB_DOWN)
-		MMB_DOWN = true;
-
-	else if (!(GetAsyncKeyState(MMB) & 0x8000) && MMB_DOWN)
-		MMB_DOWN = false;
-}
-
-//DONE
-void Rasterizer::KeyboardScan()
-{
-	if (controlAccess)
-	{
-		//MOVE MODEL IF LMB IS DOWN
-		if (GetAsyncKeyState('W') & 0x8000 && LMB_DOWN)
-			moveY += 0.15f;
-
-		if (GetAsyncKeyState('A') & 0x8000 && LMB_DOWN)
-			moveX -= 0.1f;
-
-		if (GetAsyncKeyState('S') & 0x8000 && LMB_DOWN)
-			moveY -= 0.15f;
-
-		if (GetAsyncKeyState('D') & 0x8000 && LMB_DOWN)
-			moveX += 0.1f;
-
-		if (GetAsyncKeyState('Q') & 0x8000 && LMB_DOWN)
-			moveZ -= 0.15f;
-
-		if (GetAsyncKeyState('E') & 0x8000 && LMB_DOWN)
-			moveZ += 0.1f;
-	}
-
-	//MOVE CAMERA IF RMB IS DOWN
-	if (GetAsyncKeyState('W') & 0x8000 && RMB_DOWN)
-		camY += 0.15f;
-
-	if (GetAsyncKeyState('A') & 0x8000 && RMB_DOWN)
-		camX -= 0.1f;
-
-	if (GetAsyncKeyState('S') & 0x8000 && RMB_DOWN)
-		camY -= 0.15f;
-
-	if (GetAsyncKeyState('D') & 0x8000 && RMB_DOWN)
-		camX += 0.1f;
-
-	if (GetAsyncKeyState('Q') & 0x8000 && RMB_DOWN)
-		camZ -= 0.06f;
-
-	if (GetAsyncKeyState('E') & 0x8000 && RMB_DOWN)
-		camZ += 0.06f;
-
-	//MOVE LIGHT IF MMB IS DOWN
-	if (GetAsyncKeyState('W') & 0x8000 && MMB_DOWN)
-		lightPTR->currentLight.Position.vecOrigin[1] += 0.15f;
-
-	if (GetAsyncKeyState('A') & 0x8000 && MMB_DOWN)
-		lightPTR->currentLight.Position.vecOrigin[0] -= 0.1f;
-
-	if (GetAsyncKeyState('S') & 0x8000 && MMB_DOWN)
-		lightPTR->currentLight.Position.vecOrigin[1] -= 0.15f;
-
-	if (GetAsyncKeyState('D') & 0x8000 && MMB_DOWN)
-		lightPTR->currentLight.Position.vecOrigin[0] += 0.1f;
-
-	if (GetAsyncKeyState('Q') & 0x8000 && MMB_DOWN)
-		lightPTR->currentLight.Position.vecOrigin[2] -= 0.15f;
-
-	if (GetAsyncKeyState('E') & 0x8000 && MMB_DOWN)
-		lightPTR->currentLight.Position.vecOrigin[2] += 0.1f;
-
-	//SET DIFFUSE AND AMBIENT INTENSITY
-	if (GetAsyncKeyState('I') & 0x8000 && MMB_DOWN)
-	{
-		if (lightPTR->currentLight.AmbientIntensity < 1.0f)
-		{
-			lightPTR->currentLight.AmbientIntensity += 0.01f;
-			cout << "Ambient Intensity: " << lightPTR->currentLight.AmbientIntensity << endl;
-		}
-	}
-
-	if (GetAsyncKeyState('J') & 0x8000 && MMB_DOWN)
-	{
-		if (lightPTR->currentLight.DiffuseIntensity > 0.0f)
-		{
-			lightPTR->currentLight.DiffuseIntensity -= 0.01f;
-			cout << "Diffusee Intensity: " << lightPTR->currentLight.DiffuseIntensity << endl;
-		}
-	}
-
-	if (GetAsyncKeyState('K') & 0x8000 && MMB_DOWN)
-	{
-		if (lightPTR->currentLight.AmbientIntensity > 0.0f)
-		{
-			lightPTR->currentLight.AmbientIntensity -= 0.01f;
-			cout << "Ambient Intensity: " << lightPTR->currentLight.AmbientIntensity << endl;
-		}
-	}
-
-	if (GetAsyncKeyState('L') & 0x8000 && MMB_DOWN)
-	{
-		if (lightPTR->currentLight.DiffuseIntensity < 1.0f)
-		{
-			lightPTR->currentLight.DiffuseIntensity += 0.01f;
-			cout << "Diffusee Intensity: " << lightPTR->currentLight.DiffuseIntensity << endl;
-		}
-	}
-
-	//SET SPECULAR INTENSITY
-	if (GetAsyncKeyState('Z') & 0x8000 && MMB_DOWN)
-	{
-		if (lightPTR->currentLight.SpecularIntensity > 0.0f)
-		{
-			lightPTR->currentLight.SpecularIntensity -= 0.01f;
-			cout << "Specular Intensity: " << lightPTR->currentLight.SpecularIntensity << endl;
-		}
-	}
-
-	if (GetAsyncKeyState('X') & 0x8000 && MMB_DOWN)
-	{
-		if (lightPTR->currentLight.SpecularIntensity < 1.0f)
-		{
-			lightPTR->currentLight.SpecularIntensity += 0.01f;
-			cout << "Specular Intensity: " << lightPTR->currentLight.SpecularIntensity << endl;
-		}
-	}
-
-	//SWITCH COLOR
-	if (GetAsyncKeyState('C') < 0 && MMB_DOWN && !C_DOWN)
-	{
-		switch (colorCounter)
-		{
-			//RED
-		case 0:
-			lightPTR->currentLight.Diffuse.vecOrigin[0] = 0.3f;
-			lightPTR->currentLight.Diffuse.vecOrigin[1] = 0.0f;
-			lightPTR->currentLight.Diffuse.vecOrigin[2] = 0.0f;
-
-			lightPTR->currentLight.Specular.vecOrigin[0] = 0.5f;
-			lightPTR->currentLight.Specular.vecOrigin[1] = 0.0f;
-			lightPTR->currentLight.Specular.vecOrigin[2] = 0.0f;
-			break;
-
-			//GREEN
-		case 1:
-			lightPTR->currentLight.Diffuse.vecOrigin[0] = 0.0f;
-			lightPTR->currentLight.Diffuse.vecOrigin[1] = 0.3f;
-			lightPTR->currentLight.Diffuse.vecOrigin[2] = 0.0f;
-
-			lightPTR->currentLight.Specular.vecOrigin[0] = 0.0f;
-			lightPTR->currentLight.Specular.vecOrigin[1] = 0.5f;
-			lightPTR->currentLight.Specular.vecOrigin[2] = 0.0f;
-			break;
-
-			//BLUE
-		case 2:
-			lightPTR->currentLight.Diffuse.vecOrigin[0] = 0.0f;
-			lightPTR->currentLight.Diffuse.vecOrigin[1] = 0.0f;
-			lightPTR->currentLight.Diffuse.vecOrigin[2] = 0.3f;
-
-			lightPTR->currentLight.Specular.vecOrigin[0] = 0.0f;
-			lightPTR->currentLight.Specular.vecOrigin[1] = 0.0f;
-			lightPTR->currentLight.Specular.vecOrigin[2] = 0.5f;
-			break;
-
-			//WHITE
-		case 3:
-			lightPTR->currentLight.Diffuse.vecOrigin[0] = 0.3f;
-			lightPTR->currentLight.Diffuse.vecOrigin[1] = 0.3f;
-			lightPTR->currentLight.Diffuse.vecOrigin[2] = 0.3f;
-
-			lightPTR->currentLight.Specular.vecOrigin[0] = 0.5f;
-			lightPTR->currentLight.Specular.vecOrigin[1] = 0.5f;
-			lightPTR->currentLight.Specular.vecOrigin[2] = 0.5f;
-			break;
-		}
-
-		colorCounter++;
-
-		if (colorCounter > 3)
-			colorCounter = 0;
-
-		C_DOWN = true;
-	}
-
-	if (GetAsyncKeyState('C') == 0 && C_DOWN)
-		C_DOWN = false;
+	renderTarget->Unbind();
 }
 
 //WIP

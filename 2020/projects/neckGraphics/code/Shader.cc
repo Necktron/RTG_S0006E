@@ -1,7 +1,7 @@
 #define ERROR_TRIGGER __debugbreak();
 #include "Shader.h"
 
-void Shader::SetupShader(const std::string& filepath)
+void Shader::SetupShader(const string& filepath)
 {
 	ShaderProgramSource source = ParseShader(filepath);
 	m_RendererID = CreateShader(source.VertexSource, source.FragmentSource);
@@ -9,10 +9,10 @@ void Shader::SetupShader(const std::string& filepath)
 	//Print's the Vertex and Fragment shader source code for inspection in CMD
 	if (m_DEBUG)
 	{
-		std::cout << "VERTEX" << std::endl;
-		std::cout << source.VertexSource << std::endl;
-		std::cout << "FRAGMENT" << std::endl;
-		std::cout << source.FragmentSource << std::endl;
+		printf("VERTEX");
+		printf("%s \n", source.VertexSource);
+		printf("FRAGMENT");
+		printf("%s \n", source.FragmentSource);
 	}
 }
 
@@ -26,32 +26,32 @@ void Shader::Unbind()
 	glUseProgram(0);
 }
 
-void Shader::SetUniform1i(const std::string name, int value)
+void Shader::SetUniform1i(const string name, int value)
 {
 	glUniform1i(GetUniformLocation(name), value);
 }
 
-void Shader::SetUniform1f(const std::string name, float value)
+void Shader::SetUniform1f(const string name, float value)
 {
 	glUniform1f(GetUniformLocation(name), value);
 }
 
-void Shader::SetUniform3f(const std::string name, float v0, float v1, float v2)
+void Shader::SetUniform3f(const string name, float v0, float v1, float v2)
 {
 	glUniform3f(GetUniformLocation(name), v0, v1, v2);
 }
 
-void Shader::SetUniform4f(const std::string name, float v0, float v1, float v2, float v3)
+void Shader::SetUniform4f(const string name, float v0, float v1, float v2, float v3)
 {
 	glUniform4f(GetUniformLocation(name), v0, v1, v2, v3);
 }
 
-void Shader::SetUniformMat4fv(const std::string name, const matrix3D& matrix)
+void Shader::SetUniformMat4fv(const string name, const matrix3D& matrix)
 {
 	glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, &matrix.mxOrigin[0][0]);
 }
 
-int Shader::GetUniformLocation(const std::string& name)
+int Shader::GetUniformLocation(const string& name)
 {
 	if (m_UniformLocationCache.find(name) != m_UniformLocationCache.end())
 		return m_UniformLocationCache[name];
@@ -59,18 +59,18 @@ int Shader::GetUniformLocation(const std::string& name)
 	unsigned int location = glGetUniformLocation(m_RendererID, name.c_str());
 
 	if (location == -1)
-		std::cout << "Warning: Uniform '" << name << "' dosen't exsist!" << std::endl;
+		printf("Warning: Uniform '%s' dosen't exsist!", name);
 
 	m_UniformLocationCache[name] = location;
 
 	return location;
 }
 
-Shader::ShaderProgramSource Shader::ParseShader(const std::string& filepath)
+Shader::ShaderProgramSource Shader::ParseShader(const string& filepath)
 {
-	std::ifstream stream(filepath);
-	std::string line;
-	std::stringstream ss[2];
+	ifstream stream(filepath);
+	string line;
+	stringstream ss[2];
 
 	enum class ShaderType
 	{
@@ -83,18 +83,18 @@ Shader::ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 
 	if (stream.fail())
 	{
-		std::cout << "[Necktron OpenGL Error System] : Shader could not be parsed, validate file path!" << std::endl;
+		printf("[Necktron OpenGL Error System] : Shader could not be parsed, validate file path!\n");
 		ERROR_TRIGGER;
 	}
 
 	while(getline(stream, line))
 	{
-		if (line.find("#shader") != std::string::npos)
+		if (line.find("#shader") != string::npos)
 		{
-			if (line.find("vertex") != std::string::npos)
+			if (line.find("vertex") != string::npos)
 				mode = ShaderType::VERTEX;
 
-			else if (line.find("fragment") != std::string::npos)
+			else if (line.find("fragment") != string::npos)
 				mode = ShaderType::FRAGMENT;
 		}
 
@@ -108,7 +108,7 @@ Shader::ShaderProgramSource Shader::ParseShader(const std::string& filepath)
 }
 
 //SHADER INIT AND LINKING
-unsigned int Shader::CreateShader(const std::string& vertexShader, const std::string& fragmentShader)
+unsigned int Shader::CreateShader(const string& vertexShader, const string& fragmentShader)
 {
 	unsigned int program = glCreateProgram();
 	unsigned int vs = CompileShader(GL_VERTEX_SHADER, vertexShader);
@@ -145,8 +145,9 @@ unsigned int Shader::CompileShader(unsigned int type, const string& source)
 		glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
 		char* message = (char*)alloca(length * sizeof(char));
 		glGetShaderInfoLog(id, length, &length, message);
-		std::cout << "[Necktron OpenGL Error System] : Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << std::endl;
-		std::cout << message << std::endl;
+		type == GL_VERTEX_SHADER ? "vertex" : "fragment";
+		printf("[Necktron OpenGL Error System] : Failed to compile %i \n", type);
+		printf("%s \n", message);
 		glDeleteShader(id);
 		ERROR_TRIGGER;
 		return 0;

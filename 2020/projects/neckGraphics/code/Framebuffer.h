@@ -6,7 +6,10 @@
 class FrameBuffer
 {
 public:
-	void CreateFrameBuffer(unsigned int x, unsigned int y);
+	FrameBuffer();
+	FrameBuffer(unsigned int x, unsigned int y);
+	~FrameBuffer();
+
 	void Bind();
 	void Unbind();
 
